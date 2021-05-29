@@ -1,0 +1,41 @@
+@charset 'utf-8';
+
+$base-padding-x: 36px;
+$base-padding-y: 28px;
+
+:root{
+    --vh: 1vh;
+}
+
+html{
+    user-select: none;
+}
+
+button{
+    cursor: pointer;
+}
+
+.container{
+    --txt: #{$m-col-txt};
+    --bg: #{$m-col-bg};
+
+    width: 100%;
+    min-height: calc(var(--vh) * 100);
+    color: var(--txt);
+    background-color: var(--bg);
+
+    transition-property: color, background-color;
+    transition-duration: 480ms;
+    transition-timing-function: ease-out;
+//
+//     &.-web{
+//         .safari{
+//             opacity: 1;
+//         }
+//     }
+}
+
+.img-loader-frame{
+    display: none;
+}
+

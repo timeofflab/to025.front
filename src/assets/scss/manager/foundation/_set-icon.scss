@@ -1,0 +1,27 @@
+@charset 'utf-8';
+
+/* icon */
+$m-icon-class: '
+
+';
+
+$m-icon-before-class:'
+						.-list-number .m-list-item-option::before,
+						.m-item-checkboxbtn .m-icon--switch::before,
+						.m-item-checkboxbtn .m-icon--switch::after,
+						.m-pj-caption a[target="_blank"]::before,
+';
+
+$m-icon-base-setting-class:'
+						.m-nondisplay-item::before,
+						.m-horizontal-menu-li::before,
+						.m-list-item-left-thumb-icon::before,
+						.m-switchlist-btn .m-icon--switch::before,
+						.m-switchlist-btn .m-icon--switch::after,
+						.m-logolist .m-list-item.state-active::before
+';
+
+
+$m-icon-plate-class:'
+						.ql-formats .m-icon,
+';

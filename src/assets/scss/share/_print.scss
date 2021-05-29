@@ -1,0 +1,41 @@
+@charset 'utf-8';
+
+@mixin print(){
+
+	@page p-a4{
+	  size : landscape;
+	  margin : 0px;
+	}
+
+	.p-a4{
+		position: relative;
+		page: p-a4;
+		padding: 0px;
+		margin: 0;
+	}
+
+
+	@media print{
+		#BrowserPrintDefaults{display:none}
+		html, body {
+			height: auto !important;
+		}
+		body{
+			width: 210mm; /* needed for Chrome */
+		}
+		.p-a4-v{
+			position: absolute;
+			top:0;
+			left: 0;
+			margin: 0;
+			box-shadow: none;
+			background-color: white;
+			page-break-after: always;
+		}
+
+		.ui-frame{
+			display: none !important;
+		}
+	}
+
+}

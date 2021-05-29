@@ -1,0 +1,259 @@
+@charset 'utf-8';
+
+@mixin m-frames(){
+	@include m-frames-frame();
+	@include m-frames-layer();
+	@include m-frames-wrapper();
+	@include m-frames-body();
+	@include m-frames--pc-tablet();
+	@include m-frames--mb();
+}
+
+@mixin m-frames-frame(){
+
+    ::selection {
+        background: $m-col-txt;
+        color: $m-col-bg;
+    }
+
+	.m-popup-frame,
+	.m-select-frame,
+	.m-tips-frame
+	{
+		position: absolute;
+		width: 100%;
+		top: 0px;
+		left: 0px;
+	}
+
+	.m-policy-frame{
+		z-index: $m-popup-frame-z + 1;
+		position: fixed;
+		width: 100%;
+		top: 0px;
+		left: 0px;
+	}
+
+	.m-popup-frame{
+		z-index: $m-popup-frame-z;
+		.m-body{
+			width: 100%;
+		}
+	}
+
+	.m-select-frame{
+		z-index: $m-select-frame-z;
+	}
+
+	.m-tips-frame{
+		z-index: $m-tips-frame-z;
+	}
+
+}
+
+@mixin m-frames-layer(){
+
+	.m-upload-layer,
+	.m-tips-layer,
+	.m-select-layer{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+
+	.m-select-layer{
+		height: calc(var(--vh, 1vh) * 100);
+		z-index: $m-select-frame-z;
+	    overflow-y: auto;
+	}
+
+	.m-tips-layer{
+		user-select: none;
+		pointer-events: none;
+		z-index: $m-tips-frame-z;
+		height: calc(var(--vh, 1vh) * 100);
+		overflow: hidden;
+	}
+
+	.m-policy-layer{
+		position: absolute;
+		width: 100%;
+		height: calc((var(--vh, 1vh) * 100) - #{map-get($m-pc, 'nav-bottom-h')});
+	}
+
+	.m-upload-layer{
+		z-index: 2;
+		min-width: 100%;
+		min-height: calc(var(--vh, 1vh) * 100);
+		transition-property: opacity, background-color;
+		transition-timing-function: $ease-out-cubic;
+	}
+
+}
+
+@mixin m-frames-wrapper(){
+
+	.m-pop-wrapper{
+		position: absolute;
+		display: inline-block;
+		z-index: $m-pop-z;
+		transform-origin: center top;
+		box-shadow: 0 8px 40px 3px rgba(0, 0, 0, 0.1);
+	}
+
+	.m-tips-frame{
+		.m-pop-wrapper{
+			margin: 24px 0 16px 0;
+		}
+	}
+
+	.m-popup-wrapper{
+		position: relative;
+		margin: auto;
+		z-index: 20;
+		@include box-shadows(4);
+	}
+
+	//最初の流れで使用
+	.m-tips-input{
+		.m-pop-wrapper{
+			margin-top: 52px;
+		}
+	}
+
+	.m-tips-frame .m-pop-wrapper{
+		transition-duration: $m_tips_dur_in;
+	}
+
+	.m-tour-frame .m-pop-wrapper{
+		transition-duration: $m_tour-pop_dur_in;
+	}
+
+}
+
+@mixin m-frames-body(){
+
+	.m-popup-body,
+	.m-pop-wrapper .m-body{
+		position: relative;
+		background-color: $m-col-white;
+		outline: 1px solid map-get($m-pop, 'outline');
+	}
+
+	.m-sploader-frame .m-pop-wrapper{
+
+		.m-body{
+			padding-top: 31px;
+			padding-bottom: 34px;
+		}
+
+		.m-block{
+			padding-left: 25px;
+			padding-right: 25px;
+		}
+
+	}
+
+	//Tips, Select
+	.m-pop-wrapper{
+
+		.m-body{
+			position: relative;
+			padding-top: 27px;
+			padding-bottom: 29px;
+		}
+
+		.m-block{
+			padding-left: $m-pop-p;
+			padding-right: $m-pop-p;
+		}
+
+		.m-block.m-block--border
+		{
+			margin-top: $m-base-s-m;
+			padding-top: $m-base-s-m;
+			padding-bottom: 0px;
+		}
+
+	}
+
+}
+
+@mixin m-frames--pc-tablet(){
+
+    .m-main-frame.-m--pc,
+    .m-main-frame.-m--tablet
+    {
+    	.m-popup-layer{
+    		position: fixed;
+    		display: flex;
+    		width: 100%;
+    		height: calc(var(--vh, 1vh) * 100);
+    		justify-content: center;
+    		align-items: center;
+    		padding-top: $m-popup-layer-pd;
+    		padding-bottom: $m-popup-layer-pd;
+    		overflow-x: hidden;
+    		overflow-y: auto;
+    		top:0;
+    		left: 0;
+    		z-index: 20;
+    		background-position: center center;
+    		background-size: cover;
+    	}
+
+    	.m-select-frame{
+    		.m-pop-wrapper{
+    			margin: 14px 0 16px 0;
+    		}
+    	}
+
+    }
+}
+
+@mixin m-frames--mb() {
+
+    .m-main-frame.-m--mb{
+    	.m-popup-layer{
+    		position: fixed;
+    		width: 100%;
+    		height: calc(var(--vh, 1vh) * 100);
+    		overflow-y: auto;
+    		top:0;
+    		left: 0;
+    		z-index: 20;
+    	}
+
+        .m-select-layer{
+            position: fixed;
+
+            &.m-pop--l{
+        		.m-pop-wrapper{
+        			width: 100%;
+        			height: calc(var(--vh, 1vh) * 100);
+        			overflow-y: auto;
+        			top: 0 !important;
+        			left: 0 !important;
+        		}
+            }
+
+        }
+
+    	.m-sploader-frame .m-pop-wrapper{
+
+    		.m-body{
+    			padding-top: 31px;
+    			padding-bottom: 34px;
+    		}
+
+    		.m-block{
+    			padding-left: 25px;
+    			padding-right: 25px;
+    		}
+
+    	}
+
+    }
+}
+

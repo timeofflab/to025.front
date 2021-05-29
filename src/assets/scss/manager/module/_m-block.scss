@@ -1,0 +1,250 @@
+@charset 'utf-8';
+
+@mixin m-block(){
+
+	@include m-back-block();
+	@include m-block--base();
+	@include m-block-title();
+    @include m-block--pc-tablet();
+    @include m-block--mb();
+}
+
+@mixin m-block--base(){
+
+	/* タイトルがなくて上に線をいれない場合 */
+	.post-blog-detail,
+	.post-gallery-detail,
+	.post-news-detail
+	{
+		.m-block--border:first-child{
+			padding-top: 27px;
+			border-top: none;
+		}
+	}
+
+	.m-block--border{
+		margin-top: $m-base-l-m;
+		padding-top: $m-base-l-m;
+		padding-bottom: $m-base-l-m;
+	}
+
+	.m-block--border + .m-block--border,
+	.m-blocks + .m-block--border,
+	{
+		margin-top: 0;
+	}
+
+	.m-block.-open-block + .m-block--border{
+		margin-top: -1px;
+	}
+
+	.m-left-menu{
+		.m-block--border{
+			margin-top: $m-base-m-m;
+			padding-top: $m-base-m-m;
+			padding-bottom: $m-base-m-m;
+
+			& + .m-block--border{
+				margin-top: 0;
+			}
+		}
+
+	}
+
+	.m-open-block{
+		.m-block--border:first-child{
+			margin-top: 0;
+		}
+	}
+
+	.m-block{
+		position: relative;
+		width: 100%;
+		padding-left: $gridBoxPadding;
+		padding-right: $gridBoxPadding;
+
+		&.m-block--border{
+    		&::before{
+        		position: absolute;
+        		top: 0px;
+        		left: $gridBoxPadding;
+        		width: calc(100% - #{$gridBoxPadding * 2});
+        		height: 1px;
+        		background-color: $m-col-border;
+        		content: '';
+    		}
+		}
+
+		&.-border-bottom{
+    		&::after{
+        		position: absolute;
+        		bottom: 0px;
+        		left: $gridBoxPadding;
+        		width: calc(100% - #{$gridBoxPadding * 2});
+        		height: 1px;
+        		background-color: $m-col-border;
+        		content: '';
+    		}
+		}
+
+		&.m-block--gray{
+			padding-top: 0.1px;
+			background-color: #EDECEB; //$m-col-bg-gray-n;
+
+			&.notitle{
+				margin-top: -36px;
+				.m-pj:first-child{
+					margin-top: 65px;
+				}
+			}
+
+			&.pt{
+				padding-top: 39px;
+			}
+		}
+
+    	&.-full{
+		    max-width: $m-base-max-width;
+        	padding-left: $m-base-padding;
+        	padding-right: $m-base-padding;
+        	margin: 0 auto;
+    	}
+
+		&.state-disabled{
+			opacity: $m-col-disabled;
+			pointer-events: none;
+		}
+
+		&.m-block--ptb{
+			padding-top: 46px;
+			padding-bottom: 46px;
+		}
+
+	}
+
+	.m-block.m-block--border:last-child>.m-caption:last-child{
+		margin-bottom: -45px;
+	}
+
+	.m-popup-layer{
+		.m-block--gray{
+			margin-top: 33px;
+		}
+	}
+
+	.m-contents[data-state="open"]{
+		.m-icon-sort-down{
+			transform: rotate(-180deg);
+		}
+	}
+
+	.m-open-block .m-open-block .m-block--border:first-of-type
+	{
+		border-top: none;
+	}
+
+}
+
+@mixin m-back-block(){
+
+	.m-back-block{
+		margin-left: -8px;
+		margin-top: $m-base-l-m + $m-next-txt-mt;
+	}
+
+}
+
+@mixin m-block-title(){
+
+	.m-block-title{
+		position: relative;
+		min-height: $gridH;
+		line-height: $gridH;
+		margin-top: $m-block-title-mt + $m-base-m-m;
+		margin-bottom: $m-block-title-mb;
+
+		&.-mts{
+			margin-top: $m-block-title-mt + $m-base-s-m;
+		}
+		&.-mtr{
+			margin-top: $m-block-title-mt + $m-base-r-m;
+		}
+		&.-mtl{
+			margin-top: $m-block-title-mt + $m-base-l-m;
+		}
+
+		&.bottom-is-list{
+			>.m-list-item-left{
+				height: $gridH;
+				line-height: $gridH;
+			}
+		}
+	}
+
+	.m-contents.-news{
+    	.m-block-title{
+        	margin-bottom: 26px;
+    	}
+	}
+
+	.m-block-subtitle{
+		position: relative;
+		height: map-get($m-block-subtitle, 'height');
+		line-height: 20px;
+		margin-top: $m-block-subtitle-mt + $m-base-m-m;
+		margin-bottom: $m-block-subtitle-mb;
+
+		&.-strong{
+    		color: $m-col-txt;
+		}
+
+		&.-mts{
+			margin-top: $m-block-subtitle-mt + $m-base-s-m;
+		}
+		&.-mtr{
+			margin-top: $m-block-subtitle-mt + $m-base-r-m;
+		}
+		&.-mtl{
+			margin-top: $m-block-subtitle-mt + $m-base-l-m;
+		}
+	}
+
+	.m-block-title-label{
+		padding-top: 2px;
+	}
+
+	.-l--right-primary{
+    	.m-secondary-frame{
+            .m-block-subtitle{
+                color: inherit;
+            }
+    	}
+	}
+
+}
+
+@mixin m-block--pc-tablet(){
+
+    .m-main-frame.-m--pc,
+    .m-main-frame.-m--tablet,
+    {
+
+    }
+}
+
+@mixin m-block--mb() {
+
+    .m-main-frame.-m--mb{
+    	.m-block:not(.-tips){
+    		padding-left: map-get($m-mb, 'padding-x');
+    		padding-right: map-get($m-mb, 'padding-x');
+        }
+    }
+}
+
+
+
+
+
+
+

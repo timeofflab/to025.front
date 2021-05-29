@@ -1,0 +1,137 @@
+@charset 'utf-8';
+
+@mixin keyframes($animation-name: animaton) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+@mixin animation($animation-name: animaton) {
+  -webkit-animation: #{$animation-name};
+  -moz-animation: #{$animation-name};
+  animation: #{$animation-name};
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@mixin share-reset(){
+	html, body, div, span, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	a, address, cite, code,
+	img, small, strong, b, u, i,
+	dl, dt, dd, ul, ol, li,
+	fieldset, form, label,
+	table, tbody, tfoot, thead, tr, th, td,
+	article, aside, embed,
+	footer, header,
+	menu, nav, section, time {
+		margin: 0;
+		padding: 0;
+		border: 0;
+// 		font-size: 100%;
+// 		font: inherit;
+		vertical-align: baseline;
+	}
+
+// 	li {
+//     	font-size: inherit;
+// 	}
+
+    h1, h2, h3, h4, h5, h6, th {
+        font-size: inherit;
+    }
+
+	/* HTML5 display-role reset for older browsers */
+	article, aside, li, footer, header, menu, nav, section,
+	h1, h2, h3, h4, h5, h6 {
+		display: block;
+	}
+
+	ul {
+		list-style: none;
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	th,td{
+		text-align: left;
+	}
+
+	[contenteditable=true]{
+		cursor: text;
+	}
+
+	[contenteditable=true],
+	input,
+	input:active,
+	input:focus,
+	button,
+	textarea,
+	select
+	{
+		text-decoration: none;
+		outline: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		border: 0;
+		padding: 0;
+	    border-radius: 0;
+	    font-size: inherit;
+	    color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+		letter-spacing: inherit;
+		background-color: transparent;
+	}
+
+	button{
+    	pointer-events: auto;
+	}
+
+	img {
+		vertical-align: bottom;
+		display: block;
+		outline: none;
+	}
+	*, *:before, *:after {
+		box-sizing: border-box;
+	}
+
+	html{
+		height: 100%;
+		scroll-behavior: smooth;
+	}
+
+	.os-viewport{
+		height: 100%;
+		scroll-behavior: smooth;
+	}
+
+	body{
+		height: 100%;
+// 		position: relative;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-rendering: optimizeLegibility;
+		font-kerning: normal;
+		font-feature-settings : "palt";
+	}
+
+	select::-ms-expand {
+		display: none;
+	}
+}

@@ -1,0 +1,136 @@
+@charset 'utf-8';
+
+@mixin m-popup-frame() {
+    @include m-popup-frame--base();
+    @include m-popup-frame--pc-tablet();
+    @include m-popup-frame--mb();
+}
+
+@mixin m-popup-frame--base(){
+
+	.m-popup-wrapper{
+
+		.m-back{
+			top: 20px;
+			left: -6px;
+		}
+
+		.m-close{
+			top: 20px;
+			right: 17px;
+		}
+
+		.m-header{
+			margin-top: 14px;
+		}
+
+		.m-contents{
+			height: auto;
+		}
+
+		.m-block:last-child{
+			padding-bottom: 56px;
+		}
+
+		.m-contents .m-block--gray:last-child{
+			padding-bottom: 100px;
+			margin-bottom: -$popupBottomPadding;
+		}
+
+	}
+
+	.m-close-wrapper{
+		position: relative;
+		min-height: $gridH;
+		z-index: 30;
+		margin: 0px $gridBoxPadding 0 $gridBoxPadding;
+	}
+
+	/*------------------------------------*\
+	    Bottom Margin
+	\*------------------------------------*/
+	.m-popup-layer .m-body{
+		padding-bottom: 47px;
+	}
+
+	.m-popup{
+		position: relative;
+	    height: 100%;
+		padding-top: 0;
+	}
+
+	// 余白なしの画像タイトル
+	.m-popup-img-title{
+    	position: relative;
+        width: 100%;
+        height: 218px;
+    	margin-top: -36px;
+    	margin-bottom: 56px;
+		background-color: $m-col-txt;
+		color: $m-col-bg;
+
+		.wrapper{
+    		z-index: 10;
+    		position: absolute;
+    		display: flex;
+    		justify-content: center;
+    		align-items: center;
+    		width: 100%;
+    		height: 100%;
+		}
+
+		.t{
+            position: relative;
+            top: 6px;
+    		text-align: center;
+    		white-space: nowrap;
+    		text-overflow: ellipsis;
+		}
+	}
+
+	//編集後にニョキっとでてくるボタン
+	.m-popup{
+    	.-rise-buttons{
+        	.m-btns{
+                position: sticky;
+                bottom: -$m-popup-layer-pd;
+                animation: slide-in-from-bottom 1100ms $ease-out-bounce;
+                //transition: transform 480ms $ease-out-bounce;
+        	}
+
+        	.m-btn.-st{
+                //animation: btn-active-blink 2400ms linear 0ms infinite;
+
+        	}
+    	}
+	}
+
+}
+
+@mixin m-popup-frame--pc-tablet(){
+
+    .m-main-frame.-m--pc-tablet{
+
+    }
+}
+
+@mixin m-popup-frame--mb() {
+
+    .m-main-frame.-m--mb{
+
+    	.m-close-wrapper{
+    		margin: 0px map-get($m-mb, 'padding-x');
+
+            .m-close{
+                top: 13px;
+                right: 14px;
+            }
+    	}
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+@charset 'utf-8';
+
+$ja-sans: ThoughtStandardJA;
+$en-sans: ThoughtStandard;
+
+$weight-r:		400;
+$weight-b:		700;
+
+$ja-hosei:		1.004;
+$ja-en-per: 	1.068;
+$ja-en-per-b: 	1.09;
+$en-num-per: 0.7;
+
+$m-ja-family: (
+    regular: ThoughtStandardJA,
+    regular-en: ThoughtStandard,
+    bold: ThoughtStandardJA,
+    bold-en: ThoughtStandard,
+    title: ThoughtStandardJA,
+);
+
+$m-fonts-path: $base_path + '/common/css/font/manager/';
+
+@mixin m-fontface(){
+
+	@font-face{
+        font-family:"ThoughtStandard";
+		font-weight: $weight-r;
+        src:local('☺︎'), url("/#{$m-fonts-path}38157dab-8eda-4b9d-a99e-acd0f5e08a96.eot?#iefix");
+        src:local('☺︎'), url("/#{$m-fonts-path}38157dab-8eda-4b9d-a99e-acd0f5e08a96.eot?#iefix") format("eot"),url("/#{$m-fonts-path}b1979d94-a178-4b03-b43d-c8e46562f107.woff2") format("woff2"),url("/#{$m-fonts-path}fd01e71e-6e70-4e12-b470-560c965b72b5.woff") format("woff"),url("/#{$m-fonts-path}31a3aa9f-cd2d-4a66-982b-f3b3c825cae7.ttf") format("truetype");
+	}
+	@font-face{
+        font-family:"ThoughtStandard";
+		font-weight: $weight-b;
+        src:local('☺︎'), url("/#{$m-fonts-path}9a18ba1e-dad3-48f7-9eb6-2fa41870be6a.eot?#iefix");
+        src:local('☺︎'), url("/#{$m-fonts-path}9a18ba1e-dad3-48f7-9eb6-2fa41870be6a.eot?#iefix") format("eot"),url("/#{$m-fonts-path}f9be987b-0ea1-4c6e-9302-b14707c2a1a2.woff2") format("woff2"),url("/#{$m-fonts-path}b27d3ee2-b9fb-47e7-8eab-f22f15953932.woff") format("woff"),url("/#{$m-fonts-path}4ff43877-a4d7-4c48-bd43-b19dffc4248c.ttf") format("truetype");
+	}
+	@font-face {
+		font-family: 'ThoughtStandardJA';
+		font-weight: $weight-r;
+		@include src-hiragino-sans-w3();
+	}
+	@font-face {
+		font-family: 'ThoughtStandardJA';
+		font-weight: $weight-b;
+		@include src-hiragino-sans-w6();
+	}
+}

@@ -1,0 +1,116 @@
+@charset 'utf-8';
+
+@mixin m-overlayScrollbars() {
+    @include m-overlayScrollbars--base();
+}
+
+@mixin m-overlayScrollbars--base(){
+
+    $opacity: 0.09;
+    $hover-opacity: 0.19;
+    $active-opacity: 0.19;
+
+    .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+        background-color: rgba($m-col-txt, $opacity);
+    }
+    .os-theme-dark > .os-scrollbar:hover > .os-scrollbar-track > .os-scrollbar-handle {
+        background-color: rgba($m-col-txt, $hover-opacity);
+    }
+    .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle.active {
+        background-color: rgba($m-col-txt, $active-opacity);
+    }
+}
+
+
+@mixin m-overlayScrollbars--base2(){
+
+    $width: 5px;
+    $min-height: 10px;
+    $margin-y: 26px;
+    $right: 15px;
+    $opacity: 0.09;
+    $hover-opacity: 0.19;
+    $active-opacity: 0.19;
+
+    .os-scrollbar-horizontal{
+        right: 10px;
+        height: 10px;
+    }
+    .os-scrollbar-vertical{
+        bottom: 10px;
+        width: $width + ($right * 2);
+    }
+    .os-host-rtl > .os-scrollbar-horizontal{
+        left: 10px;
+        right: 0;
+    }
+    .os-scrollbar-corner{
+        height: 10px;
+        width: 10px;
+    }
+    .os-scrollbar-horizontal > .os-scrollbar-track > .os-scrollbar-handle{
+        min-width: 30px;
+    }
+    .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle{
+        min-height: 30px;
+    }
+    .os-host-transition > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle{
+        //transition: background-color 0.3s ease-out;
+        transition-property: background-color;
+        transition-timing-function: $ease-out-quart;
+    }
+    .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle,
+    .os-scrollbar > .os-scrollbar-track{
+        border-radius: 10px;
+    }
+    .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+        background: rgba($m-col-txt, $opacity);
+        transition-duration: 480ms;
+    }
+    .os-scrollbar:hover > .os-scrollbar-track > .os-scrollbar-handle {
+        background: rgba($m-col-txt, $hover-opacity);
+        transition-duration: 190ms;
+    }
+    .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle.active {
+        background: rgba($m-col-txt, $active-opacity);
+        transition-duration: 190ms;
+    }
+
+    //Scrolling
+    .os-host.os-host-scrolling{
+        .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+            background: rgba($m-col-txt, $active-opacity);
+        }
+    }
+
+    .os-scrollbar-horizontal .os-scrollbar-handle:before,
+    .os-scrollbar-vertical .os-scrollbar-handle:before
+    {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: block;
+    }
+    .os-host-scrollbar-horizontal-hidden > .os-scrollbar-horizontal .os-scrollbar-handle:before,
+    .os-host-scrollbar-vertical-hidden > .os-scrollbar-vertical .os-scrollbar-handle:before
+    {
+        display: none;
+    }
+    .os-scrollbar-horizontal .os-scrollbar-handle:before{
+        top: -6px;
+        bottom: -2px;
+    }
+    .os-scrollbar-vertical .os-scrollbar-handle:before{
+        left: -6px;
+        right: -2px;
+    }
+    .os-host-rtl.os-scrollbar-vertical .os-scrollbar-handle:before{
+        right: -6px;
+        left: -2px;
+    }
+
+}
+

@@ -1,0 +1,69 @@
+@charset 'utf-8';
+
+.t-loader-enter{
+	opacity: 0;
+
+	.loader{
+		transform: translateY(16px);
+	}
+}
+
+.t-loader-enter-to{
+	opacity: 1;
+
+	.loader{
+	    transform: translateY(0px);
+	}
+}
+
+.t-loader-leave{
+	opacity: 1;
+}
+
+.t-loader-leave-to{
+	opacity: 0;
+}
+
+.t-loader-enter-active{
+	transition: opacity 600ms $ease-out-quart 200ms;
+
+	.loader{
+		transition: transform 600ms $ease-out-quart 200ms;
+	}
+}
+
+.t-loader-leave-active{
+	transition: opacity 600ms $ease-out-cubic 200ms;
+
+	.loader{
+		transition: transform 600ms $ease-out-quart 200ms;
+	}
+}
+
+
+$y: 14px;
+
+.item-enter{
+	opacity: 0;
+	transform: translate3d(0, #{$y}, 0);
+}
+
+.item-enter-to,
+.item-leave{
+	opacity: 1;
+	transform: translate3d(0, 0px, 0);
+}
+
+.item-leave-to{
+	opacity: 0;
+	transform: translate3d(0, #{$y}, 0);
+}
+
+.item-leave-active,
+.item-enter-active{
+	transition-property: opacity, transform;
+	transition-duration: 600ms;
+	transition-timing-function: $ease-out-quart;
+	transition-delay: 0ms;
+	will-change: opacity, transform;
+}

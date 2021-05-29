@@ -1,0 +1,244 @@
+@charset 'utf-8';
+
+@mixin DEV-V-ENTER-OPACITY(){
+	opacity: 0;
+}
+
+@mixin m-color-white(){
+	color: $m-col-white;
+	a{
+
+	}
+}
+@mixin m-get-height(){
+	&::after {
+		content: ".";
+		display: block;
+		clear: both;
+		height: 0;
+		visibility: hidden;
+	}
+}
+
+@mixin m-line-clamp( $line-height: $ja-r-line , $rows: 3, $bg-color: $m-col-white ){
+    white-space: normal;
+    max-height: $rows * $line-height;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/*
+	$w: 黒い部分の横幅
+	$aki: 隙間
+*/
+@mixin dotted-border( $col: rgba(0,0,0,0.31), $w: 1, $aki: 2 ){
+	$length: #{$w + $aki};
+	$wper: 100% / #{$w + $aki};
+	position: absolute;
+	display: block;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-image: linear-gradient(90deg,
+		#{$col},
+		#{$col} $wper,
+		transparent $wper,
+		transparent 100%
+	);
+	background-size: #{$length + px} 1px;
+	border: none;
+	content: '';
+}
+
+@mixin m-pop-shadow(){
+	position: absolute;
+	display: block;
+	top: -1px;
+	left: -1px;
+	z-index: -11;
+	width: calc(100% + 2px);
+	height: calc(100% + 2px);
+	background-color: rgba(0,0,0,$m-col-plate-shadow );
+	content: '';
+}
+
+
+/*------------------------------------*\
+	THUMB LIST
+\*------------------------------------*/
+@mixin m-thumblist-read(){
+	position: relative;
+	color: $m-col-black;
+	margin-top: 7px;
+	text-align: left;
+	z-index: 3;
+}
+
+/*------------------------------------*\
+    FLEX
+\*------------------------------------*/
+@mixin m-flex-center(){
+	display: flex;
+    flex-direction: column; /* 子要素をflexboxにより縦方向に揃える */
+    justify-content: center; /* 子要素をflexboxにより中央に配置する */
+    align-items: center;  /* 子要素をflexboxにより中央に配置する */
+}
+
+/*------------------------------------*\
+    SHADOW
+\*------------------------------------*/
+@mixin box-shadows( $s : 1 ){
+	@if $s == 1 {
+
+		box-shadow: 0 1px 3px 0 rgba(0,0,0,0.11);
+
+	} @else if $s == 2 {
+		//TIPS
+		box-shadow: 0 4px 19px 0 rgba(0,0,0,0.09);
+
+	} @else if $s == 3 {
+
+		box-shadow: 0 1px 19px 0 rgba(0,0,0,0.17);
+
+	} @else if $s == 4 {
+		//Popup
+		box-shadow: 0 9px 55px 0 rgba(0,0,0,0.18);
+
+	}
+}
+
+/*------------------------------------*\
+    SEPARATOR
+\*------------------------------------*/
+@mixin m-separator-base(){
+	display: block;
+	position: absolute;
+	height: 1px;
+	content:' ';
+	background-color: $m-col-border;
+}
+
+@mixin m-separator--nopd(){
+	@include m-separator-base();
+	left: -$gridBoxPadding;
+	width: calc(100% + #{$gridBoxPadding * 2} );
+}
+
+@mixin m-separator--pd-top(){
+	@include m-separator-base();
+	left: 0;
+	width: 100%;
+	top: 0;
+}
+
+@mixin m-separator--pd-bottom(){
+	@include m-separator-base();
+	left: 0;
+	width: 100%;
+	bottom: 0;
+}
+
+@mixin m-separator-bottom(){
+	@include m-separator--nopd();
+	bottom: 0;
+}
+
+@mixin m-separator-top($top:0){
+	@include m-separator--nopd();
+	top: $top;
+}
+
+
+/*------------------------------------*\
+	PLATE
+\*------------------------------------*/
+@mixin m-plate-fill(){
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+@mixin m-plate(){
+	position: absolute;
+	width: calc(100% + #{$gridBoxPadding * 2} );
+	height: 100%;
+	top: 0px;
+	left: -$gridBoxPadding;
+	z-index: -1;
+}
+
+
+@mixin m-plate-hover(){
+	transition-property: opacity;
+	transition-duration: $trans-hover;
+	transition-timing-function: $ease-out-cubic;
+}
+
+@mixin plate($bg:$m-col-hover-bg){
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: $m-col-hover-bg;
+	z-index: -1;
+	opacity: 0;
+	border-radius: 5px;
+	transition: opacity $trans-out $ease-out-cubic 0ms;
+}
+
+@mixin trans-hover(){
+	transition: opacity $trans-hover $ease-out-cubic 0ms;
+}
+
+@mixin trans-out(){
+	transition: opacity $trans-out $ease-out-cubic 0ms;
+}
+/*------------------------------------*\
+	m-popup-bg, m-sploader-screen
+\*------------------------------------*/
+@mixin m-screen-bg(){
+	position: fixed;
+	width: 100%;
+	height: calc(var(--vh, 1vh) * 100);
+	z-index: 5;
+	&.img{
+		z-index: 1;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+}
+
+@mixin border--base( $color: $m-col-black, $left: 3px, $bottom: -4px ) {
+
+	background-color: $color;
+	width: calc(100% - #{$left + 1px});
+	left: $left;
+	bottom: $bottom;
+
+	position: absolute;
+	display: block;
+	height: 1px;
+	content: '';
+
+}
+
+@mixin bgimg($image, $width, $height) {
+
+	$widthh: $width / 2;
+	$heighth: $height / 2;
+
+	background-image: url($image);
+	background-size: $widthh $heighth;
+	@media (-webkit-min-device-pixel-ratio: 2),
+		     (min--moz-device-pixel-ratio: 2),
+		     (-o-min-device-pixel-ratio: 2/1),
+		     (min-device-pixel-ratio: 2),
+		     (min-resolution: 192dpi),
+		     (min-resolution: 2dppx) {
+		/* on retina, use image that's scaled by 2 */
+		background-image: url($image);
+		background-size: $width $height;
+	}
+}

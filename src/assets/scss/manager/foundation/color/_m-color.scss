@@ -1,0 +1,52 @@
+@charset 'utf-8';
+
+@mixin m-color(){
+	
+	/*
+		Text		
+	*/
+	#{$m-col-txt-bk-class} .m-col-txt-bk
+	{ 
+		color: $m-col-txt;
+		border-color: rgba($m-col-txt, 0.48);
+	}
+	
+	#{$m-col-txt-gray-class} .m-col-txt-gray
+	{
+		color: $m-col-txt-gray;
+		border-color: rgba($m-col-txt-gray, 0.48);
+	}
+	
+	.m-pj-caption{
+		color: $m-col-txt-gray;
+		a{
+			color: $m-col-txt-gray;
+			text-decoration: underline;
+			transition: color $trans-hover $ease-out-cubic 0ms;
+			&:hover{
+				color: $m-col-txt;
+			}
+		}
+		.attention-link{
+			display: inline-block;
+			color: $m-col-red;
+			text-decoration: none;
+			cursor: pointer;
+			&:hover{
+			color: $m-col-txt;
+			}
+		}
+	}
+	
+	#{$m-col-txt-class} .m-col-txt
+	{ color: $m-col-txt; }
+	
+	.m-col-title-gray{
+		color: $m-col-txt-in-q;
+	}
+		
+	
+}
+
+
+

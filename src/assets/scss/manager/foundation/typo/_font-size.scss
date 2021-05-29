@@ -1,0 +1,151 @@
+@charset 'utf-8';
+
+/*
+	Japanese
+*/
+$f-xxs:		 		10px * $ja-hosei;
+$f-xs: 				10.2px * $ja-hosei;
+$f-xs-book: 		10.2px * $ja-hosei;
+$f-s: 				11.3px * $ja-hosei;
+$f-s-book:			11.3px * $ja-hosei;
+$f-r: 				12.6px * $ja-hosei;
+$f-book: 			12.6px * $ja-hosei;
+$f-m: 				13.5px * $ja-hosei;
+$f-m-book: 			13.5px * $ja-hosei;
+$f-ml: 				14.8px * $ja-hosei;
+$f-ml-book: 		14.8px * $ja-hosei;
+$f-l: 				15.74px;
+$f-l-book: 			15.74px;
+$f-ll: 				17.5px;
+$f-ll-book: 		17.5px;
+$f-xl: 		        26px * $ja-hosei;
+$f-xl-book: 		26px * $ja-hosei;
+$f-notet: 			39.34px * $ja-hosei;
+
+
+$ja-xxs-track: 		0.114em;
+$ja-xs-track: 		0.12em;
+$ja-xs-book-track: 	0.12em;
+$ja-s-track: 		0.112em;
+$ja-s-book-track: 	0.112em;
+$ja-r-track: 		0.102em;
+$ja-book-track: 	0.102em;
+$ja-m-track: 		0.091em;
+$ja-m-book-track: 	0.091em;
+$ja-ml-track: 		0.088em;
+$ja-ml-book-track: 	0.088em;
+$ja-l-track: 		0.122em;
+$ja-l-book-track: 	0.122em;
+$ja-ll-track: 		0.106em;
+$ja-ll-book-track: 	0.106em;
+$ja-xl-track: 	    0.091em;
+$ja-xl-book-track: 	0.091em;
+$ja-notet-track:	0.065em;
+
+
+$ja-xxs-line: 		21px;
+$ja-xs-line: 		21px;
+$ja-xs-book-line: 	19px;
+$ja-s-line-1: 		23px;
+$ja-s-line-2: 	    24px;
+$ja-r-line: 		26px;
+$ja-book-line: 		26px;
+ $ja-book-2-line:	27px;
+ $ja-book-3-line:	30px;
+ $ja-book-s-line:	21px;
+ $ja-book-4-line: 	24px;  // Tips
+ $ja-book-5-line: 	28px;  // Tips
+$ja-m-line: 		30px;
+$ja-m-book-line: 	30px;
+$ja-m-book-official-column-line: 32px;
+$ja-ml-line: 		29px;
+$ja-ml-book-line: 	29px;
+$ja-l-line: 		32px;
+$ja-l-book-line: 	32px;
+$ja-xl-book-line: 	32px;
+$ja-notet-line:		79px;
+
+/*
+	English
+*/
+$en-xxs: $f-xxs;
+$en-xs: $f-xs * $ja-en-per;
+$en-xs-book: $f-xs-book * $ja-en-per;
+$en-s: 12.2px; //OK
+$en-s-book: 12.2px; //OK
+$en-r: 13.698px; //OK
+$en-book: 13.698px; //OK
+$en-m: $f-m * $ja-en-per;
+$en-m-book: $f-m-book * $ja-en-per;
+$en-ml: $f-ml * $ja-en-per;
+$en-ml-book: $f-ml-book * $ja-en-per;
+$en-l: 16.95px; //OK
+$en-l-book: 16.95px; //OK
+$en-ll: $f-ll * $ja-en-per;
+$en-ll-book: $f-ll-book * $ja-en-per;
+$en-xl: $f-xl * $ja-en-per;
+$en-xl-book: $f-xl-book * $ja-en-per;
+$en-notet: $f-notet * $ja-en-per;
+
+$en-xxs-track: 		0.078em;
+$en-xs-track: 		0.048em;
+$en-xs-book-track: 	0.048em;
+$en-s-track: 		0.045em; //OK
+$en-s-book-track: 	0.045em; //OK
+$en-r-track: 		0.042em;
+$en-book-track: 	0.042em;
+$en-m-track: 		0.042em;
+$en-m-book-track: 	0.042em;
+$en-ml-track: 		0.04em;
+$en-ml-book-track: 	0.04em;
+$en-l-track: 		0.037em;
+$en-l-book-track: 	0.037em;
+$en-ll-track: 		0.037em;
+$en-ll-book-track: 	0.037em;
+$en-xl-track: 	    0.042em;
+$en-xl-book-track: 	0.023em;
+$en-notet-track:	0.068em;
+
+
+$en-xxs-line: 		17px;
+$en-xs-line: 		17px;
+$en-xs-book-line: 	17px;
+$en-s-line: 		18px;
+$en-s-book-line: 	18px;
+$en-r-line: 		23px;
+$en-book-line: 		23px;
+ $en-book-2-line:	25px;
+ $en-book-3-line:	27px;
+ $en-book-s-line:	21px;
+ $en-book-4-line:	22px; // Tips
+ $en-book-5-line:	26px; // Tips
+$en-m-line: 		23px;
+$en-m-book-line: 	23px;
+$en-m-book-official-column-line: 27px;
+$en-ml-line: 		25px;
+$en-ml-book-line: 	25px;
+$en-l-line: 		27px;
+$en-l-book-line: 	27px;
+$en-xl-book-line: 	37px;
+$en-notet-line:		79px;
+
+$num-xxs-track: 	$en-xxs-track * $en-num-per;
+$num-xs-track: 		$en-xs-track * $en-num-per;
+$num-xs-book-track: $en-xs-book-track * $en-num-per;
+$num-s-track: 		$en-s-track * $en-num-per;
+$num-s-book-track: 	$en-s-book-track * $en-num-per;
+$num-r-track: 		$en-r-track * $en-num-per;
+$num-book-track: 	$en-book-track * $en-num-per;
+$num-m-track: 		$en-m-track * $en-num-per;
+$num-m-book-track: 	$en-m-book-track * $en-num-per;
+$num-ml-track: 		$en-ml-track * $en-num-per;
+$num-ml-book-track: 	$en-ml-book-track * $en-num-per;
+$num-l-track: 		$en-l-track * $en-num-per;
+$num-l-book-track: 	$en-l-book-track * $en-num-per;
+$num-ll-track: 		$en-ll-track * $en-num-per;
+$num-ll-book-track: 	$en-ll-book-track * $en-num-per;
+$num-xl-track: $en-xl-track * $en-num-per;
+$num-xl-book-track: $en-xl-book-track * $en-num-per;
+$num-notet-track: $en-notet-track * $en-num-per;
+
+

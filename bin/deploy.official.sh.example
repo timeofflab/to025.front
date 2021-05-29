@@ -1,0 +1,32 @@
+#!/bin/bash -x
+
+D_SCRIPT=$(cd $(dirname $0); pwd)
+D_ROOT="$D_SCRIPT/.."
+D_DST=${D_ROOT}/.deploy/official
+
+mkdir -p ${D_DST}
+
+cd ${D_ROOT}/src
+
+yarn clean
+
+cp .env .env.org
+cp .env.production .env
+yarn build:o
+mv .env.org .env
+
+cp .env.production ${D_DST}/.env
+cp ./deploy/official/nuxt.config.js ${D_DST}
+cp ./deploy/official/package.json ${D_DST}
+cp ./deploy/official/app.yaml ${D_DST}
+rsync -az --delete ./.nuxt/official/* ${D_DST}/.nuxt
+rsync -az --delete ./static ${D_DST}/
+rsync -az --delete ./node_modules ${D_DST}/
+
+# sitemap.xml
+cp ./deploy/official/sitemap.xml ${D_DST}/static/sitemap.xml
+
+cd ${D_DST}
+
+yarn deploy
+gcloud app browse --project=to003-200909

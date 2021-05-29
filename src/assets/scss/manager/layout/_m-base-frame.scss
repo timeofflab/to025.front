@@ -1,0 +1,30 @@
+@charset 'utf-8';
+
+@mixin m-base-frame(){
+    @include m-base-frame--base();
+    @include m-base-frame--pc-tablet();
+    @include m-base-frame--mb();
+}
+
+@mixin m-base-frame--base(){
+
+	.m-base-frame{
+	}
+}
+
+@mixin m-base-frame--pc-tablet(){
+
+    .m-base-frame.-m--pc,
+    .m-base-frame.-m--tablet
+    {
+
+    }
+}
+
+@mixin m-base-frame--mb() {
+
+    .m-base-frame.-m--mb{
+
+    }
+}
+

@@ -1,0 +1,439 @@
+@charset 'utf-8';
+
+$m-col-white: 					#F8F7F6; //#F7F6F5
+$m-col-black: 					#303030;
+$m-col-black-dark: 				#282828;
+$m-col-btn-black:				#3b3b3b;
+$m-col-black-on-gray: 			#282828;
+
+$m-col-snow-white: 				#FDFDFD;
+$m-col-ultra-white: 				#FFFFFF;
+
+$m-col-silver: 					#E4E6E6;
+$m-col-silver-bg: 				#E3E5E5;
+$m-col-silver-b: 				#8A8A8A;
+
+$m-col-gold: 					#AB8F6F;
+$m-col-gold-m: 					#D6C7B8;
+
+/* Red */
+$m-col-pink:                    #E8CACA;
+$m-col-red: 					#FF5C4D;
+$m-col-red-txt: 				#FF5C4D;
+$m-col-red-bg-usui:				#FF9994;
+$m-col-red-bg:					#FCEBE8;
+$m-col-red-border:				rgba($m-col-red, 0.15);
+
+/* Green */
+$m-col-green: 					#a7d9d2;
+
+/* Blue */
+$m-col-blue: 					#56bcdb;
+$m-col-blue-2: 					#2F4D8F;
+
+$m-col-pink:					#FAE7E7;
+
+/* Sky */
+$m-col-sky: 					#0DCCCF;
+$m-col-sky-txt:					#0DCCCF;
+$m-col-sky-border:				rgba($m-col-sky, 0.15);
+$m-col-sky-bg:					#E1F2F2;
+
+/* Purple */
+$m-col-purple: 					#6880D8;
+
+/* Yellow */
+$m-col-yellow: 					#FFC618;
+
+/* Orange */
+$m-col-orange: 					#FFC64E;
+
+$m-col-sat:						$m-col-blue;
+$m-col-holiday:					$m-col-red;
+
+
+
+
+$m-col-link-icon:				0.55;
+
+
+$m-col-target:					#fff81f;
+
+
+$m-mv-background-color: #EDEDEC;
+
+/* Gray */
+$m-col-bg-gray-detail:			rgba(0,3,3, 0.02);  //#EFEFEE;
+$m-col-bg-gray:					rgba(0,3,3, 0.03);  //#EFEFEE;
+$m-col-bg-gray-n:				#f2f2f1;
+$m-col-bg-gray-n2:				#EDEDEC;
+$m-col-bg-gray2:				rgba(11,11,10, 0.07);
+$m-col-bg-gray3:				rgba(0,0,0, 0.08);
+$m-col-bg-gray4:				#e6e7e7;
+$m-col-bg-gray4-hover:			#dfe0e0;
+$m-col-bg-l-gray:				rgba(48,48,48, 0.03);
+$m-col-bg-l-gray-n:				#f2f1f0;
+$m-col-bg-gray-1-n:				#f2f2f1; //#f1f0ef;
+$m-col-bg-cover:				#F1F0EF;
+//$m-col-txt-gray:				#A6A6A6; //#A6A6A6; #919191;
+$m-col-txt-gray-1:				$m-col-silver-b;
+$m-col-txt-gray-2:				rgba(0,0,0, 0.19); //disabled
+$m-col-txt-in-q:				#d9d9d9;
+
+$m-btn-hover-lighten:			10%;
+$m-txt-hover-lighten:			24%;
+
+$m-col-border: rgba($m-col-black, 0.08);
+$m-col-border-white: rgba(255,255,255, 0.07);
+$m-col-border-c: #ebebeb;
+$m-col-border-hover:	 $m-col-black;
+$m-col-border-m: #D1D1D1;
+$m-col-border-strong: rgba($m-col-black, 0.78);
+$m-col-border-opacity: 0.75;
+
+
+$m-plate-shadow: 0 4px 24px 0px rgba(0, 0, 0, 0.01);
+
+
+/*
+	BUTTONS
+*/
+//BUTTON
+$mc-btn-border:					rgba(112,112,90, 0.15);
+$mc-btn-txt:					$m-col-black;
+
+$mc-btn-txt--hov:				rgba($m-col-black, 0.7);
+$mc-btn-bg--hov:				#FCFBFA;
+$mc-btn-border--hov:				rgba($m-col-black, 0.24);
+
+$mc-btn-txt--act:				$m-col-black;
+$mc-btn-bg--act:				#ffffff;
+
+$mc-btn-border-2:				rgba(112,112,90, 0.12);;
+
+
+$mc-btn-st-txt--hov:				#1a1a1a;
+$mc-btn-pop-separate:			rgba(13,13,13,0.12);
+$mc-btn-pop--hov:				rgba(white,0.86);
+$mc-btn-txt--dis:				rgba(0,0,0,0.15);
+$mc-btn-border--dis:				rgba(112,112,90, 0.11);
+$mc-btn-border-m:				#595959;
+
+
+
+$mc-btn-st-border:				rgba(5,5,5,0.49);
+
+
+
+
+
+// RADIO
+$mc-radio-border:				rgba(0,0,0,0.32);
+
+
+
+/* BASE */
+$m-col-txt:						$m-col-black;
+$m-col-txt-gray-op: 0.55;
+$m-col-txt-link-gray-op: 0.4;
+$m-col-txt-gray:				rgba($m-col-black, $m-col-txt-gray-op); //m-caption rgba(3,3,3,0.53) rgba(#050505,0.25)
+$m-col-txt-gray-st:				#686868;
+$m-col-txt-strong:				$m-col-red;
+$m-col-txt-border:				rgba($m-col-black, 0.58);
+$m-col-disabled:				0.19;
+$m-col-bg:						$m-col-white;
+
+/* LINK */
+$m-col-link:					$m-col-black;
+$m-col-link-bg:					$m-col-link;
+$m-col-link-bg-txt:				$m-col-white;
+$m-col-link-txt:				$m-col-black;
+$m-col-link-border:				$m-col-link;
+$m-col-link-v:					$m-col-link;
+$m-col-a-hover:					0.8;
+$m-col-txt-a-hover:				0.7;
+
+
+/* INPUT */
+$m-col-ipt-hover-border:		rgba(0,0,0, 0.20);;
+$m-col-ipt-focus-border:		$m-col-txt;
+
+/* ATTENTION */
+$m-col-attention-bg:			#F9E9E9;
+
+/* TXT LINK */
+$m-col-caption-a:				rgba(0, 0, 0, 0.64);
+
+$m-col-txtlink-txt:						$m-col-txt-gray;
+$m-col-txtlink-txt-border:				rgba($m-col-txt-gray, $m-col-border-opacity);
+$m-col-txtlink-txt-hover:				$m-col-black;
+$m-col-txtlink-txt-active:				$m-col-black;
+$m-col-txtlink-txt-border-hover:		rgba($m-col-link-border, $m-col-border-opacity);
+
+$m-col-borderlink-txt-hover:			$m-col-black;
+
+$m-col-txtlink-txt-black:				$m-col-black;
+$m-col-txtlink-txt-black-border: 		rgba($m-col-black, $m-col-border-opacity);
+$m-col-txtlink-txt-black-border-s: 		rgba($m-col-black, 0.48);
+$m-col-txtlink-txt-black-hover:			$m-col-link-txt;
+$m-col-txtlink-txt-black-border-hover:	rgba($m-col-link-border, $m-col-border-opacity);
+
+
+/* ACTIVE */
+$m-col-active:					lighten($m-col-link, $m-btn-hover-lighten);
+$m-col-active-bg:				lighten($m-col-link-bg, $m-btn-hover-lighten);
+$m-col-active-bg-txt:			lighten($m-col-link-bg-txt, $m-btn-hover-lighten);
+$m-col-active-txt:				lighten($m-col-link-txt, $m-btn-hover-lighten);
+$m-col-active-border:			lighten($m-col-link-border, $m-btn-hover-lighten);
+$m-col-a-active:				0.92;
+
+
+/* -----------------------------------------
+	PV
+----------------------------------------- */
+$m-col-pv-border:				$m-col-target;
+$m-col-pv-border-false:			$m-col-txt-gray;
+
+/* -----------------------------------------
+	PLATE
+----------------------------------------- */
+$m-col-plate:					$m-col-silver;
+$m-col-plate-txt:				$m-col-black;
+$m-col-plate-press:				#ffec00;
+$m-col-plate-txt-press:			#fffcd7;
+$m-col-plate-shadow:			0.05;
+
+//PINK
+$m-col-plate-active-bg:			$m-col-link;
+$m-col-plate-active-txt:		$m-col-txt;
+$m-col-plate-active-hover:		rgba($m-col-link, 0.8);
+$m-col-plate-active-txt-hover:	$m-col-txt;
+
+//BLUE
+$m-col-plate-selected:			$m-col-link;
+$m-col-plate-selected-txt:		$m-col-txt;
+$m-col-plate-selected-hover:	$m-col-link;
+$m-col-plate-selected-hover-txt:#9fb1ff;
+
+//ホーバーされた緑のリストにあるアイコン
+$m-col-hovered-txt:				$m-col-white;
+$m-col-hovered-bg:				transparent;
+$m-col-hovered-border:			$m-col-white;
+$m-col-hovered-txt-hover:		$m-col-link;
+$m-col-hovered-bg-hover:		$m-col-white;
+$m-col-hovered-border-hover:	$m-col-white;
+
+/* SORT */
+$m-col-sort-hover-bg:			$m-col-ultra-white;
+$m-col-sort-hover-bg-txt:		$m-col-black;
+$m-col-sort-dragging-alpha:		0.8;
+
+/* TIME CALENDAR */
+$m-col-tmcal-bg:				rgba(103,192,178,0.28);
+$m-col-tmcal-bg-alpha:			0.28;
+$m-col-tmcal-hover-bg:			rgba(140,212,197,0.28);
+$m-col-tmcal-hover-bg-alpha:	0.28;
+$m-col-tmcal-hover-bg-value:	0%;
+$m-col-tmcal-handle:			$m-col-black;
+$m-col-tmcal-handle-active:		$m-col-link;
+
+
+$m-col-hover:					$m-col-black;
+$m-col-hover-bg:				rgba(0,3,3, 0.04);
+$m-col-hover-border-opacity: 	0.2;
+$m-col-state:					$m-col-gold;
+$m-col-checked:					$m-col-link;
+
+$m-col-placeholder: 				rgba(0,0,0, 0.28); //#bfbfbf
+$m-col-text-read: 				$m-col-txt-gray-1;
+
+$m-col-passive: 				#BABABA;
+
+$m-col-hover-opacity: 			0.61;
+$m-col-hover-strong-opacity: 	0.8;
+
+$m-col-subtitle: 				#ADADAD;
+
+$m-col-abg-white-color:			#efefee;
+$m-col-abg-white-alpha:			0.91;
+$m-col-abg-black-color:			$m-col-black;
+$m-col-abg-black-alpha:			0.88;
+$m-col-abg-black-alpha-light:	0.2;
+
+$m-col-sploader-bg-color:		$m-col-black;
+$m-col-sploader-bg-alpha:		0.3;
+
+/*------------------------------------*\
+    VALIDATION
+\*------------------------------------*/
+$m-col-validation-txt: 			$m-col-txt;
+$m-col-validation-bg: 			$m-col-bg;
+
+/*------------------------------------*\
+    TEXT
+\*------------------------------------*/
+
+/*------------------------------------*\
+    LIST
+\*------------------------------------*/
+$m-col-list-bg:					#EFEFEE;
+$m-col-list-txt-hover:			rgba($m-col-txt, 0.8);
+$m-col-list-bg-hover:			$m-col-bg-gray2;
+
+$m-col-selector-selected-bg:	 #404040;
+$m-col-selector-selected-txt:	$m-col-white;
+
+$m-col-list-selected-bg:			$m-col-bg-gray2;
+$m-col-list-selected-txt:		$m-col-txt;
+$m-col-list-selected-hover-bg:	#EFEFEE;
+$m-col-list-selected-hover-txt:	$m-col-txt;
+
+$m-col-list-hover-txt:			$m-col-txt;
+$m-col-list-hover-bg:			$m-col-bg-gray2;
+
+
+
+/*------------------------------------*\
+    ICON
+\*------------------------------------*/
+$m-col-icon-link: 				#BABABA;
+$m-col-icon-link-hover:			$m-col-black;
+$m-col-icon-hover-lighten:		8%;
+$m-col-icon-active:				$m-col-link;
+
+$m-col-icon-link-txt-active:	#D1D1D1;
+
+$m-col-iconbtn-bg-strong:			$m-col-white;
+$m-col-iconbtn-txt-strong:			$m-col-black;
+$m-col-iconbtn-bg-strong-hover:		$m-col-link;
+$m-col-iconbtn-txt-strong-hover:	$m-col-white;
+
+
+
+/*------------------------------------*\
+    Button
+\*------------------------------------*/
+
+$m-filter-button: (
+    bg: rgba($m-col-txt, 0.06),
+    bg-hover: $m-col-ultra-white,
+    bg-active: rgba($m-col-txt, 1),
+);
+
+/* POSITIVE */
+$m-col-btn-border:							rgba(0,0,0,0.69);
+
+$m-col-btn-pos-txt:							$m-col-bg;
+$m-col-btn-pos-bg:							$m-col-btn-black;
+$m-col-btn-pos-border:						$m-col-btn-black;
+
+$m-col-btn-pos-txt-hover:					$m-col-white;
+$m-col-btn-pos-bg-hover:					rgba($m-col-btn-black, 0.94);
+$m-col-btn-pos-border-hover:				rgba($m-col-btn-black, 0.94);
+
+
+/* NEGATIVE */
+$m-col-btn-neg-txt:							rgba($m-col-btn-black, 0.32);
+$m-col-btn-neg-bg:							$m-col-white;
+$m-col-btn-neg-border:						rgba($m-col-btn-black, 0.22);
+
+$m-col-btn-neg-txt-hover:					rgba($m-col-btn-black, 0.48);
+$m-col-btn-neg-bg-hover:					$m-col-white;
+$m-col-btn-neg-border-hover:				rgba($m-col-btn-black, 0.38);
+
+
+/* DISABLED */
+$m-col-btn-disabled-txt:					rgba(0,0,0, 0.26);
+$m-col-btn-disabled-bg:						$m-col-white;
+$m-col-btn-disabled-border:					$m-col-white;
+
+
+/* ADD (GREEN) */
+$m-col-btn-txt-add:							$m-col-link;
+$m-col-btn-bg-add:							transparent;
+$m-col-btn-border-add:						$m-col-link;
+$m-col-btn-txt-add-hover:					$m-col-white;
+$m-col-btn-bg-add-hover:					$m-col-link;
+$m-col-btn-border-add-hover:				$m-col-link;
+
+$m-col-btn-normal-reverse-color:			$m-col-white;
+$m-col-btn-normal-reverse-bg:				transparent;
+$m-col-btn-normal-reverse-border:			$m-col-white;;
+
+$m-col-btn-pos-txt-reverse-color:			$m-col-black;
+$m-col-btn-pos-txt-reverse-bg:				$m-col-white;
+$m-col-btn-pos-txt-reverse-border:			$m-col-white;
+
+$m-col-btn-disabled-color-alpha:			0.24;
+$m-col-btn-disabled-border-alpha:			0.07;
+
+
+
+/*------------------------------------*\
+    Thumb
+\*------------------------------------*/
+$m-col-thumb-bg:				$m-col-bg-gray;
+$m-col-thumb-hover-bg:			$m-col-black;
+$m-col-thumb-hover-txt:			$m-col-white;
+
+$m-col-thumb-hover-btn-bg:		$m-col-white;
+$m-col-thumb-hover-btn-txt:		$m-col-black;
+
+$m-col-thumb-hover-bg-alpha:	 0.2;
+$m-col-thumb-bg-ghost-alpha:	 3.2%;
+
+/*------------------------------------*\
+    ACTIVE
+\*------------------------------------*/
+$m-col-state-active:			$m-col-black;
+$m-col-state-active-bg:			$m-col-link;
+
+/*------------------------------------*\
+    TOUR
+\*------------------------------------*/
+$m-col-tour-bg-alpha:			0.68;
+$m-col-tour-bg:					#FFE6EE;
+$m-col-tour-txt:				$m-col-black;
+$m-col-clickhere:				$m-col-target;
+
+/*------------------------------------*\
+    Theme Salon
+\*------------------------------------*/
+$m-col-bg-hover: 				#D4D9D9;
+$m-col-dotborder-silverbg: 		#CDCFCF;
+$m-col-a-disabled: 				0.14;
+$alpha-uploadimg-icon:	 		0.4;
+$alpha-uploadimg-text: 			0.4;
+
+/*------------------------------------*\
+   m-list Edit Name
+\*------------------------------------*/
+$m-list-edit-name-bg: 			$m-col-link;
+
+/*------------------------------------*\
+	RESERVATION PERSON BG
+\*------------------------------------*/
+$m-rv-col-btn-bg:				#EDEDED;
+$m-col-rv-green: 				#6AB16B;
+
+/*------------------------------------*\
+	SWITCH
+\*------------------------------------*/
+$m-item-checkboxbtn-bg:		#f2f2f2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

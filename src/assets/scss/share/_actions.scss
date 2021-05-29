@@ -1,0 +1,50 @@
+@charset 'utf-8';
+
+@mixin line-clamp($l : 3 , $h : 26px){
+	text-align: justify;
+	display: -webkit-box;
+    /* autoprefixer: ignore next */
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $l;
+	max-height: $h * $l;
+	overflow: hidden;
+}
+
+@function str-replace($substr, $newsubstr, $str, $all:false) {
+    $pos : str-index($str, $substr);
+
+    @while $pos != null {
+        $strlen : str-length($substr);
+        $start : str-slice($str, 0, $pos - 1);
+        $end : str-slice($str, $pos + $strlen);
+        $str : $start + $newsubstr + $end;
+
+        @if $all == true {
+            $pos : str-index($str, $substr);
+        } @else {
+            $pos : null;
+        }
+    }
+    @return $str;
+}
+
+/*
+    単位をとる
+*/
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+    @return $number;
+}
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        @if not map-has-key($map, $key) {
+            @return null;
+        }
+        $map: map-get($map, $key);
+    }
+
+    @return $map;
+}

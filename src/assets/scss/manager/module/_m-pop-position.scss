@@ -1,0 +1,86 @@
+@charset 'utf-8';
+
+@mixin m-pop-position(){
+	@include m-pop-position--base();
+	@include m-pop-position--pc-tablet();
+	@include m-pop-position--mb();
+}
+
+@mixin m-pop-position--base(){
+
+	.-noarrow{
+		.m-pop-arrow{
+			display: none;
+		}
+	}
+
+	.m-pop--top{
+		.m-pop-wrapper{
+			margin: 0;
+		}
+		.m-pop-arrow{
+			top: auto;
+			bottom: -$m-pop-arrow-h;
+			background-image: url('#{$domain}/manager/tutorial/arrow-bottom.png');
+		}
+	}
+
+	.m-pop--right{
+
+		.m-pop-wrapper{
+			margin: 0 #{-4px - $m_pop_distance} 0 $m-pop-margin;
+		}
+		.m-pop-arrow{
+			width: $m-pop-arrow-h;
+			height: $m-pop-arrow-w;
+			top: 50%;
+			left: -$m-pop-arrow-h;
+			margin: -#{$m-pop-arrow-w / 2} 0 0 0;
+			background-image: url('#{$domain}/manager/tutorial/arrow-left.png');
+			background-size: $m-pop-arrow-h $m-pop-arrow-w;
+		}
+	}
+
+	.m-pop--left{
+
+		.m-pop-wrapper{
+			margin: 0 $m-pop-margin 0 #{4px + $m_pop_distance};
+		}
+		.m-pop-arrow{
+			width: $m-pop-arrow-h;
+			height: $m-pop-arrow-w;
+			top: 50%;
+			left: auto;
+			right: -$m-pop-arrow-h;
+			margin: -#{$m-pop-arrow-w / 2} 0 0 0;
+			background-image: url('#{$domain}/manager/tutorial/arrow-right.png');
+			background-size: $m-pop-arrow-h $m-pop-arrow-w;
+		}
+	}
+
+	.m-pop--bottom{
+		.m-pop-wrapper{
+			margin-top: #{20px + $m_pop_distance};
+		}
+	}
+}
+
+@mixin m-pop-position--pc-tablet(){
+
+    .m-main-frame.-m--pc,
+    .m-main-frame.-m--tablet
+    {
+
+    }
+}
+
+@mixin m-pop-position--mb(){
+
+    .m-main-frame.-m--mb{
+
+    }
+}
+
+
+
+

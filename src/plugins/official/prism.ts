@@ -1,0 +1,9 @@
+import Vue from 'vue';
+import Prism from 'prismjs';
+// import 'prismjs/themes/prism-tomorrow.css';
+
+import {PrismEditor} from 'vue-prism-editor';
+// import 'vue-prism-editor/dist/prismeditor.min.css'; // import the styles
+Vue.component('PrismEditor', PrismEditor);
+
+export default Prism;

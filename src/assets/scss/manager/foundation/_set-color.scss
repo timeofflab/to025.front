@@ -1,0 +1,67 @@
+@charset 'utf-8';
+
+/*
+	Text Link Set Color
+*/
+$m-link-txt-border-class:'
+						.m-upload-drag-select .link,
+						.m-item-link a,
+						.m-item-link .link,
+						.m-item-link [data-pv-target=""],
+						.m-list-item-btns a.m-read,
+						.m-event-mes .more,
+						.m-read .m-link-border-bk,
+						.m-upload-drag-cancel span,
+						.m-tutorial-start-btn-2>span,
+						.m-link-border-gray,
+						.m-unsplash-header .category li.state-active,
+';
+$m-link-txt-hover-border-class:'
+						.m-pop-left span,
+						.m-nondisplay-item .s-pv-link,
+						.m-unsplash-header .category li,
+';
+$m-link-txt-gray-class:'
+						.m-list-item-footer,
+						.m-list-item-btns .m-read,
+						.-thumb-v:not(.m-list--txt) .m-item-read,
+						.m-checkbox.-weak a,
+						.m-caption .m-link-border,
+';
+
+/*
+	セレクターなどの背景色が変わるタイプ
+*/
+$m-link-listitem-class:'
+						.m-calendar-body .m-item,
+						.-list-select .m-list-item,
+';
+
+
+
+
+/*
+	Color Only
+*/
+/* = .m-col-gray  $m-col-txt-gray */
+$m-col-txt-bk-class:'
+						.page-normal .m-block-subtitle,
+';
+/* = .m-col-gray  $m-col-txt-gray */
+$m-col-txt-gray-class:'
+						.m-caption,
+						.m-item-caption,
+						.m-footer-book-num,
+						.m-uploadimg-caption,
+						.m-time,
+						.m-block-subtitle,
+						.m-checkbox.-weak,
+						.m-nav-menu .m-nav-foot,
+';
+
+
+/* color : $m-col-txt */
+$m-col-txt-class:'
+						.m-main-frame,
+';
+

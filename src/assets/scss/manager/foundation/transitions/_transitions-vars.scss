@@ -1,0 +1,134 @@
+@charset 'utf-8';
+
+$m-animeframe: 136ms;
+$introend-delay: 5;
+
+$mt-active: 280ms;
+$t-change:				300ms;
+$t-change-out:			480ms;
+
+//Value Label Click
+$trans-hover: 			240ms;
+$m-t-btn-hover: 		140ms;
+$trans-txt-hover:		120ms;
+$trans-out: 			150ms;
+$trans-active: 			100ms;
+$trans-active-opacity: 	0.65;
+$m-trans-click-flash: 	800ms;
+
+$trans-page-move: 					450ms;
+
+$trans-state-in: 					100ms;
+$trans-state-out: 					300ms;
+
+$trans-menu-dur:					360ms;
+
+//Hover Tool Menu
+$trans-hovermenu-in-duration: 		300ms;
+$trans-hovermenu-out-duration: 		350ms;
+
+/* -----------------------------------------
+	SELECTER
+----------------------------------------- */
+$trans-select-in:					460ms;
+$trans-select-out:					320ms;
+$trans-selecter-y:					10px;
+
+/* -----------------------------------------
+	THUMB LIST
+----------------------------------------- */
+$m-trans-thumblist-thumb-hover:		400ms;
+
+/* -----------------------------------------
+	FRAME
+----------------------------------------- */
+/*
+
+	1. Left Out 			left-in
+	2. Right Out			left-delay
+	3. Mutate Frames
+	4. Left In
+	5. Right In
+
+*/
+$mt-page-contents: 300ms;
+$mt-page-leave-second-delay: 140ms;
+$mt-page-mutate: 0ms;
+$mt-page-mutate-delay: $mt-page-leave-second-delay + $mt-page-contents;
+$mt-page-enter-first-delay: $mt-page-mutate-delay + $mt-page-mutate;
+$mt-page-enter-second-delay: $mt-page-enter-first-delay + $mt-page-leave-second-delay;
+
+$m-t-frame-op:				 		420ms;
+
+$m-t-page:							190ms;
+$m-t-page-easing:					cubic-bezier(0.880, 0.005, 0.125, 1.000);
+
+$m-trans-fullframe-in:				600ms;
+$m-trans-fullframe-delay-1:			0ms;
+$m-trans-fullframe-delay-2:			300ms;
+
+
+/* -----------------------------------------
+	POPUP
+----------------------------------------- */
+
+/* -----------------------------------------
+	TUTORIAL
+----------------------------------------- */
+$trans-tour-bg-in: 					400ms;
+$m-trans-tour-box:					360ms;
+
+/* -----------------------------------------
+	Right Frame Tools
+----------------------------------------- */
+$m-trans-right-frame-tools-in:		360ms;
+$m-trans-right-frame-tools-out:		360ms;
+
+/* -----------------------------------------
+	LEFT PAGE
+----------------------------------------- */
+$trans-leftpage-duration: 			300ms;
+$trans-leftpage-distance: 			16px;
+$trans-leftpage-delay: 				100ms;
+$t-page-next-easing:					cubic-bezier(0.880, 0.005, 0.125, 1.000);
+
+/* -----------------------------------------
+	UPLOAD
+----------------------------------------- */
+$mt-upload-ease-in: $ease-out-quart;
+$m-horizontal-menu-li-in-y:			14px;
+
+@function upload-hmenu-dur( $total: 1s, $num: 3, $each-delay:100ms, $delay: 0ms ) {
+	@return (($total - $delay) / $num ) - (($each-delay * ($num - 1)) / $num );
+}
+
+
+
+/* -----------------------------------------
+	Tour
+----------------------------------------- */
+$m_tips_dur_in:						260ms;
+$m_tips_dur_out:					260ms;
+$m_pop_dur_in:						260ms;
+$m_pop_dur_out:						260ms;
+$m_tour-pop_dur_in:					480ms;
+$m_tour-pop_dur_out:					480ms;
+$m_pop_distance:					8px;
+
+$m_maskbg_dur_in:					600ms;
+$m_mask_move_dur:					860ms;
+
+
+/* -----------------------------------------
+	Reservation
+----------------------------------------- */
+$m-trans-close-right:				200ms;
+$m-trans-open-right:					200ms;
+
+
+
+
+
+
+
+

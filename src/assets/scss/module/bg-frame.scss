@@ -1,0 +1,11 @@
+@charset 'utf-8';
+
+.bg-frame{
+    z-index: 6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(var(--vh) * 100);;
+}
+

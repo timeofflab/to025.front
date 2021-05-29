@@ -1,0 +1,23 @@
+@charset 'utf-8';
+
+$base_path: '';
+$domain: $base_path + '/common/img';
+$font_path: $base_path + '/common/css/font/';
+$theme-font-path: $base_path + '/common/css/themes';
+$img-path-manager: $base_path + '/common/img/manager/';
+$icomoon-font-path: $base_path + "/common/css/files/icon";
+$theme-icon-font-path: $base_path + "/common/css/themes/icon";
+
+@import 'share/s-imports';
+@import 'manager/foundation/imports';
+@import 'module/transitions';
+@import 'module/base';
+// @import 'module/popup-frame';
+@import 'module/ui-frame';
+@import 'module/img-frame';
+@import 'module/bg-frame';
+
+
+.console-frame{
+    display: none;
+}

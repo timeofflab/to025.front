@@ -1,0 +1,570 @@
+@charset 'utf-8';
+
+$base-width: 1366px;
+$base-height: 768px;
+
+/*
+	USER SITE
+*/
+@mixin src-hiragino-sans-w3(){
+	src:
+		local('HiraginoSans-W3'),
+		local('ヒラギノ角ゴシック W3'),
+		local('HiraKakuStd-W3'),
+		local('ヒラギノ角ゴ Std W3'),
+		local('HiraKakuStdN-W3'),
+		local('ヒラギノ角ゴ StdN W3'),
+
+		local('YuGo-Medium'), 				/* Mac PostScript Name */
+		local('YuGothic Medium'),     		/* Mac Fullname */
+		local('YuGo Medium'),     			/* Mac Fullname */
+		local('游ゴシック体 ミディアム'),     	/* Mac Fullname */
+
+		local('YuGothic-Medium'),     		/* Win PostScript Name */
+		local('Yu Gothic Medium'),     		/* Win FullScript */
+
+		local('YuGo-Regular'), 				/* Mac PostScript Name */
+		local('YuGothic Regular'),     		/* Mac Fullname */
+		local('YuGo Regular'),     			/* Mac Fullname */
+		local('游ゴシック体 レギュラー'),     	/* Mac Fullname */
+
+		local('YuGothic-Regular'),     		/* Win PostScript Name */
+		local('Yu Gothic Regular'),     	/* Win Fullname */
+
+		local('NotoSansJP-DemiLight'),   	/* android */
+		local('NotoSansJP-DemiLight.otf'),  /* android */
+		local("Noto Sans CJK JP DemiLight"),
+
+		local('NotoSansJP-Regular'),    	/* android */
+		local('NotoSansJP-Regular.otf'),    /* android */
+		local("Noto Sans CJK JP Regular"),
+
+		local('Meiryo'),    				/* windows */
+		local('メイリオ'),   					/* windows */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400');
+}
+@mixin src-hiragino-sans-w6(){
+	src:
+		local('HiraginoSans-W6'),
+		local('ヒラギノ角ゴシック W6'),
+		local('HiraKakuStd-W6'),
+		local('ヒラギノ角ゴ Std W6'),
+		local('HiraKakuStdN-W6'),
+		local('ヒラギノ角ゴ StdN W6'),
+
+		local('YuGo-Bold'), 				/* Mac PostScript Name */
+		local('YuGothic Bold'),     		/* Mac Fullname */
+		local('YuGo Bold'),     			/* Mac Fullname */
+		local('游ゴシック体 ボールド'),     	/* Mac Fullname */
+
+		local('YuGothic-Bold'),     		/* Win PostScript Name */
+		local('Yu Gothic Bold'),     		/* Win FullScript */
+
+		local('NotoSansJP-Bold'),   	 	/* android */
+		local('NotoSansJP-Bold.otf'),    	/* android */
+		local("Noto Sans CJK JP Bold"),
+
+		local('Meiryo-Bold'),    			/* windows */
+		local('Meiryo Bold'),    			/* windows */
+		local('メイリオ ボールド'),   			/* windows */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:700');
+}
+
+@mixin src-yugo-r(){
+	src:
+		local('YuGo-Regular'), 				/* Mac PostScript Name */
+		local('YuGothic Regular'),     		/* Mac Fullname */
+		local('YuGo Regular'),     			/* Mac Fullname */
+		local('游ゴシック体 レギュラー'),     	/* Mac Fullname */
+
+		local('YuGothic-Regular'),     		/* Win PostScript Name */
+		local('Yu Gothic Regular'),     	/* Win Fullname */
+
+		local('YuGo-Medium'), 				/* Mac PostScript Name */
+		local('YuGothic Medium'),     		/* Mac Fullname */
+		local('YuGo Medium'),     			/* Mac Fullname */
+		local('游ゴシック体 ミディアム'),     	/* Mac Fullname */
+
+		local('YuGothic-Medium'),     		/* Win PostScript Name */
+		local('Yu Gothic Medium'),     		/* Win FullScript */
+
+		local('HiraginoSans-W2'),
+		local('ヒラギノ角ゴシック W2'),
+		local('HiraKakuStd-W2'),
+		local('ヒラギノ角ゴ Std W2'),
+		local('HiraKakuStdN-W2'),
+		local('ヒラギノ角ゴ StdN W2'),
+
+		local('NotoSansJP-Light'),   	 	/* android */
+		local('NotoSansJP-Light.otf'),    	/* android */
+		local("Noto Sans CJK JP Light"),
+
+		local('NotoSansJP-Regular'),    	/* android */
+		local('NotoSansJP-Regular.otf'),    /* android */
+		local("Noto Sans CJK JP Regular"),
+
+		url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:300');
+}
+@mixin src-yugo-m(){
+	src:
+		local('YuGo-Medium'), 				/* Mac PostScript Name */
+		local('YuGothic Medium'),     		/* Mac Fullname */
+		local('YuGo Medium'),     			/* Mac Fullname */
+		local('游ゴシック体 ミディアム'),     	/* Mac Fullname */
+
+		local('YuGothic-Medium'),     		/* Win PostScript Name */
+		local('Yu Gothic Medium'),     		/* Win FullScript */
+		local('YuGo Medium'),     			/* Mac Fullname */
+
+		local('HiraginoSans-W3'),
+		local('ヒラギノ角ゴシック W3'),
+		local('HiraKakuStd-W3'),
+		local('ヒラギノ角ゴ Std W3'),
+		local('HiraKakuStdN-W3'),
+		local('ヒラギノ角ゴ StdN W3'),
+
+		local('YuGo-Regular'), 				/* Mac PostScript Name */
+		local('YuGothic Regular'),     		/* Mac Fullname */
+		local('YuGo Regular'),     			/* Mac Fullname */
+		local('游ゴシック体 レギュラー'),     	/* Mac Fullname */
+
+		local('YuGothic-Regular'),     		/* Win PostScript Name */
+		local('Yu Gothic Regular'),     	/* Win Fullname */
+
+		local('NotoSansJP-DemiLight'),   	 /* android */
+		local('NotoSansJP-DemiLight.otf'),    /* android */
+		local("Noto Sans CJK JP DemiLight"),
+
+		local('NotoSansJP-Regular'),    	/* android */
+		local('NotoSansJP-Regular.otf'),    /* android */
+		local("Noto Sans CJK JP Regular"),
+
+		local('Meiryo'),    				/* windows */
+		local('メイリオ'),   					/* windows */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:300');
+}
+@mixin src-yugo-b(){
+	src:
+		local('YuGo-Bold'), 				/* Mac PostScript Name */
+		local('YuGothic Bold'),     		/* Mac Fullname */
+		local('YuGo Bold'),     			/* Mac Fullname */
+		local('游ゴシック体 ボールド'),     	/* Mac Fullname */
+
+		local('YuGothic-Bold'),     		/* Win PostScript Name */
+		local('Yu Gothic Bold'),     		/* Win FullScript */
+		local('Yu Gothic'),     		/* Win FullScript */
+
+		local('HiraginoSans-W6'),
+		local('ヒラギノ角ゴシック W6'),
+		local('HiraKakuStd-W6'),
+		local('ヒラギノ角ゴ Std W6'),
+		local('HiraKakuStdN-W6'),
+		local('ヒラギノ角ゴ StdN W6'),
+
+		local('NotoSansJP-Bold'),   	 	/* android */
+		local('NotoSansJP-Bold.otf'),    	/* android */
+		local("Noto Sans CJK JP Bold"),
+
+		local('Meiryo-Bold'),    			/* windows */
+		local('Meiryo Bold'),    			/* windows */
+		local('メイリオ ボールド'),   			/* windows */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:700');
+}
+
+@mixin src-hiragino-serif-w2(){
+	src:
+		local('HiraMinProN-W2'), 			/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W2'),
+		local('HiraMinStd-W2'),
+		local('ヒラギノ明朝 Std W2'),
+		local('HiraMinStdN-W2'),
+		local('ヒラギノ明朝 StdN W2'),
+
+		local('YuMin-Regular'), 			/* Mac PostScript Name */
+		local('YuMincho Regular'),     		/* Mac Fullname */
+		local('YuMin Regular'),     		/* Mac Fullname */
+		local('游明朝体 レギュラー'),     		/* Mac Fullname */
+
+		local('YuMincho-Regular'),     		/* Win PostScript Name */
+		local('Yu Mincho Regular'),     	/* Win Fullname */
+
+		local('YuMin-Medium'), 				/* Mac PostScript Name */
+		local('YuMincho Medium'),     		/* Mac Fullname */
+		local('YuMin Medium'),     			/* Mac Fullname */
+		local('游明朝体 ミディアム'),     		/* Mac Fullname */
+
+		local('YuMincho-Medium'),     		/* Win PostScript Name */
+		local('Yu Mincho Medium'),     		/* Win FullScript */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:300');
+}
+@mixin src-hiragino-serif-w3(){
+	src:
+		local('HiraMinProN-W3'), 			/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W3'),
+		local('HiraMinStd-W3'),
+		local('ヒラギノ明朝 Std W3'),
+		local('HiraMinStdN-W3'),
+		local('ヒラギノ明朝 StdN W3'),
+
+		local('YuMin-Medium'), 				/* Mac PostScript Name */
+		local('YuMincho Medium'),     		/* Mac Fullname */
+		local('YuMin Medium'),     			/* Mac Fullname */
+		local('游明朝体 ミディアム'),     		/* Mac Fullname */
+
+		local('YuMincho-Medium'),     		/* Win PostScript Name */
+		local('Yu Mincho Medium'),     		/* Win FullScript */
+
+		local('YuMin-Regular'), 			/* Mac PostScript Name */
+		local('YuMincho Regular'),     		/* Mac Fullname */
+		local('YuMin Regular'),     		/* Mac Fullname */
+		local('游明朝体 レギュラー'),     		/* Mac Fullname */
+
+		local('YuMincho-Regular'),     		/* Win PostScript Name */
+		local('Yu Mincho Regular'),     	/* Win Fullname */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400');
+}
+@mixin src-hiragino-serif-w4(){
+	src:
+		local('HiraMinProN-W4'), 			/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W4'),
+		local('HiraMinStd-W4'),
+		local('ヒラギノ明朝 Std W4'),
+		local('HiraMinStdN-W4'),
+		local('ヒラギノ明朝 StdN W4'),
+
+		local('YuMin-Medium'), 				/* Mac PostScript Name */
+		local('YuMincho Medium'),     		/* Mac Fullname */
+		local('YuMin Medium'),     			/* Mac Fullname */
+		local('游明朝体 ミディアム'),     		/* Mac Fullname */
+
+		local('YuMincho-Medium'),     		/* Win PostScript Name */
+		local('Yu Mincho Medium'),     		/* Win FullScript */
+
+		local('YuMin-Regular'), 			/* Mac PostScript Name */
+		local('YuMincho Regular'),     		/* Mac Fullname */
+		local('YuMin Regular'),     		/* Mac Fullname */
+		local('游明朝体 レギュラー'),     		/* Mac Fullname */
+
+		local('YuMincho-Regular'),     		/* Win PostScript Name */
+		local('Yu Mincho Regular'),     	/* Win Fullname */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:500');
+}
+@mixin src-hiragino-serif-w5(){
+	src:
+		local('HiraMinProN-W5'), 				/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W5'),
+		local('HiraMinStd-W5'),
+		local('ヒラギノ明朝 Std W5'),
+		local('HiraMinStdN-W5'),
+		local('ヒラギノ明朝 StdN W5'),
+
+		local('YuMin-Demibold'), 				/* Mac PostScript Name */
+		local('YuMincho Demibold'),     		/* Mac Fullname */
+		local('YuMin Demibold'),     			/* Mac Fullname */
+		local('游明朝体 デミボールド'),     		/* Mac Fullname */
+
+		local('YuMincho-Demibold'),     		/* Win PostScript Name */
+		local('Yu Mincho Demibold'),     		/* Win FullScript */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:600');
+}
+@mixin src-hiragino-serif-w6(){
+	src:
+		local('HiraMinProN-W6'), 				/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W6'),
+		local('HiraMinStd-W6'),
+		local('ヒラギノ明朝 Std W6'),
+		local('HiraMinStdN-W6'),
+		local('ヒラギノ明朝 StdN W6'),
+
+		local('YuMin-Demibold'), 				/* Mac PostScript Name */
+		local('YuMincho Demibold'),     		/* Mac Fullname */
+		local('YuMin Demibold'),     			/* Mac Fullname */
+		local('游明朝体 デミボールド'),     		/* Mac Fullname */
+
+		local('YuMincho-Demibold'),     		/* Win PostScript Name */
+		local('Yu Mincho Demibold'),     		/* Win FullScript */
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:700');
+}
+
+@mixin src-yumin-r(){
+	src:
+		local('YuMin-Regular'), 			/* Mac PostScript Name */
+		local('YuMincho Regular'),     		/* Mac Fullname */
+		local('YuMin Regular'),     		/* Mac Fullname */
+		local('游明朝体 レギュラー'),     		/* Mac Fullname */
+
+		local('YuMincho-Regular'),     		/* Win PostScript Name */
+		local('Yu Mincho Regular'),     	/* Win Fullname */
+
+		local('YuMin-Medium'), 				/* Mac PostScript Name */
+		local('YuMincho Medium'),     		/* Mac Fullname */
+		local('YuMin Medium'),     			/* Mac Fullname */
+		local('游明朝体 ミディアム'),     		/* Mac Fullname */
+
+		local('YuMincho-Medium'),     		/* Win PostScript Name */
+		local('Yu Mincho Medium'),     		/* Win FullScript */
+
+		local('HiraMinProN-W2'), 			/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W2'),
+		local('HiraMinStd-W2'),
+		local('ヒラギノ明朝 Std W2'),
+		local('HiraMinStdN-W2'),
+		local('ヒラギノ明朝 StdN W2')
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:300');
+}
+@mixin src-yumin-m(){
+	src:
+
+		local('YuMin-Medium'), 				/* Mac PostScript Name */
+		local('YuMincho Medium'),     		/* Mac Fullname */
+		local('YuMin Medium'),     			/* Mac Fullname */
+		local('游明朝体 ミディアム'),     		/* Mac Fullname */
+
+		local('YuMincho-Medium'),     		/* Win PostScript Name */
+		local('Yu Mincho Medium'),     		/* Win FullScript */
+
+		local('YuMin-Regular'), 			/* Mac PostScript Name */
+		local('YuMincho Regular'),     		/* Mac Fullname */
+		local('YuMin Regular'),     		/* Mac Fullname */
+		local('游明朝体 レギュラー'),     		/* Mac Fullname */
+
+		local('YuMincho-Regular'),     		/* Win PostScript Name */
+		local('Yu Mincho Regular'),     	/* Win Fullname */
+
+		local('HiraMinProN-W3'), 			/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W3'),
+		local('HiraMinStd-W3'),
+		local('ヒラギノ明朝 Std W3'),
+		local('HiraMinStdN-W3'),
+		local('ヒラギノ明朝 StdN W3'),
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400');
+}
+@mixin src-yumin-m-mac(){
+	src:
+
+		local('YuMin-Medium'), 				/* Mac PostScript Name */
+		local('YuMincho Medium'),     		/* Mac Fullname */
+		local('YuMin Medium'),     			/* Mac Fullname */
+		local('游明朝体 ミディアム'),     		/* Mac Fullname */
+
+		local('YuMincho-Medium'),     		/* Win PostScript Name */
+		local('Yu Mincho Medium'),     		/* Win FullScript */
+
+		local('HiraMinProN-W3'), 			/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W3'),
+		local('HiraMinStd-W3'),
+		local('ヒラギノ明朝 Std W3'),
+		local('HiraMinStdN-W3'),
+		local('ヒラギノ明朝 StdN W3'),
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400');
+
+}
+@mixin src-yumin-db(){
+	src:
+		local('YuMin-Demibold'), 				/* Mac PostScript Name */
+		local('YuMincho Demibold'),     		/* Mac Fullname */
+		local('YuMin Demibold'),     			/* Mac Fullname */
+		local('游明朝体 デミボールド'),     		/* Mac Fullname */
+		local('YuMincho-Demibold'),     		/* Win PostScript Name */
+		local('Yu Mincho Demibold'),     		/* Win FullScript */
+
+		local('HiraMinProN-W6'), 				/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W6'),
+		local('HiraMinStd-W6'),
+		local('ヒラギノ明朝 Std W6'),
+		local('HiraMinStdN-W6'),
+		local('ヒラギノ明朝 StdN W6'),
+
+		local('HiraMinProN-W5'), 				/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W5'),
+		local('HiraMinStd-W5'),
+		local('ヒラギノ明朝 Std W5'),
+		local('HiraMinStdN-W5'),
+		local('ヒラギノ明朝 StdN W5'),
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:500');
+
+}
+@mixin src-yumin-eb(){
+	src:
+		local('YuMin-Extrabold'), 				/* Mac PostScript Name */
+		local('YuMincho Extrabold'),     		/* Mac Fullname */
+		local('YuMin Extrabold'),     			/* Mac Fullname */
+		local('游明朝体 エクストラボールド'),     	/* Mac Fullname */
+
+		local('YuMincho-Extrabold'),     		/* Win PostScript Name */
+		local('Yu Mincho Extrabold'),     		/* Win FullScript */
+
+		local('HiraMinProN-W7'), 				/* iOS PostScript Name */
+		local('ヒラギノ明朝 ProN W7'),
+		local('HiraMinStd-W7'),
+		local('ヒラギノ明朝 Std W7'),
+		local('HiraMinStdN-W7'),
+		local('ヒラギノ明朝 StdN W7'),
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:700');
+}
+
+// Mobile ///////////////////////////////////////////////////////////////
+
+@mixin src-mb-hiragino-serif-w3(){
+	src:
+		local('HiraMinProN-W3'),
+		local('ヒラギノ明朝 ProN W3'),
+		local('HiraMinPro-W3'),
+		local('ヒラギノ明朝 Pro W3'),
+		local('HiraMinStd-W3'),
+		local('ヒラギノ明朝 Std W3'),
+		local('HiraMinStdN-W3'),
+		local('ヒラギノ明朝 StdN W3'),
+		local('Hiragino Mincho Pro W3'),
+		local('Hiragino-Mincho-Pro-W3'),
+
+
+		local('NotoSerifJP-Regular'),    	/* android */
+		local('NotoSerifJP-Regular.otf'),    /* android */
+		local("Noto Serif CJK JP Regular"),
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:400&display=swap&subset=japanese');
+}
+@mixin src-mb-hiragino-serif-w6(){
+	src:
+		local('HiraMinProN-W6'),
+		local('ヒラギノ明朝 ProN W6'),
+		local('HiraMinPro-W6'),
+		local('ヒラギノ明朝 Pro W6'),
+		local('HiraMinStd-W6'),
+		local('ヒラギノ明朝 Std W6'),
+		local('HiraMinStdN-W6'),
+		local('ヒラギノ明朝 StdN W6'),
+		local('Hiragino Mincho Pro W6'),
+		local('Hiragino-Mincho-Pro-W6'),
+
+		local('NotoSerifJP-Bold'),    	/* android */
+		local('NotoSerifJP-Bold.otf'),    /* android */
+		local("Noto Serif CJK JP Bold"),
+
+		url('https://fonts.googleapis.com/css?family=Noto+Serif+JP:700&display=swap&subset=japanese');
+}
+
+@mixin src-yakuhanJp(){
+
+	@font-face {
+	    font-family: 'YakuHanJP';
+	    font-style: normal;
+	    font-weight: 100;
+	    src: url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Thin.eot');
+	    src: local('☺︎'),
+	         url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Thin.woff2') format('woff2'),
+	         url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Thin.woff') format('woff');
+	}
+	@font-face {
+	    font-family: 'YakuHanJP';
+	    font-style: normal;
+	    font-weight: 200;
+	    src: url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Light.eot');
+	    src: local('☺︎'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Light.woff2') format('woff2'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Light.woff') format('woff');
+	}
+	@font-face {
+	    font-family: 'YakuHanJP';
+	    font-style: normal;
+	    font-weight: 300;
+	    src:  url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-DemiLight.eot');
+	    src: local('☺︎'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-DemiLight.woff2') format('woff2'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-DemiLight.woff') format('woff');
+	}
+	@font-face {
+	    font-family: 'YakuHanJP';
+	    font-style: normal;
+	    font-weight: 400;
+	    src:  url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Regular.eot');
+	    src: local('☺︎'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Regular.woff2') format('woff2'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Regular.woff') format('woff');
+	}
+	@font-face {
+	    font-family: 'YakuHanJP';
+	    font-style: normal;
+	    font-weight: 500;
+	    src:  url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Medium.eot');
+	    src: local('☺︎'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Medium.woff2') format('woff2'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Medium.woff') format('woff');
+	}
+	@font-face {
+	    font-family: 'YakuHanJP';
+	    font-style: normal;
+	    font-weight: 700;
+	    src:  url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Bold.eot');
+	    src: local('☺︎'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Bold.woff2') format('woff2'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Bold.woff') format('woff');
+	}
+	@font-face {
+	    font-family: 'YakuHanJP';
+	    font-style: normal;
+	    font-weight: 900;
+	    src:  url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Black.eot');
+	    src: local('☺︎'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Black.woff2') format('woff2'),
+	          url('https://cdn.jsdelivr.net/yakuhanjp/1.3.1/fonts/YakuHanJP/YakuHanJP-Black.woff') format('woff');
+	}
+
+}
+
+@mixin src-sans-serif(){
+
+	@font-face {
+	    font-family: 'AppleSystem';
+	    src: local('-apple-system'),
+	         local('BlinkMacSystemFont');
+	}
+
+	/* MySansSerif */
+	@font-face {
+	    font-family: 'MySansSerif';
+	    font-weight: normal;
+	    src: local('HelveticaNeue'),
+	         local('Helvetica Neue'),
+	         local('Helvetica'),
+	         local('Arial');
+	}
+	@font-face {
+	    font-family: 'MySansSerif';
+	    font-weight: 700;
+	    src: local('HelveticaNeueBold'),
+	         local('HelveticaNeue-Bold'),
+	         local('Helvetica Neue Bold'),
+	         local('HelveticaBold'),
+	         local('Helvetica-Bold'),
+	         local('Helvetica Bold'),
+	         local('Arial Bold');
+	}
+	@font-face {
+	    font-family: 'MySansSerif';
+	    font-weight: 900;
+	    src: local('HelveticaNeueBlack'),
+	         local('HelveticaNeue-Black'),
+	         local('Helvetica Neue Black'),
+	         local('HelveticaBlack'),
+	         local('Helvetica-Black'),
+	         local('Helvetica Black'),
+	         local('Arial Black');
+	}
+}
+

@@ -1,0 +1,11 @@
+@charset 'utf-8';
+
+/*
+	MANAGER
+*/
+@mixin m-css-vars(){
+
+	:root{
+		--vh: 1vh;
+	}
+}

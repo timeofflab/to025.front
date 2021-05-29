@@ -1,0 +1,145 @@
+@charset 'utf-8';
+
+.scrollbar-page {
+	max-height: calc(var(--vh, 1vh) * 100);
+}
+
+html{
+    .os-viewport {
+        overflow-y: scroll;
+        -ms-overflow-style: none;    /* IE, Edge 対応 */
+        scrollbar-width: none;       /* Firefox 対応 */
+    }
+    .os-viewport::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+        display: none;
+    }
+}
+
+
+.main-frame{
+    $min-height: 10px;
+    $margin-y: 26px;
+    $opacity: 0.09;
+    $hover-opacity: 0.19;
+    $active-opacity: 0.19;
+
+    $os: (
+        width: 5px,
+        right: 14px,
+    );
+
+    $os-mb: (
+        width: 4px,
+        right: 4px,
+    );
+
+    /* DARK & LIGHT THEME: */
+    .os-theme-dark > .os-scrollbar-horizontal,
+    .os-theme-light > .os-scrollbar-horizontal {
+        right: map-get($os, width) + (map-get($os, right) * 2);
+        height: map-get($os, width) + (map-get($os, right) * 2);
+    }
+    .os-theme-dark > .os-scrollbar-vertical,
+    .os-theme-light > .os-scrollbar-vertical {
+        bottom: map-get($os, width) + (map-get($os, right) * 2);
+        width: map-get($os, width) + (map-get($os, right) * 2);
+    }
+    .os-theme-dark.os-host-rtl > .os-scrollbar-horizontal,
+    .os-theme-light.os-host-rtl > .os-scrollbar-horizontal {
+        left: map-get($os, width) + (map-get($os, right) * 2);
+        right: 0;
+    }
+    .os-theme-dark > .os-scrollbar-corner,
+    .os-theme-light > .os-scrollbar-corner {
+        height: map-get($os, width) + (map-get($os, right) * 2);
+        width: map-get($os, width) + (map-get($os, right) * 2);
+    }
+    .os-theme-dark > .os-scrollbar,
+    .os-theme-light > .os-scrollbar {
+        padding: $margin-y map-get($os, right);
+        box-sizing: border-box;
+        background: transparent;
+    }
+    .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle,
+    .os-theme-light > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle,
+    .os-theme-dark > .os-scrollbar > .os-scrollbar-track,
+    .os-theme-light > .os-scrollbar > .os-scrollbar-track {
+        border-radius: (map-get($os, width) / 2);
+    }
+
+
+    .os-theme-dark > .os-scrollbar-corner,
+    .os-theme-light > .os-scrollbar-corner {
+        background-color: transparent;
+    }
+
+    .os-theme-dark > .os-scrollbar-horizontal > .os-scrollbar-track > .os-scrollbar-handle,
+    .os-theme-light > .os-scrollbar-horizontal > .os-scrollbar-track > .os-scrollbar-handle {
+        min-width: 80px;
+    }
+    .os-theme-dark > .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle,
+    .os-theme-light > .os-scrollbar-vertical > .os-scrollbar-track > .os-scrollbar-handle {
+        min-height: 80px;
+    }
+
+    .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle {
+        background: rgba(0, 0, 0, 0.09);
+    }
+    .os-theme-dark > .os-scrollbar-horizontal .os-scrollbar-handle:before,
+    .os-theme-light > .os-scrollbar-horizontal .os-scrollbar-handle:before {
+        top: -6px;
+        bottom: -2px;
+    }
+    .os-theme-dark > .os-scrollbar-vertical .os-scrollbar-handle:before,
+    .os-theme-light > .os-scrollbar-vertical .os-scrollbar-handle:before {
+        left: -6px;
+        right: -2px;
+    }
+    .os-host-rtl.os-theme-dark > .os-scrollbar-vertical .os-scrollbar-handle:before,
+    .os-host-rtl.os-theme-light > .os-scrollbar-vertical .os-scrollbar-handle:before {
+        right: -6px;
+        left: -2px;
+    }
+
+
+    &.-mb{
+        .os-theme-dark > .os-scrollbar-horizontal,
+        .os-theme-light > .os-scrollbar-horizontal {
+            right: map-get($os-mb, width) + (map-get($os-mb, right) * 2);
+            height: map-get($os-mb, width) + (map-get($os-mb, right) * 2);
+        }
+        .os-theme-dark > .os-scrollbar-vertical,
+        .os-theme-light > .os-scrollbar-vertical {
+            bottom: map-get($os-mb, width) + (map-get($os-mb, right) * 2);
+            width: map-get($os-mb, width) + (map-get($os-mb, right) * 2);
+        }
+        .os-theme-dark.os-host-rtl > .os-scrollbar-horizontal,
+        .os-theme-light.os-host-rtl > .os-scrollbar-horizontal {
+            left: map-get($os-mb, width) + (map-get($os-mb, right) * 2);
+            right: 0;
+        }
+        .os-theme-dark > .os-scrollbar-corner,
+        .os-theme-light > .os-scrollbar-corner {
+            height: map-get($os-mb, width) + (map-get($os-mb, right) * 2);
+            width: map-get($os-mb, width) + (map-get($os-mb, right) * 2);
+        }
+        .os-theme-dark > .os-scrollbar,
+        .os-theme-light > .os-scrollbar {
+            padding: $margin-y map-get($os-mb, right);
+            box-sizing: border-box;
+            background: transparent;
+        }
+        .os-theme-dark > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle,
+        .os-theme-light > .os-scrollbar > .os-scrollbar-track > .os-scrollbar-handle,
+        .os-theme-dark > .os-scrollbar > .os-scrollbar-track,
+        .os-theme-light > .os-scrollbar > .os-scrollbar-track {
+            border-radius: (map-get($os-mb, width) / 2);
+        }
+    }
+}
+
+.main-frame.-touch-device{
+    .os-scrollbar.os-scrollbar-vertical{
+        opacity: 0 !important;
+    }
+}

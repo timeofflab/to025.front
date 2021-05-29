@@ -1,0 +1,555 @@
+@charset 'utf-8';
+
+
+///// MARGINS /////////////////////////
+$m-margin-acc: 0.6818;
+
+$m-base-xxxs-m: 11px;
+$m-base-xxs-m: 15px;
+$m-base-xs-m: 20px;
+$m-base-s-m: 32px; //27 11/10
+$m-base-r-m: 36px;
+$m-base-m-m: 47px;
+$m-base-ml-m: 58px; //note
+$m-base-l-m: 64px;
+$m-base-xl-m: 73px;
+
+$m-read-mt: -10px;
+$m-read-mb: -9px;
+$m-caption-mt: -7px;
+$m-caption-mb: -7px;
+$m-textarea-mt: -16px;
+$m-textarea-mb: -18px;//-11
+$m-block-title-mt: -13px;
+$m-block-title-mb: -14px;
+$m-block-subtitle-mt: -5px;
+$m-block-subtitle-mb: -9px;
+$m-list-mt: -16px;
+$m-list-mb: -5px;
+$m-txtbtns-mt: -11px;
+$m-txtbtns-mb: -14px;
+$m-contents-title-mt: -8px;
+$m-contents-title-mb: -10px;
+$m-list-table-mt: -17px;
+$m-list-table-mb: -0px;
+$m-tab-container-mt: -4px;
+$m-tab-container-mb: -14px;
+$m-txtitems-mt: -8px;
+$m-txtitems-mb: -12px;
+$m-subscriptions-table-mt: -13px;
+$m-subscriptions-table-mb: 0px;
+$m-next-txt-mt: -14px;
+
+$m-block-subtitle-mb-s: 39px;
+
+////////// LAYOUT //////////////////////////////////
+$m-l--note-pt: 49px;
+
+
+///// GRID /////////////////////////
+
+$m-base-lineheight:					18px;
+
+$gridW: 							50px; //50px
+$gridH: 							36px;
+$gridMargin: 						12px;
+$gridBoxPadding: 					38px;
+$gridBoxPadding-l: 					50px;
+$gridBoxPaddingS: 					26px;
+$gridBoxPaddingXS: 					18px;
+$list-border-position:				1px;
+$m-column-gap:						28px;
+
+
+$m-ratio-thumb:						62.2%;
+$m-ratio-thumb-b:					76.21%;
+$m-ratio-silver:					70.716%;
+$m-ratio-mv:						54.1%;
+$m-ratio-horizontal:					62%;
+$m-ratio-vertical:					120%;
+$m-ratio-square:					100%;
+
+$m-nav-menu-h: 454px;
+$m-gnav-h:							134px;
+$m-gnav-m:							26px;//20px;
+
+$m-pc: (
+    max-width: 1380px,
+    'nav-bottom-h': 114px,
+);
+
+$mo-pc: (
+    gap-x: 50px,
+);
+
+$m-mb: (
+    'padding-x': 34px, //34px
+    'padding-x-s': 26px,
+    'nav-height': 71px,
+    'nav-height-m': 61px,
+    'nav-bottom-h': 60px,
+    gap-x: 18px,
+);
+
+$grid2-frame: (( $gridW + $gridMargin ) * 2 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid3-frame: (( $gridW + $gridMargin ) * 3 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid4-frame: (( $gridW + $gridMargin ) * 4 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid5-frame: (( $gridW + $gridMargin ) * 5 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid6-frame: (( $gridW + $gridMargin ) * 6 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid7-frame: (( $gridW + $gridMargin ) * 7 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid8-frame: (( $gridW + $gridMargin ) * 8 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid9-frame: (( $gridW + $gridMargin ) * 9 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid10-frame: (( $gridW + $gridMargin ) * 10 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid11-frame: (( $gridW + $gridMargin ) * 11 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid12-frame: (( $gridW + $gridMargin ) * 12 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid13-frame: (( $gridW + $gridMargin ) * 13 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid14-frame: (( $gridW + $gridMargin ) * 14 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid15-frame: (( $gridW + $gridMargin ) * 15 ) - $gridMargin + ($gridBoxPadding * 2);
+$grid16-frame: (( $gridW + $gridMargin ) * 16 ) - $gridMargin + ($gridBoxPadding * 2);
+
+
+$grid1: (( $gridW + $gridMargin ) * 1 ) - $gridMargin;
+$grid2: (( $gridW + $gridMargin ) * 2 ) - $gridMargin;
+$grid3: (( $gridW + $gridMargin ) * 3 ) - $gridMargin;
+$grid4: (( $gridW + $gridMargin ) * 4 ) - $gridMargin;
+$grid5: (( $gridW + $gridMargin ) * 5 ) - $gridMargin;
+$grid6: (( $gridW + $gridMargin ) * 6 ) - $gridMargin;
+$grid7: (( $gridW + $gridMargin ) * 7 ) - $gridMargin;
+$grid8: (( $gridW + $gridMargin ) * 8 ) - $gridMargin;
+$grid9: (( $gridW + $gridMargin ) * 9 ) - $gridMargin;
+$grid10: (( $gridW + $gridMargin ) * 10 ) - $gridMargin;
+$grid11: (( $gridW + $gridMargin ) * 11 ) - $gridMargin;
+$grid12: (( $gridW + $gridMargin ) * 12 ) - $gridMargin;
+$grid13: (( $gridW + $gridMargin ) * 13 ) - $gridMargin;
+$grid14: (( $gridW + $gridMargin ) * 14 ) - $gridMargin;
+$grid15: (( $gridW + $gridMargin ) * 15 ) - $gridMargin;
+$grid16: (( $gridW + $gridMargin ) * 16 ) - $gridMargin;
+
+$grid1p: (( $gridW + $gridMargin ) * 1 );
+$grid2p: (( $gridW + $gridMargin ) * 2 );
+$grid3p: (( $gridW + $gridMargin ) * 3 );
+$grid4p: (( $gridW + $gridMargin ) * 4 );
+$grid5p: (( $gridW + $gridMargin ) * 5 );
+$grid6p: (( $gridW + $gridMargin ) * 6 );
+$grid7p: (( $gridW + $gridMargin ) * 7 );
+$grid8p: (( $gridW + $gridMargin ) * 8 );
+$grid9p: (( $gridW + $gridMargin ) * 9 );
+$grid10p: (( $gridW + $gridMargin ) * 10 );
+$grid11p: (( $gridW + $gridMargin ) * 11 );
+$grid12p: (( $gridW + $gridMargin ) * 12 );
+$grid13p: (( $gridW + $gridMargin ) * 13 );
+$grid14p: (( $gridW + $gridMargin ) * 14 );
+$grid15p: (( $gridW + $gridMargin ) * 15 );
+$grid16p: (( $gridW + $gridMargin ) * 16 );
+
+
+$grid2btn: (( $gridW + $gridMargin ) * 2 ) + $gridMargin;
+$grid3btn: (( $gridW + $gridMargin ) * 3 ) + $gridMargin;
+$grid4btn: (( $gridW + $gridMargin ) * 4 ) + $gridMargin;
+$grid5btn: (( $gridW + $gridMargin ) * 5 ) + $gridMargin;
+$grid6btn: (( $gridW + $gridMargin ) * 6 ) + $gridMargin;
+
+
+// GLOBAL /////////////////////////////////
+$m-base-padding: 62px;
+
+$half-max-width: $grid9 + $gridBoxPadding-l + $m-base-padding;
+// $half-max-width: 528px;
+$m-base-max-width: ($half-max-width * 2) + 2;
+// $s-max-width: $grid12 + $gridBoxPadding-l + $m-base-padding;
+
+
+// Z INDEX /////////////////////////////////
+$m-sploader-frame-z:						300;
+$m-loader-frame-z:						200;
+$m-tour-frame-z:						90;
+$m-notice-frame-z:						85;
+$m-tips-frame-z:						80;
+$m-select-frame-z:						70;
+$m-help-frame-z:						65;
+$m-popup-frame-z:						60;
+	$m-upload-frame-z:					50;
+$m-base-frame-z:						10;
+	$m-nav-frame-z:						40;
+	$m-primary-frame-z:					10;
+	$m-secondary-frame-z:					20;
+	$m-control-frame-z:					12;
+	$m-center-frame-z:					8;
+		$c-main-frame-z:				1;
+			$c-contents-container-z:	1;
+			$s-pv-block-z:			2;
+				$m-preview-tools-z:		2;
+				$m-preview-pattern-z:	1;
+
+
+// Official
+$mo-intro-body-z:		   20;
+	$m-mv-hoverbtn-z:	   52;
+	$m-mv-btn-z:		   50;
+	$mo-intro-title-z:	   40;
+	$mo-intro-darklayer-z:  30;
+	$m-mv-name-z:		25;
+	$m-mv-tablet-z:		20;
+	$m-mv-items-z:		10;
+	$m-mv-bg-z: 		1;
+
+
+$mo-intro-title-h:			158px;
+$mo-intro-body-top:			53.3%; //44.1%;
+$mo-intro-body-top-tool:		41.2%;
+
+
+/*
+	Left Frame
+*/
+$m-left-middle-vertical: 82px;
+
+$m-left-menu: (
+    icon-gap: 24px,
+    contents-title-margin-top: 69px,
+);
+
+
+$mo-container: (
+    padding-y: 120px,
+);
+
+/*
+	m-block
+*/
+$m-block-padding-y: 43px;
+
+//Right Frame
+$m-secondary-frame-tools-w: 118px;
+$m-secondary-frame-tools-spd: 18px;
+$m-secondary-preview-top:	26px; //17px;
+
+$m-radius-r: 4px;
+$m-radius-s: 4px;
+
+$m-list-item-bg-click-w: 12px;
+
+$left-frame-width: $grid6;
+$right-frame-right-m: $gridH;
+$m-header-mt: 15px;
+
+
+/*------------------------------------*\
+	PAGE LAYOUT
+\*------------------------------------*/
+$m-page-layout-divider--xs-w: $grid4-frame;
+$m-page-layout-divider--s-w:	 $grid6-frame;
+$m-page-layout-divider--m-w:	 $grid8-frame;
+$m-page-layout-divider--9-w:	 $grid9-frame;
+$m-page-layout-divider--l-w:	 $grid10-frame;
+$m-page-layout-divider--max-w: 1190px;
+
+$m-btn: (
+    gap-x: 14px,
+);
+
+/*------------------------------------*\
+	HEADER
+\*------------------------------------*/
+$m-header-obj-margin: 48px;
+
+/*------------------------------------*\
+	TEXT
+\*------------------------------------*/
+$m-link-active-border-bottom: -4px;
+
+/*------------------------------------*\
+	MARGIN TOP
+\*------------------------------------*/
+$m-mtl-plus: 15px;
+
+/*------------------------------------*\
+	VALIDATION
+\*------------------------------------*/
+$m-validation-mt: 4px;
+$m-validation-left-pd: -30px;
+
+/*------------------------------------*\
+	ICON
+\*------------------------------------*/
+//IconのMargin Padding
+$m-icon-fontsize: 32px;
+$m-icon-font-frame-size:	 $gridH;
+$m-icon-line-height: 32px;
+$m-icon-fontsize-l: 91px;
+$m-icon-size: 32px;
+$m-icon-padding: 4px;
+$m-icon-last-padding: -5px;
+$m-btn-icon-w: 36px;
+
+$m-btn-s-h: 24px;
+$m-btn-s-line: 24px;
+
+$m-btn-xs-h: 24px;
+$m-btn-xs-line: 14px;
+
+$m-btn-icon-s-w: 30px;
+$m-btn-icon-s-fontsize: 32px;
+$m-btn-icon-xs-w: 20px;
+$m-btn-icon-xs-fontsize: 22px;
+
+$m-btn-icon-l-w: 48px;
+
+$m-icon-padding-contents-title: 7px;
+$m-icon-close-l-size: 48px;
+
+//リストの中のアイコンのTop Margin
+$m-icon-list-mt: 3px;
+
+
+//Previewエリアのセレクターのアイコン上Margin
+$m-preview--select-value-label-top:		-1px;
+$m-preview--select-value-btn-top:		2px;
+$m-preview-tools-btns-top:				-1px;
+$m-preview--select-value-bg-top:		5px;
+
+/* アイコンの右配置の右のマージン */
+$m-icon--mr--m-list-item-btns:			-3px;
+$m-icon--mr--select-value:				-5px;
+
+$m-btn-accept--s--min-width:			84px;
+
+
+/*------------------------------------*\
+	preview
+\*------------------------------------*/
+$m-preview-mb: (
+    'width': 335px,
+    'height': 582px,
+);
+
+$m-block-subtitle: (
+    height: 23px,
+);
+
+/*------------------------------------*\
+	m-contents-title
+\*------------------------------------*/
+$m-contents-height: 					36px;
+$m-contents-title-base-mt: 				34px;
+
+//増やせば下に移動する
+$m-contents-title-1-mt: 				9px;
+$m-contents-title-2-mt: 				9px;
+
+/*------------------------------------*\
+	LIST
+\*------------------------------------*/
+$m-list-item-h:							$gridH;
+$m-list-item-baseline:					0px;
+$m-list-item-left-thumb-w:				103px;
+$m-list-item-left-thumb-w-sortable:		73px;
+$m-list-item-left-thumb-h:				72px;
+$m-list-item-left-icon-x:				-3px;
+$m-list-item-left-icon-y:				3px;
+$m-list-item-left-icon-color-x:			-3px;
+$m-list-item-left-icon-color-y:			3px;
+
+$m-list-bg-short-margin: 				24px;
+$m-list-sort-hover-bg-pd:				16px;
+
+$m-item-read-h:							21px;
+$m-item-read-h-en:						20px;
+$m-icon-switch-size:					64px;
+
+
+/*------------------------------------*\
+	THUMB LIST
+\*------------------------------------*/
+$m-list--thumb--w:						96px;
+$m-list--thumb--gap:					26px;
+$m-list--thumb-h:						123px;
+$m-thumblist-hover-scale:				1.04;
+$m-thumblist-b-col-m:					16px;
+$m-thumb-mt:							32px;
+
+/*------------------------------------*\
+	HEADER
+\*------------------------------------*/
+$m-list-horizontal-m:					16px;
+
+/*------------------------------------*\
+	PREVIEW
+\*------------------------------------*/
+$m-secondary-frame-nav-z:			10;
+$m-secondary-frame-block-nav-z:		30;
+$m-secondary-frame-dur:				400ms;
+$m-editarea-pt:					26px;
+$m-editarea-pr:					46px;
+
+/*------------------------------------*\
+	THUMB
+\*------------------------------------*/
+$m-thumb-h:								222px;
+$m-thumb-label-icon:						84px;
+$m-thumb-hover-btn-l-size:				64px;
+$m-thumb-hover-z:						10;
+$m-thumb-btns-z:						20;
+$m-thumb-btns-pt:						33px;
+$m-thumb-btns-pr:						34px;
+$m-thumb-logo-h:						206px;
+
+/*------------------------------------*\
+	UPLOAD IMAGE
+\*------------------------------------*/
+$m-uploadimg-base-z:					10;
+$m-uploadimg-label-edit-w:				46px;
+
+$m-btn-icon-uploadimg-pt:				14px;
+$m-btn-icon-uploadimg-pr:				16px;
+
+$m-uploadimg-col-m:						2;
+$m-uploadimg-col-pd-m:					10px;
+$m-uploadimg-col-max:					4;
+$m-uploadimg-col-pd-max:				10px;
+
+$m-uploadimg-thumb-col-m:				4;
+$m-uploadimg-thumb-col-pd-m:			10px;
+$m-uploadimg-thumb-col-max:				8;
+$m-uploadimg-thumb-col-pd-max:			10px;
+
+/*------------------------------------*\
+	UNSPLASH
+\*------------------------------------*/
+$m-photoidx-col:						3;
+$m-photoidx-col-pd:						18px;
+$m-photoidx-hover-btn-w:					36px;
+
+/*------------------------------------*\
+	SELECTER
+\*------------------------------------*/
+$m-selecter-open-y:						18px;
+$m-selecter-h:							30px;
+$m-selecter-padding:					31px;
+$m-select-bg-left-pd:					8px;
+
+
+/*------------------------------------*\
+	POP
+\*------------------------------------*/
+$m-pop: (
+    outline: rgba(0,0,0,0.05),
+);
+
+$m-pop-w:			222px;
+$m-pop-h:			196px;
+$m-pop-z:			200;
+$m-pop-p:			31px;
+$m-pop-radius:		6px;
+$m-pop-margin:		24px;
+
+$m-pop-arrow-w:		20px;
+$m-pop-arrow-h:		11px;
+
+$m-pop-loader--autotrans-s-dur:	800ms;
+$m-pop-loader--autotrans-dur:	3000ms;
+
+
+
+/*------------------------------------*\
+	BUTTON
+\*------------------------------------*/
+$m-btn-pd-x:				20px; //12px;
+
+/*------------------------------------*\
+	TIPS
+\*------------------------------------*/
+$m-tips-l-pd-x:				30px;
+
+/*------------------------------------*\
+	POPUP
+\*------------------------------------*/
+$m-popup-layer-pd:			8vh;
+$popupTopPadding:			17px;
+$popupTopPadding-loginlogo:	-38px;
+
+$popupSidePadding: 			$gridBoxPadding;
+$popupBottomPadding: 		62px;
+
+$popupTopPadding-book: 		48px;
+
+$popupSidePadding-m: 		100px;
+$popupTopPadding-m: 		15px;
+$popupBottomPadding-m: 		81px;
+
+$m-popup-scroll-right-pd: 	30px;
+
+$m-popup-middle-vertical:	20px;
+
+
+/*------------------------------------*\
+	POPUP BOOK
+\*------------------------------------*/
+$m-popup-book-w: 380px;
+$m-popup-book-h: 528px;
+$m-popup-book-text-pd: 68px;
+$m-popup-book-img-pd-w: 	49px;
+$m-popup-book-img-pd-v: 	48px;
+
+$m-icon-book-next-btn-w:	 49px;
+$m-icon-book-next-btn-h:	 36px;
+$m-icon-book-next-btn-top: 0px;
+$m-icon-book-next-btn-fsize: 41px;
+/*------------------------------------*\
+	TAB
+\*------------------------------------*/
+//$m-tab-li-right-pr:			0.7px;
+$m-tab-li-right-pr:			9px;
+
+/*------------------------------------*\
+	UI BUTTONS
+\*------------------------------------*/
+$m-ui-btn-size:				23px;
+
+/*------------------------------------*\
+	RESERVATION
+\*------------------------------------*/
+$m-rv-col-day-w:					95px;
+$m-rv-col-all-w:					33px;
+$m-rv-col-area-row-h:				63px;
+$m-rv-col-num-h:					30px;
+
+$m-rv-body-mt:						43px;
+
+$m-rv-time-h:						36px;
+$m-rv-label-w:						122px;
+$m-rv-col-btn-h:					36px;
+$m-rv-data-hit-side:				16px;
+$m-rv-data-side-pd:					6px;
+$m-rv-data-content-top:				8px;
+$m-rv-head-h:						37px;
+
+$m-rv-add-frame-h:					266px;
+$m-rv-add-frame-pt:					30px;
+$m-rv-add-frame-inner-pd:			24px;
+$m-rv-add-list-option-label-w:		66px;
+$m-rv-add-list-option-w:			250px;
+
+$m-rv-new-frame-pd:				24px;
+$m-rv-new-frame-w:				$grid4 + ($m-rv-new-frame-pd * 2);
+
+/*------------------------------------*\
+	LOADER
+\*------------------------------------*/
+$m-sploader-pop-w:			249px;
+$m-sploader-pop-h:			176px;
+
+/*------------------------------------*\
+	BACKGROUND SIZE
+\*------------------------------------*/
+$bg-images-w:				500px;
+$bg-images-h:				1000px;
+
+
+$m-arrow-hover-x:			9px;
+
+
+
+
+
+

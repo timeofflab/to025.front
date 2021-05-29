@@ -1,0 +1,232 @@
+@charset 'utf-8';
+
+$m-trans-loader-in:			300ms;
+$m-trans-loader-out:		300ms;
+$m-loader-width: 			41px;
+$m-loader-width-s: 			32px;
+
+/* ローダーを設置するコンテナに付加する
+-------------------------------------- */
+@mixin m-loader(){
+
+	//@include m-loader-mini();
+
+	.s-loader{
+		position: absolute;
+		display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    flex-direction: column;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 200;
+		transition-property: opacity;
+	}
+
+	.m-logolist >.s-loader{
+		justify-content: flex-start;
+		top: 1px;
+		.loader-content{
+			margin-top: 116px;
+		}
+	}
+
+	.ja{
+		.-logo-input-en >.s-loader
+		{
+			.m-read::after{
+				content: '英語用書体に切替中';
+			}
+		}
+		.-logo-input-ja >.s-loader
+		{
+			.m-read::after{
+				content: '日本語用書体に切替中';
+			}
+		}
+	}
+
+	.en{
+		.-logo-input-en >.s-loader
+		{
+			.m-read::after{
+				content: 'Switching to English typeface';
+			}
+		}
+		.-logo-input-ja >.s-loader
+		{
+			.m-read::after{
+				content: 'Switching to Japanese typeface';
+			}
+		}
+	}
+
+	/* ローダー本体
+	-------------------------------------- */
+	.loader-content{
+		position: relative;
+		display: flex;
+	    justify-content: center;
+	    align-items: center;
+		.m-read{
+			white-space: nowrap;
+			position: absolute;
+			display: block;
+			text-align: center;
+			content: '';
+			margin-top: 39px;
+		}
+	}
+
+	.loader-graphic{
+		position: relative;
+		margin: 0 auto;
+		width: $m-loader-width;
+		&:before {
+			content: '';
+			display: block;
+			padding-top: 100%;
+		}
+	}
+
+	.loader-move, .loader-bg {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		transform-origin: center center;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+
+	.loader-move {
+		z-index: 60;
+		animation: rotate 2s linear infinite;
+	}
+
+	.loader-bg{
+		z-index: 50;
+	}
+
+	.loader-move-path {
+		fill: none;
+		stroke-dasharray: 1, 200;
+		stroke-dashoffset: 0;
+		animation: dash 1.5s ease-in-out infinite, m-loader-color 6s ease-in-out infinite;
+		stroke-linecap: round;
+		stroke-width: 1.5px;
+		stroke-miterlimit: 10px;
+	}
+
+	.loader-bg-path {
+		fill: none;
+		fill-opacity: 0;
+		stroke-width: 1.5px;
+		stroke: transparent;
+	}
+
+	/* 白バージョン
+	--------------------------------------*/
+	.loader-style-white{
+		.loader-move-path {
+			animation: dash 1.5s ease-in-out infinite, m-loader-color-w 6s ease-in-out infinite;
+		}
+	}
+
+	/* -----------------------
+		Label
+	------------------------ */
+	.loader-label{
+		margin-top: 7px;
+		text-align: center;
+		text-transform: uppercase;
+		opacity: $alpha-uploadimg-icon;
+	}
+
+    @keyframes m-loader-color {
+        100%,
+        0% {
+            stroke: $m-col-black;
+        }
+        40% {
+            stroke: $m-col-black;
+        }
+        66% {
+            stroke: $m-col-black;
+        }
+        80%,
+        90% {
+            stroke: $m-col-black;
+        }
+    }
+
+    @keyframes m-loader-color-w {
+        100%,
+        0% {
+            stroke: $m-col-white;
+        }
+        40% {
+            stroke: $m-col-white;
+        }
+        66% {
+            stroke: $m-col-white;
+        }
+        80%,
+        90% {
+            stroke: $m-col-white;
+        }
+    }
+
+}
+
+
+// @mixin m-loader-mini(){
+//
+// 	.is-loading{
+// 		position: absolute;
+// 		top: 0px;
+// 		left: 0px;
+// 		z-index: 999;
+// 		width: 100%;
+// 		height: 100%;
+// 		user-select: none;
+// 		transition-property: opacity;
+// 		transition-duration: 200ms;
+// 		transition-timing-function: $ease-out-cubic;
+// 		*{
+// 			pointer-events: none !important;
+// 		}
+// 		&::before{
+// 			position: absolute !important;
+// 			top: 0px !important;
+// 			left: 0px !important;
+// 			width: 100% !important;
+// 			height: 100% !important;
+// 			background-color: rgba($m-col-bg, 1) !important;
+// 			content: '' !important;
+// 			z-index: 999 !important;
+// 		}
+// 		&::after{
+// 			position: absolute !important;
+// 			display: block !important;
+// 			font-family: 'm-icon' !important;
+// 			font-size: $m-icon-fontsize !important;
+// 			line-height: $m-icon-font-frame-size !important;
+// 			width: $m-icon-font-frame-size !important;
+// 			height: $m-icon-font-frame-size !important;
+// 			top: 50% !important;
+// 			left: 50% !important;
+// 			transform: translate(-50%, -50%) !important;
+// 			color: $m-col-txt !important;
+// 			background-color: transparent !important;
+// 			content: $m-icon-wait !important;
+// 			z-index: 1000 !important;
+// 		}
+//
+// 	}
+//
+// }

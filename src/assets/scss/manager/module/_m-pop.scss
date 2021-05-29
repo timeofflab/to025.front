@@ -1,0 +1,96 @@
+@charset 'utf-8';
+
+@mixin m-pop(){
+	@include m-pop--base();
+	@include m-pop--arrow();
+	@include m-pop--pc-tablet();
+	@include m-pop--mb();
+}
+
+@mixin m-pop--base(){
+
+	.m-pop-wrapper{
+	    transition: opacity 240ms ease-out;
+
+	    &.-loading{
+    	    opacity: 0;
+	    }
+
+		img{
+			width: 100%;
+			margin-top: 5px;
+		}
+		.m-caption{
+			line-height: 18px;
+			margin: 4px 0 0 0;
+		}
+	}
+
+	.m-tips-layer{
+		.m-pop-wrapper{
+    		min-width: auto;
+			pointer-events: none;
+		}
+	}
+
+	// COLOR ////////////////////////////////////////////////////////
+	.m-pop-bg--wh{ background-color: rgba( $m-col-abg-white-color, $m-col-abg-white-alpha ); }
+	.m-pop-bg--bk{ background-color: rgba( $m-col-abg-black-color, $m-col-abg-black-alpha-light ); }
+
+}
+
+@mixin m-pop--pc-tablet(){
+
+    .m-main-frame.-m--pc,
+    .m-main-frame.-m--tablet
+    {
+    	// SIZE ////////////////////////////////////////////////////////
+
+    	//横幅
+    	@for $i from 2 through 14 {
+    		.m-pop--#{$i}w{
+
+    			.m-popup-wrapper	{
+    				width: ((( $gridW + $gridMargin ) * $i ) - $gridMargin) + ( ( $gridBoxPadding ) * 2 );
+    			}
+
+    			.m-pop-wrapper{
+    				width: (( $gridW + $gridMargin ) * $i ) - $gridMargin;
+    			}
+
+    		}
+    	}
+    }
+}
+
+@mixin m-pop--mb() {
+
+    .m-main-frame.-m--mb{
+
+    }
+}
+
+
+@mixin m-pop--arrow(){
+	.m-pop-arrow{
+		@include m-pop--arrow-base();
+		background-image: url('#{$domain}/manager/tutorial/arrow.png');
+	}
+}
+
+@mixin m-pop--arrow-base(){
+	position: absolute;
+	width: $m-pop-arrow-w;
+	height: $m-pop-arrow-h;
+	top: -$m-pop-arrow-h;
+	left: 50%;
+	margin-left: -#{$m-pop-arrow-w / 2};
+	z-index: 2;
+	background-repeat: no-repeat;
+	background-size: $m-pop-arrow-w $m-pop-arrow-h;
+}
+
+
+
+
+

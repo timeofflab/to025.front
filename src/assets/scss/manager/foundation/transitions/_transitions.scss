@@ -1,0 +1,83 @@
+@charset 'utf-8';
+
+@mixin m-transitions(){
+	@include mt-change();
+	@include m-t-loadend();
+}
+
+@mixin mt-change(){
+	.change-enter{
+		opacity: 0;
+	}
+	.change-enter-to{
+		opacity: 1;
+	}
+	.change-leave{
+		opacity: 1;
+	}
+	.change-leave-to{
+		opacity: 0;
+	}
+	.change-enter-active{
+		transition: opacity $t-change ease-out;
+	}
+	.change-leave-active{
+		transition: opacity $t-change-out ease-out;
+	}
+}
+
+
+@mixin m-t-loadend(){
+
+	.m-loadend-enter{
+		opacity: 0;
+	}
+	.m-loadend-enter-to{
+		opacity: 1;
+	}
+	.m-loadend-leave{
+		opacity: 1;
+	}
+	.m-loadend-leave-to{
+		opacity: 0;
+	}
+
+	.m-loadend-enter-active{
+		transition: opacity 400ms ease-out 600ms;
+	}
+	.m-loadend-leave-active{
+		transition: opacity 400ms ease-out;
+	}
+
+}
+
+
+
+/////////// PART //////////////////////////////////
+
+@mixin m-each-delay( $class , $eachdelay: 120ms, $delay: 0ms, $count: 5 ){
+	@for $i from 1 through $count {
+		#{$class}{
+			&:nth-of-type(#{$i}){
+				transition-delay: #{ ($eachdelay * ($i - 1)) + $delay};
+			}
+		}
+	}
+}
+
+@mixin trans-opacity(){
+	transition-property: opacity;
+	transition-delay: 0ms;
+}
+@mixin trans-transform(){
+	transition-property: transform;
+}
+@mixin trans-opacity-transform(){
+	transition-property: opacity, transform;
+	transition-delay: 0ms;
+}
+@mixin trans-top-opacity-transform(){
+	transition-property: opacity, top, transform;
+	transition-delay: 0ms;
+}
+
