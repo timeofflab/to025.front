@@ -32,6 +32,8 @@ export class EnvUtil {
             TO985_SECRET: process.env.TO985_SECRET || '',
 
             INSTAGRAM_API_BASE: process.env.INSTAGRAM_API_BASE || '',
+
+            TO025_API_BASE: process.env.TO025_API_BASE || '',
         };
 
         M._inited = true;
@@ -121,6 +123,10 @@ export class EnvUtil {
 
     public static get TO985_SECRET(): string {
         return $v.p(M.src, 'to985Secret') as string;
+    }
+
+    public static get TO025_API_BASE(): string {
+        return $v.p(M.src, 'TO025_API_BASE') as string;
     }
 
 

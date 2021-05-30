@@ -1,4 +1,5 @@
 import to985 from '~/classes/api/client/to985/$api';
+import to025c2 from '~/classes/api/client/to025-c2/$api';
 import instagram from '~/classes/api/client/instagram/$api';
 import axiosClient from '@aspida/axios';
 import {NuxtAxiosInstance} from "@nuxtjs/axios";
@@ -27,6 +28,13 @@ export class Api {
         return to985(axiosClient(Api.axios, {
             baseURL: EnvUtil.TO985_API_BASE,
         })).to985;
+    }
+
+
+    public static get To025c2(): any {
+        return to025c2(axiosClient(Api.axios, {
+            baseURL: EnvUtil.TO025_API_BASE,
+        })).to025.c2;
     }
 }
 

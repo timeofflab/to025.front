@@ -246,6 +246,8 @@ export default {
         TO985_API_BASE: $.TO985_API_BASE || '',
 
         INSTAGRAM_API_BASE: $.INSTAGRAM_API_BASE || '',
+
+        TO025_API_BASE: $.TO025_API_BASE || '',
     },
     basic: {
         name: $.AUTH_ID,
