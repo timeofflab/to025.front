@@ -6,9 +6,13 @@ import {appProjectModule, IAppProject} from "~/store/app/project";
 import EditGlobal from "~/components/pages/my/presentation/project/edit/EditGlobal";
 import EditItem from "~/components/pages/my/presentation/project/edit/EditItem";
 import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-project";
+import {ExtEdit} from "~/classes/components/ext/ext-edit";
 
+const TAG = '/my/presentations/project/_pj/_id';
 const state = {
-    config: {},
+    config: {
+        editId: 'myPresentationsProject',
+    },
     param: {
         id: '',
     },
@@ -23,22 +27,42 @@ const state = {
         EditItem,
     }
 })
-export default class Slide extends AToComponent {
+export default class Id extends AToComponent {
     /**
      *
      */
     public state: any = state;
 
     // Method ///////////////////////////////////////
-
     public async load() {
-        await appProjectModule.$get()
-        pageMyPresentationProjectModule.updateCurrentProject($v.p(this.record, 'id'));
+        if (this.records.length === 0) {
+            await appProjectModule.$get()
+        }
+        pageMyPresentationProjectModule.updateProject($v.p(this.record, 'id'));
+        await this.selectRecord();
         this.state.view.ready = true;
+    }
+
+    public async selectRecord() {
+        pageMyPresentationProjectModule.updateRecord(
+            appProjectModule.records.findByKey('id', $v.p(this.state, 'param.id', '@')));
     }
 
     public getRecordLink(item: any): string {
         return '/my/presentation/project/' + $v.p(item, 'id');
+    }
+
+    public async addItem() {
+
+    }
+
+    // Events ///////////////////////////////////////
+    public get extEdit(): ExtEdit {
+        return new ExtEdit(this);
+    }
+
+    public async onClickAddItem(e: any) {
+        await this.addItem();
     }
 
     // Computed /////////////////////////////////////
@@ -47,7 +71,7 @@ export default class Slide extends AToComponent {
     }
 
     public get record(): any {
-        return appProjectModule.records.findByKey('id', $v.p(this.state, 'param.id', '@'));
+        return pageMyPresentationProjectModule.record;
     }
 
     public get records(): IAppProject[] {
@@ -81,7 +105,7 @@ export default class Slide extends AToComponent {
 
     public async initParam() {
         this.state.param = {
-            id: $v.p(this.$route, 'params.slide'),
+            id: $v.p(this.$route, 'params.id'),
         };
     }
 }
