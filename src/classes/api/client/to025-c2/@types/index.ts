@@ -1,4 +1,6 @@
 /* eslint-disable */
+import type { ReadStream } from 'fs'
+
 export type Any = {
   any: string | null
 }
@@ -32,4 +34,9 @@ export type ListInfo = {
   allCount: number | null
   filterCount: number | null
   limit: number | null
+}
+
+export type UploadFile = {
+  token: string
+  file: File | ReadStream
 }

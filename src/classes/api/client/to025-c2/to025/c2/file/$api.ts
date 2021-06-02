@@ -5,11 +5,14 @@ import { AspidaClient, BasicHeaders } from 'aspida'
 import { Methods as Methods0 } from '.'
 // prettier-ignore
 import { Methods as Methods1 } from './_id@string'
+// prettier-ignore
+import { Methods as Methods2 } from './_id@string/attach'
 
 // prettier-ignore
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'https://api.plain.timeoff.today/api/v1' : baseURL).replace(/\/$/, '')
   const PATH0 = '/to025/c2/file'
+  const PATH1 = '/attach'
   const GET = 'GET'
   const POST = 'POST'
   const PUT = 'PUT'
@@ -20,6 +23,19 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       const prefix0 = `${PATH0}/${val0}`
 
       return {
+        attach: {
+          /**
+           * @returns A array of auth
+           */
+          post: (option: { body: Methods2['post']['reqBody'], headers?: Methods2['post']['reqHeaders'], config?: T }) =>
+            fetch<Methods2['post']['resBody'], BasicHeaders, Methods2['post']['status']>(prefix, `${prefix0}${PATH1}`, POST, option, 'FormData').json(),
+          /**
+           * @returns A array of auth
+           */
+          $post: (option: { body: Methods2['post']['reqBody'], headers?: Methods2['post']['reqHeaders'], config?: T }) =>
+            fetch<Methods2['post']['resBody'], BasicHeaders, Methods2['post']['status']>(prefix, `${prefix0}${PATH1}`, POST, option, 'FormData').json().then(r => r.body),
+          $path: () => `${prefix}${prefix0}${PATH1}`
+        },
         /**
          * @returns A array of auth
          */
@@ -33,12 +49,12 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         /**
          * @returns A array of auth
          */
-        put: (option?: { headers?: Methods1['put']['reqHeaders'], config?: T }) =>
+        put: (option: { body: Methods1['put']['reqBody'], headers?: Methods1['put']['reqHeaders'], config?: T }) =>
           fetch<Methods1['put']['resBody'], BasicHeaders, Methods1['put']['status']>(prefix, prefix0, PUT, option).json(),
         /**
          * @returns A array of auth
          */
-        $put: (option?: { headers?: Methods1['put']['reqHeaders'], config?: T }) =>
+        $put: (option: { body: Methods1['put']['reqBody'], headers?: Methods1['put']['reqHeaders'], config?: T }) =>
           fetch<Methods1['put']['resBody'], BasicHeaders, Methods1['put']['status']>(prefix, prefix0, PUT, option).json().then(r => r.body),
         /**
          * @returns A array of auth

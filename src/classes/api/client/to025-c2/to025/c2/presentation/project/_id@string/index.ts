@@ -22,6 +22,7 @@ export type Methods = {
     status: 200
     /** A array of auth */
     resBody: Types.Any
+    reqBody: Types.Any
   }
 
   delete: {

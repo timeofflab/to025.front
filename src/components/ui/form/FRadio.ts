@@ -38,16 +38,13 @@ export default class FRadio extends AInputComponent {
     // Events /////////////////////////////////////////////
     public async onInput(e: any) {
 
-        await this.triggerParentEmit('input', e);
         await this.extEdit.onInput(e);
     }
 
     public async onFocus(e: any) {
-        await this.triggerParentEmit('focus', e);
     }
 
     public async onBlur(e: any) {
-        await this.triggerParentEmit('blur', e);
     }
 
     // Computed //////////////////////////////////////////

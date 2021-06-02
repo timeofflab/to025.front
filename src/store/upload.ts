@@ -1,5 +1,4 @@
 import {Mutation, MutationAction, Action, VuexModule, getModule, Module} from 'vuex-module-decorators';
-import axios from 'axios';
 import store from '@/store';
 
 const TAG = 'uploadModule';
@@ -37,72 +36,24 @@ class Store extends VuexModule implements IUploadModule {
     // Actions //////////////////////////////////////////////
     // Shop S3 put URL
     @Action
-    public async showUrl(param: {
+    public async $get(param: {
         exid: string
     }): Promise<string> {
         return '';
-        // try {
-        //
-        //     console.log('[%s.showUrl] req > ', TAG, param);
-        //
-        //     const api = new OfficialSponsorApi();
-        //     const res = await api.showOfficialSponsorSignedUrl(param.exid, '-');
-        //
-        //     console.log('[%s.showUrl] res > ', TAG, $v.p(res, 'data'));
-        //
-        //     return $v.p(res, 'data.signedUrl');
-        // } catch (e) {
-        //     console.error(e);
-        //     return '';
-        // }
     }
 
-    //
-    // @Action
-    // public async putFiles(param: {
-    //     id: string,
-    //     exid: string,
-    // }) {
-    //     try {
-    //         const upload = M.uploads.findByKey('id', param.id);
-    //         for (const i in upload.files) {
-    //             const f = upload.files[i];
-    //             const ext = f.name.split('.').last();
-    //             const filename = `file-${i}.${ext}`;
-    //
-    //             const signedUrl = await M.showUrl({
-    //                 exid: param.exid,
-    //                 filename,
-    //             });
-    //             console.log('[%s] show url success!', TAG);
-    //
-    //             await M.putFile({
-    //                 url: signedUrl,
-    //                 file: f,
-    //             });
-    //             console.log('[%s] put file success!', TAG, i, filename);
-    //         }
-    //     } catch (e) {
-    //         console.log('[%s] put error > ', TAG, e);
-    //     }
-    // }
-    //
-    // AWS S3 Put
     @Action
-    public async putFile(param: {
-        url: string,
-        file: File,
-    }) {
-        try {
-            const options = {
-                headers: {
-                    'Content-Type': param.file.type,
-                },
-            };
-            await axios.put(param.url, param.file, options);
-        } catch (e) {
-            console.log('[%s] put error > ', TAG, param.file.name);
-        }
+    public async $post(param: {
+        exid: string
+    }): Promise<string> {
+        return '';
+    }
+
+    @Action
+    public async $attach(param: {
+        exid: string
+    }): Promise<string> {
+        return '';
     }
 }
 

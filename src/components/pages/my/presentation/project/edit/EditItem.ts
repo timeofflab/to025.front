@@ -3,8 +3,9 @@ import {AOfficialComponent} from "~/classes/components/a-official-component";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
 import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-project";
 import {appProjectModule} from "~/store/app/project";
-import {$v} from "~/classes/utils/var-util";
 import {IEditSchema} from "~/store/edit";
+import {cmdModule} from "~/store/cmd";
+import {AppCmd} from "~/configs/app-cmd";
 
 const TAG = 'EditItem';
 
@@ -22,6 +23,7 @@ export default class EditItem extends AOfficialComponent {
                     },
                     {
                         name: 'img',
+                        type: 'file',
                         title: 'Img',
                         maxlength: 1000,
                     },
@@ -62,14 +64,26 @@ export default class EditItem extends AOfficialComponent {
     // Methods /////////////////////////////////////
     public async addItem() {
 
-
     }
 
     // Events //////////////////////////////////////
     public async onInput(e: any) {
         await this.extEdit.onInput(e);
+
+        switch (e.target.name) {
+            case 'file':
+                console.log('onInput.File');
+                break;
+            default:
+                break;
+        }
     }
 
+    public async onClickSave() {
+        await cmdModule.registCmd({
+            cmd: AppCmd.PresentationProjectSave,
+        });
+    }
 
     // Computed /////////////////////////////////////
     public get extEdit(): ExtEdit {

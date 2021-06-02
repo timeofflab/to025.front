@@ -44,20 +44,6 @@ export default class FgInput extends AInputComponent {
     }
 
     // Events ---------------------------------------
-    public async onInput(e: any) {
-        await this.triggerParentEmit('input', e);
-        this.showBubble().then();
-    }
-
-    public async onFocus(e: any) {
-        await this.triggerParentEmit('focus', e);
-    }
-
-    public async onBlur(e: any) {
-        console.log('[%s.onBlur]', TAG);
-        await this.triggerParentEmit('blur', e);
-    }
-
     // Getter ///////////////////////////////
     public get eid(): string {
         return `ipt_${this.name}`;

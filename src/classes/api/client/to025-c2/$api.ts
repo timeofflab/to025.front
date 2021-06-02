@@ -6,23 +6,26 @@ import { Methods as Methods0 } from './to025/c2/file'
 // prettier-ignore
 import { Methods as Methods1 } from './to025/c2/file/_id@string'
 // prettier-ignore
-import { Methods as Methods2 } from './to025/c2/presentation/project'
+import { Methods as Methods2 } from './to025/c2/file/_id@string/attach'
 // prettier-ignore
-import { Methods as Methods3 } from './to025/c2/presentation/project/_id@string'
+import { Methods as Methods3 } from './to025/c2/presentation/project'
 // prettier-ignore
-import { Methods as Methods4 } from './to025/c2/service/auth'
+import { Methods as Methods4 } from './to025/c2/presentation/project/_id@string'
 // prettier-ignore
-import { Methods as Methods5 } from './to025/c2/service/auth/_token@string'
+import { Methods as Methods5 } from './to025/c2/service/auth'
 // prettier-ignore
-import { Methods as Methods6 } from './to025/c2/service/hello'
+import { Methods as Methods6 } from './to025/c2/service/auth/_token@string'
+// prettier-ignore
+import { Methods as Methods7 } from './to025/c2/service/hello'
 
 // prettier-ignore
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'https://api.plain.timeoff.today/api/v1' : baseURL).replace(/\/$/, '')
   const PATH0 = '/to025/c2/file'
-  const PATH1 = '/to025/c2/presentation/project'
-  const PATH2 = '/to025/c2/service/auth'
-  const PATH3 = '/to025/c2/service/hello'
+  const PATH1 = '/attach'
+  const PATH2 = '/to025/c2/presentation/project'
+  const PATH3 = '/to025/c2/service/auth'
+  const PATH4 = '/to025/c2/service/hello'
   const GET = 'GET'
   const POST = 'POST'
   const PUT = 'PUT'
@@ -36,6 +39,19 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             const prefix3 = `${PATH0}/${val3}`
 
             return {
+              attach: {
+                /**
+                 * @returns A array of auth
+                 */
+                post: (option: { body: Methods2['post']['reqBody'], headers?: Methods2['post']['reqHeaders'], config?: T }) =>
+                  fetch<Methods2['post']['resBody'], BasicHeaders, Methods2['post']['status']>(prefix, `${prefix3}${PATH1}`, POST, option, 'FormData').json(),
+                /**
+                 * @returns A array of auth
+                 */
+                $post: (option: { body: Methods2['post']['reqBody'], headers?: Methods2['post']['reqHeaders'], config?: T }) =>
+                  fetch<Methods2['post']['resBody'], BasicHeaders, Methods2['post']['status']>(prefix, `${prefix3}${PATH1}`, POST, option, 'FormData').json().then(r => r.body),
+                $path: () => `${prefix}${prefix3}${PATH1}`
+              },
               /**
                * @returns A array of auth
                */
@@ -49,12 +65,12 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
               /**
                * @returns A array of auth
                */
-              put: (option?: { headers?: Methods1['put']['reqHeaders'], config?: T }) =>
+              put: (option: { body: Methods1['put']['reqBody'], headers?: Methods1['put']['reqHeaders'], config?: T }) =>
                 fetch<Methods1['put']['resBody'], BasicHeaders, Methods1['put']['status']>(prefix, prefix3, PUT, option).json(),
               /**
                * @returns A array of auth
                */
-              $put: (option?: { headers?: Methods1['put']['reqHeaders'], config?: T }) =>
+              $put: (option: { body: Methods1['put']['reqBody'], headers?: Methods1['put']['reqHeaders'], config?: T }) =>
                 fetch<Methods1['put']['resBody'], BasicHeaders, Methods1['put']['status']>(prefix, prefix3, PUT, option).json().then(r => r.body),
               /**
                * @returns A array of auth
@@ -94,118 +110,118 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         presentation: {
           project: {
             _id: (val4: string) => {
-              const prefix4 = `${PATH1}/${val4}`
-
-              return {
-                /**
-                 * @returns A array of auth
-                 */
-                get: (option?: { headers?: Methods3['get']['reqHeaders'], config?: T }) =>
-                  fetch<Methods3['get']['resBody'], BasicHeaders, Methods3['get']['status']>(prefix, prefix4, GET, option).json(),
-                /**
-                 * @returns A array of auth
-                 */
-                $get: (option?: { headers?: Methods3['get']['reqHeaders'], config?: T }) =>
-                  fetch<Methods3['get']['resBody'], BasicHeaders, Methods3['get']['status']>(prefix, prefix4, GET, option).json().then(r => r.body),
-                /**
-                 * @returns A array of auth
-                 */
-                put: (option?: { headers?: Methods3['put']['reqHeaders'], config?: T }) =>
-                  fetch<Methods3['put']['resBody'], BasicHeaders, Methods3['put']['status']>(prefix, prefix4, PUT, option).json(),
-                /**
-                 * @returns A array of auth
-                 */
-                $put: (option?: { headers?: Methods3['put']['reqHeaders'], config?: T }) =>
-                  fetch<Methods3['put']['resBody'], BasicHeaders, Methods3['put']['status']>(prefix, prefix4, PUT, option).json().then(r => r.body),
-                /**
-                 * @returns A array of auth
-                 */
-                delete: (option?: { headers?: Methods3['delete']['reqHeaders'], config?: T }) =>
-                  fetch<Methods3['delete']['resBody'], BasicHeaders, Methods3['delete']['status']>(prefix, prefix4, DELETE, option).json(),
-                /**
-                 * @returns A array of auth
-                 */
-                $delete: (option?: { headers?: Methods3['delete']['reqHeaders'], config?: T }) =>
-                  fetch<Methods3['delete']['resBody'], BasicHeaders, Methods3['delete']['status']>(prefix, prefix4, DELETE, option).json().then(r => r.body),
-                $path: () => `${prefix}${prefix4}`
-              }
-            },
-            /**
-             * @returns A array of auth
-             */
-            get: (option?: { headers?: Methods2['get']['reqHeaders'], config?: T }) =>
-              fetch<Methods2['get']['resBody'], BasicHeaders, Methods2['get']['status']>(prefix, PATH1, GET, option).json(),
-            /**
-             * @returns A array of auth
-             */
-            $get: (option?: { headers?: Methods2['get']['reqHeaders'], config?: T }) =>
-              fetch<Methods2['get']['resBody'], BasicHeaders, Methods2['get']['status']>(prefix, PATH1, GET, option).json().then(r => r.body),
-            $path: () => `${prefix}${PATH1}`
-          }
-        },
-        service: {
-          auth: {
-            _token: (val4: string) => {
               const prefix4 = `${PATH2}/${val4}`
 
               return {
                 /**
                  * @returns A array of auth
                  */
-                get: (option?: { headers?: Methods5['get']['reqHeaders'], config?: T }) =>
-                  fetch<Methods5['get']['resBody'], BasicHeaders, Methods5['get']['status']>(prefix, prefix4, GET, option).json(),
+                get: (option?: { headers?: Methods4['get']['reqHeaders'], config?: T }) =>
+                  fetch<Methods4['get']['resBody'], BasicHeaders, Methods4['get']['status']>(prefix, prefix4, GET, option).json(),
                 /**
                  * @returns A array of auth
                  */
-                $get: (option?: { headers?: Methods5['get']['reqHeaders'], config?: T }) =>
-                  fetch<Methods5['get']['resBody'], BasicHeaders, Methods5['get']['status']>(prefix, prefix4, GET, option).json().then(r => r.body),
+                $get: (option?: { headers?: Methods4['get']['reqHeaders'], config?: T }) =>
+                  fetch<Methods4['get']['resBody'], BasicHeaders, Methods4['get']['status']>(prefix, prefix4, GET, option).json().then(r => r.body),
                 /**
                  * @returns A array of auth
                  */
-                put: (option?: { headers?: Methods5['put']['reqHeaders'], config?: T }) =>
-                  fetch<Methods5['put']['resBody'], BasicHeaders, Methods5['put']['status']>(prefix, prefix4, PUT, option).json(),
+                put: (option: { body: Methods4['put']['reqBody'], headers?: Methods4['put']['reqHeaders'], config?: T }) =>
+                  fetch<Methods4['put']['resBody'], BasicHeaders, Methods4['put']['status']>(prefix, prefix4, PUT, option).json(),
                 /**
                  * @returns A array of auth
                  */
-                $put: (option?: { headers?: Methods5['put']['reqHeaders'], config?: T }) =>
-                  fetch<Methods5['put']['resBody'], BasicHeaders, Methods5['put']['status']>(prefix, prefix4, PUT, option).json().then(r => r.body),
+                $put: (option: { body: Methods4['put']['reqBody'], headers?: Methods4['put']['reqHeaders'], config?: T }) =>
+                  fetch<Methods4['put']['resBody'], BasicHeaders, Methods4['put']['status']>(prefix, prefix4, PUT, option).json().then(r => r.body),
+                /**
+                 * @returns A array of auth
+                 */
+                delete: (option?: { headers?: Methods4['delete']['reqHeaders'], config?: T }) =>
+                  fetch<Methods4['delete']['resBody'], BasicHeaders, Methods4['delete']['status']>(prefix, prefix4, DELETE, option).json(),
+                /**
+                 * @returns A array of auth
+                 */
+                $delete: (option?: { headers?: Methods4['delete']['reqHeaders'], config?: T }) =>
+                  fetch<Methods4['delete']['resBody'], BasicHeaders, Methods4['delete']['status']>(prefix, prefix4, DELETE, option).json().then(r => r.body),
                 $path: () => `${prefix}${prefix4}`
               }
             },
             /**
              * @returns A array of auth
              */
-            get: (option?: { headers?: Methods4['get']['reqHeaders'], config?: T }) =>
-              fetch<Methods4['get']['resBody'], BasicHeaders, Methods4['get']['status']>(prefix, PATH2, GET, option).json(),
+            get: (option?: { headers?: Methods3['get']['reqHeaders'], config?: T }) =>
+              fetch<Methods3['get']['resBody'], BasicHeaders, Methods3['get']['status']>(prefix, PATH2, GET, option).json(),
             /**
              * @returns A array of auth
              */
-            $get: (option?: { headers?: Methods4['get']['reqHeaders'], config?: T }) =>
-              fetch<Methods4['get']['resBody'], BasicHeaders, Methods4['get']['status']>(prefix, PATH2, GET, option).json().then(r => r.body),
-            /**
-             * @returns A array of auth
-             */
-            post: (option: { body: Methods4['post']['reqBody'], headers?: Methods4['post']['reqHeaders'], config?: T }) =>
-              fetch<Methods4['post']['resBody'], BasicHeaders, Methods4['post']['status']>(prefix, PATH2, POST, option).json(),
-            /**
-             * @returns A array of auth
-             */
-            $post: (option: { body: Methods4['post']['reqBody'], headers?: Methods4['post']['reqHeaders'], config?: T }) =>
-              fetch<Methods4['post']['resBody'], BasicHeaders, Methods4['post']['status']>(prefix, PATH2, POST, option).json().then(r => r.body),
+            $get: (option?: { headers?: Methods3['get']['reqHeaders'], config?: T }) =>
+              fetch<Methods3['get']['resBody'], BasicHeaders, Methods3['get']['status']>(prefix, PATH2, GET, option).json().then(r => r.body),
             $path: () => `${prefix}${PATH2}`
+          }
+        },
+        service: {
+          auth: {
+            _token: (val4: string) => {
+              const prefix4 = `${PATH3}/${val4}`
+
+              return {
+                /**
+                 * @returns A array of auth
+                 */
+                get: (option?: { headers?: Methods6['get']['reqHeaders'], config?: T }) =>
+                  fetch<Methods6['get']['resBody'], BasicHeaders, Methods6['get']['status']>(prefix, prefix4, GET, option).json(),
+                /**
+                 * @returns A array of auth
+                 */
+                $get: (option?: { headers?: Methods6['get']['reqHeaders'], config?: T }) =>
+                  fetch<Methods6['get']['resBody'], BasicHeaders, Methods6['get']['status']>(prefix, prefix4, GET, option).json().then(r => r.body),
+                /**
+                 * @returns A array of auth
+                 */
+                put: (option?: { headers?: Methods6['put']['reqHeaders'], config?: T }) =>
+                  fetch<Methods6['put']['resBody'], BasicHeaders, Methods6['put']['status']>(prefix, prefix4, PUT, option).json(),
+                /**
+                 * @returns A array of auth
+                 */
+                $put: (option?: { headers?: Methods6['put']['reqHeaders'], config?: T }) =>
+                  fetch<Methods6['put']['resBody'], BasicHeaders, Methods6['put']['status']>(prefix, prefix4, PUT, option).json().then(r => r.body),
+                $path: () => `${prefix}${prefix4}`
+              }
+            },
+            /**
+             * @returns A array of auth
+             */
+            get: (option?: { headers?: Methods5['get']['reqHeaders'], config?: T }) =>
+              fetch<Methods5['get']['resBody'], BasicHeaders, Methods5['get']['status']>(prefix, PATH3, GET, option).json(),
+            /**
+             * @returns A array of auth
+             */
+            $get: (option?: { headers?: Methods5['get']['reqHeaders'], config?: T }) =>
+              fetch<Methods5['get']['resBody'], BasicHeaders, Methods5['get']['status']>(prefix, PATH3, GET, option).json().then(r => r.body),
+            /**
+             * @returns A array of auth
+             */
+            post: (option: { body: Methods5['post']['reqBody'], headers?: Methods5['post']['reqHeaders'], config?: T }) =>
+              fetch<Methods5['post']['resBody'], BasicHeaders, Methods5['post']['status']>(prefix, PATH3, POST, option).json(),
+            /**
+             * @returns A array of auth
+             */
+            $post: (option: { body: Methods5['post']['reqBody'], headers?: Methods5['post']['reqHeaders'], config?: T }) =>
+              fetch<Methods5['post']['resBody'], BasicHeaders, Methods5['post']['status']>(prefix, PATH3, POST, option).json().then(r => r.body),
+            $path: () => `${prefix}${PATH3}`
           },
           hello: {
             /**
              * @returns A array of auth
              */
-            get: (option?: { headers?: Methods6['get']['reqHeaders'], config?: T }) =>
-              fetch<Methods6['get']['resBody'], BasicHeaders, Methods6['get']['status']>(prefix, PATH3, GET, option).json(),
+            get: (option?: { headers?: Methods7['get']['reqHeaders'], config?: T }) =>
+              fetch<Methods7['get']['resBody'], BasicHeaders, Methods7['get']['status']>(prefix, PATH4, GET, option).json(),
             /**
              * @returns A array of auth
              */
-            $get: (option?: { headers?: Methods6['get']['reqHeaders'], config?: T }) =>
-              fetch<Methods6['get']['resBody'], BasicHeaders, Methods6['get']['status']>(prefix, PATH3, GET, option).json().then(r => r.body),
-            $path: () => `${prefix}${PATH3}`
+            $get: (option?: { headers?: Methods7['get']['reqHeaders'], config?: T }) =>
+              fetch<Methods7['get']['resBody'], BasicHeaders, Methods7['get']['status']>(prefix, PATH4, GET, option).json().then(r => r.body),
+            $path: () => `${prefix}${PATH4}`
           }
         }
       }

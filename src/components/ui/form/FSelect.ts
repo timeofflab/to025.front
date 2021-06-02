@@ -33,15 +33,14 @@ export default class FSelect extends AInputComponent {
 
     // Events /////////////////////////////////////////////
     public async onInput(e: any) {
-        await this.triggerParentEmit('input', e);
+
     }
 
     public async onFocus(e: any) {
-        await this.triggerParentEmit('focus', e);
+
     }
 
     public async onBlur(e: any) {
-        await this.triggerParentEmit('blur', e);
     }
 
     // Computed //////////////////////////////////////////

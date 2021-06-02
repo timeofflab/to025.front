@@ -7,6 +7,8 @@ import EditGlobal from "~/components/pages/my/presentation/project/edit/EditGlob
 import EditItem from "~/components/pages/my/presentation/project/edit/EditItem";
 import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-project";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
+import {cmdModule, ICmd} from "~/store/cmd";
+import {AppCmd} from "~/configs/app-cmd";
 
 const TAG = '/my/presentations/project/_pj/_id';
 const state = {
@@ -33,6 +35,11 @@ export default class Page extends AToComponent {
      *
      */
     public state: any = state;
+
+    @Watch('cmds')
+    public watchCmds() {
+
+    }
 
     // Method ///////////////////////////////////////
     public async load(force: boolean = false) {
@@ -143,6 +150,14 @@ export default class Page extends AToComponent {
 
     public get pageItem(): any {
         return pageMyPresentationProjectModule.pageItem;
+    }
+
+    public get cmds(): ICmd[] | null {
+        return cmdModule.queues.filter((_: ICmd) => {
+            return [
+                AppCmd.PresentationProjectSave.toString(),
+            ].indexOf(_.cmd) >= 0;
+        });
     }
 
     // Init //////////////////////////////////////////////////

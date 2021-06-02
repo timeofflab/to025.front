@@ -7,15 +7,6 @@ export class AInputComponent extends AToComponent {
     public emptyIsNull: boolean = true;
     public parentEmit: boolean = true;
 
-    public async triggerParentEmit(emit: string, e: Event) {
-        await this.$emit(emit, e);
-        if (this.parentEmit) {
-            const evt = 'on' + $v.ucfirst(emit);
-            // @ts-ignore
-            (this.$parent as any)[evt](e);
-        }
-    }
-
     public adaptInput(e: any): any {
         const name = e.target.name;
         const value = $v.tap(e.target.value, (v: any) => {

@@ -32,12 +32,12 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
         /**
          * @returns A array of auth
          */
-        put: (option?: { headers?: Methods1['put']['reqHeaders'], config?: T }) =>
+        put: (option: { body: Methods1['put']['reqBody'], headers?: Methods1['put']['reqHeaders'], config?: T }) =>
           fetch<Methods1['put']['resBody'], BasicHeaders, Methods1['put']['status']>(prefix, prefix0, PUT, option).json(),
         /**
          * @returns A array of auth
          */
-        $put: (option?: { headers?: Methods1['put']['reqHeaders'], config?: T }) =>
+        $put: (option: { body: Methods1['put']['reqBody'], headers?: Methods1['put']['reqHeaders'], config?: T }) =>
           fetch<Methods1['put']['resBody'], BasicHeaders, Methods1['put']['status']>(prefix, prefix0, PUT, option).json().then(r => r.body),
         /**
          * @returns A array of auth
