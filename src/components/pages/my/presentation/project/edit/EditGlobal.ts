@@ -24,22 +24,22 @@ export default class EditGlobal extends AOfficialComponent {
                     {
                         name: 'proposer',
                         title: 'Proposer',
-                        maxlength: 20,
+                        maxlength: 1000,
                     },
                     {
                         name: 'title',
                         title: 'Title',
-                        maxlength: 20,
+                        maxlength: 100,
                     },
                     {
                         name: 'transition',
                         title: 'Transition',
-                        maxlength: 20,
+                        maxlength: 50,
                     },
                     {
                         name: 'txt',
                         title: 'Text',
-                        maxlength: 20,
+                        maxlength: 100,
                     },
                     {
                         name: 'bg',
@@ -70,10 +70,17 @@ export default class EditGlobal extends AOfficialComponent {
         await this.initInput();
     }
 
+    // Methods /////////////////////////////////////
+    public async addItem() {
+
+
+    }
+
     // Events //////////////////////////////////////
     public async onInput(e: any) {
         await this.extEdit.onInput(e);
     }
+
 
     // Computed /////////////////////////////////////
     public get extEdit(): ExtEdit {
@@ -85,15 +92,17 @@ export default class EditGlobal extends AOfficialComponent {
     }
 
     public get currentProject(): string {
-        return pageMyPresentationProjectModule.currentProject;
+        return pageMyPresentationProjectModule.project;
     }
 
     public get currentRecord(): any {
         return appProjectModule.records.findByKey('id', this.currentProject);
     }
+
     public get currentItem(): any {
         return $v.p(this.currentRecord, 'ex.item.global');
     }
+
     // Init /////////////////////////////////////////////
     public async mounted() {
         await this.initEdit();

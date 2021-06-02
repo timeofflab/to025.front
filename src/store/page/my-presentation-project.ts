@@ -13,34 +13,56 @@ export interface IBodyClickEvent {
 
 // state's interface
 export interface IBodyModule {
-    currentProject: string;
-    currentPage: string;
+    project: string;
+    record: any;
+    page: string;
+    pageItem: any;
 }
 
 @Module({dynamic: true, store, name: 'pageMyPresentationProject', namespaced: true})
 class Store extends VuexModule implements IBodyModule {
 
-    private _currentProject: string = '';
-    private _currentPage: string = '';
+    private _project: string = '';
+    private _record: any = null;
+    private _page: string = '';
+    private _pageItem: any = null;
 
     // Computed ////////////////////////////////////////
-    public get currentProject(): string {
-        return this._currentProject;
+    public get project(): string {
+        return this._project;
     }
 
-    public get currentPage(): string {
-        return this._currentPage;
+    public get record(): string {
+        return this._record;
+    }
+
+    public get page(): string {
+        return this._page;
+    }
+
+    public get pageItem(): any {
+        return this._pageItem;
     }
 
 // Mutations ///////////////////////////////////////
     @Mutation
-    public updateCurrentProject(value: string) {
-        this._currentProject = value;
+    public updateProject(value: string) {
+        this._project = value;
     }
 
     @Mutation
-    public updateCurrentPage(value: string) {
-        this._currentPage = value;
+    public updateRecord(value: any) {
+        this._record = value;
+    }
+
+    @Mutation
+    public updatePage(value: string) {
+        this._page = value;
+    }
+
+    @Mutation
+    public updatePageItem(value: any) {
+        this._pageItem = value;
     }
 
 // Action //////////////////////////////////////////

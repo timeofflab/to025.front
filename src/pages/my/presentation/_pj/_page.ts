@@ -14,7 +14,8 @@ const state = {
         editId: 'myPresentationsProject',
     },
     param: {
-        id: '',
+        pj: '',
+        page: '0',
     },
     view: {
         ready: false,
@@ -27,33 +28,79 @@ const state = {
         EditItem,
     }
 })
-export default class Id extends AToComponent {
+export default class Page extends AToComponent {
     /**
      *
      */
     public state: any = state;
 
     // Method ///////////////////////////////////////
-    public async load() {
-        if (this.records.length === 0) {
+    public async load(force: boolean = false) {
+        if (force || this.records.length === 0) {
             await appProjectModule.$get()
         }
-        pageMyPresentationProjectModule.updateProject($v.p(this.record, 'id'));
         await this.selectRecord();
+        await this.selectItem();
         this.state.view.ready = true;
     }
 
+    public async save() {
+        await appProjectModule.$put({
+            record: this.record,
+        });
+        await this.load(true);
+    }
+
     public async selectRecord() {
+        pageMyPresentationProjectModule.updateProject(this.state.param.pj);
         pageMyPresentationProjectModule.updateRecord(
-            appProjectModule.records.findByKey('id', $v.p(this.state, 'param.id', '@')));
+            appProjectModule.records.findByKey('id', $v.p(this.state, 'param.pj', '@')));
+    }
+
+    public async selectItem() {
+        pageMyPresentationProjectModule.updatePage(this.state.param.page);
+        pageMyPresentationProjectModule.updatePageItem(
+            $v.p(this.pjItems || [], this.state.param.page));
     }
 
     public getRecordLink(item: any): string {
         return '/my/presentation/project/' + $v.p(item, 'id');
     }
 
-    public async addItem() {
+    public isCurrentPageItem(idx: number) {
+        return Number(this.state.param.page) === idx;
+    }
 
+    public async addItem() {
+        pageMyPresentationProjectModule.updateRecord(
+            $v.put(this.record, 'ex.item.items', this.pjItems.from([{
+                img: '',
+                bg: '#f4f4f4',
+                shadow: false,
+                web: false,
+                scroll: false,
+                label: 'New Page',
+            }])));
+        await this.save();
+        await this.$router.push(this.linkPage(this.pjItems.length - 1));
+    }
+
+    public async removeItem(idx: number) {
+        pageMyPresentationProjectModule.updateRecord(
+            $v.put(this.record, 'ex.item.items', this.pjItems.filter((_: any, _i: number) => {
+                return (idx !== _i);
+            })));
+        await this.save();
+    }
+
+    public linkPage(idx: number) {
+        return ['', 'my', 'presentation', this.state.param.pj, idx].join('/');
+    }
+
+    public classPageItem(idx: number): any {
+        return {
+            ['-active']: this.isCurrentPageItem(idx),
+        };
     }
 
     // Events ///////////////////////////////////////
@@ -65,13 +112,17 @@ export default class Id extends AToComponent {
         await this.addItem();
     }
 
+    public async onClickRemoveItem(idx: number) {
+
+        if (!confirm('Delete')) {
+            return;
+        }
+        await this.removeItem(idx);
+    }
+
     // Computed /////////////////////////////////////
     public get isReady(): boolean {
         return this.state.view.ready;
-    }
-
-    public get record(): any {
-        return pageMyPresentationProjectModule.record;
     }
 
     public get records(): IAppProject[] {
@@ -84,6 +135,14 @@ export default class Id extends AToComponent {
 
     public get pjItems(): any {
         return $v.p(this.record, 'ex.item.items');
+    }
+
+    public get record(): any {
+        return pageMyPresentationProjectModule.record;
+    }
+
+    public get pageItem(): any {
+        return pageMyPresentationProjectModule.pageItem;
     }
 
     // Init //////////////////////////////////////////////////
@@ -105,7 +164,8 @@ export default class Id extends AToComponent {
 
     public async initParam() {
         this.state.param = {
-            id: $v.p(this.$route, 'params.id'),
+            pj: $v.p(this.$route, 'params.pj'),
+            page: $v.p(this.$route, 'params.page', '0'),
         };
     }
 }

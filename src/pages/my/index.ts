@@ -23,7 +23,7 @@ export default class Index extends AToComponent {
     }
 
     public getRecordLink(item: any): string {
-        return '/my/presentation/project/' + $v.p(item, 'id');
+        return '/my/presentation/' + $v.p(item, 'id') + '/0';
     }
 
     // Evnets /////////////////////////////////

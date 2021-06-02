@@ -1,18 +1,9 @@
 <template lang="pug">
 div
-    h3 Page 1
-    .form-group
-        input(type="text" placeholder="Label")
-    .form-group
-        input(type="text" placeholder="img")
-    .form-group
-        input(type="text" placeholder="bg")
-    .form-group
-        input(type="text" placeholder="shadow")
-    .form-group
-        input(type="text" placeholder="web")
-    .form-group
-        input(type="text" placeholder="scroll")
+    h3 Page {{ pageL }}
+    template(v-for="f in state.config.form.schemas")
+        FgInput(:cid="state.config.editId" :name="f.name")
+
     .form-group
         a.btn.btn-primary(href="#") save
 

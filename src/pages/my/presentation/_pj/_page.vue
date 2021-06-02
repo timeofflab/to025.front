@@ -19,11 +19,28 @@ div
             h2 Pages
             h3 List
                 a(href="#") sort
-            ul
-                li(v-for="(r, idx) in pjItems")
-                    a(href="#")  {{ p(r, 'label') }}
-                    a(href="#") X
+            ul.items
+                li(v-for="(r, idx) in pjItems"
+                    :class="classPageItem(idx)")
+                    span.-active-mark ＞
+                    router-link(:to="linkPage(idx)")  {{ p(r, 'label') }}
+                    a(href="#" @click.stop="onClickRemoveItem(idx)") X
                 li
                     a(href="#" @click.stop="onClickAddItem") +
+
+            EditItem
+
 </template>
-<script lang="ts" src="./_id.ts"/>
+<script lang="ts" src="./_page.ts"/>
+<style lang="sass">
+
+.items
+    .-active-mark
+        display: none
+
+    .-active
+        .-active-mark
+            display: inline-block
+
+
+</style>
