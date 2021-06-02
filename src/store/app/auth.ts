@@ -15,7 +15,7 @@ export interface IAppAuth {
     },
     token: string;
     loginAt: string;
-    limitAt: string;
+    limitedAt: string;
 }
 
 export interface IAppAuthModule {
@@ -86,11 +86,13 @@ class Store extends VuexModule implements IAppAuthModule {
                 .hello
                 .$get();
 
-            const auth = $v.p(res, 'auth');
-            if ($v.p(auth, 'user')) {
-                M.updateAuth(auth);
+            console.log('%s.hello｜res > ', TAG, res);
+
+            const session = $v.p(res, 'session');
+            if ($v.p(session, 'user')) {
+                // M.updateAuth(session);
             } else {
-                console.log('[%s] hello() failed auth clean', TAG, auth);
+                console.log('[%s] hello() failed auth clean', TAG, session);
                 M.updateAuth(null);
                 await M.clear();
             }
@@ -106,7 +108,7 @@ class Store extends VuexModule implements IAppAuthModule {
     public async showAuth(param: {
         act?: string,
         token?: string
-    } = {}): Promise<boolean> {
+    } = {}): Promise<IAppAuth | null> {
 
         try {
             const res = await Api.To025c2
@@ -119,14 +121,13 @@ class Store extends VuexModule implements IAppAuthModule {
 
             if (!!$v.p(res, 'user')) {
                 console.log('%s.showAUth() | success > login', TAG);
-                await M.login(res);
-                return true;
+                return res;
             } else {
-                return false;
+                return null;
             }
         } catch (e) {
             console.error(e);
-            return false;
+            return null;
         }
     }
 

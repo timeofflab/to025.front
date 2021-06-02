@@ -1,7 +1,9 @@
 import {appModule} from "~/store/app";
 import {cSImgModule} from "~/store/c/s-img";
 
-export default function (context: any) {
+const TAG = 'MW.nav-move';
+
+export default async function (context: any) {
     cSImgModule.updateLoadInterval(null);
     setTimeout(() => {
         appModule.incRouteStep();

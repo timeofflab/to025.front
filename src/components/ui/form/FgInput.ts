@@ -1,5 +1,5 @@
 import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-import {editModule, IEdit, IErrorBag} from "~/store/edit";
+import {editModule, IEdit, IEditSchema, IErrorBag} from "~/store/edit";
 import {$v} from "~/classes/utils/var-util";
 import Bubble from "~/components/ui/Bubble";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
@@ -26,39 +26,6 @@ export default class FgInput extends AInputComponent {
     public name: string;
 
     // Optional -----------------------------------
-    @Prop({default: ''})
-    public id: string;
-
-    @Prop({default: 'text'})
-    public type: string;
-
-    @Prop({default: ''})
-    public en: string;
-
-    @Prop({default: ''})
-    public placeholder: string;
-
-    @Prop({default: 'error'})
-    public eclass: any;
-
-    @Prop({default: 50})
-    public maxlength: number;
-
-    @Prop({default: true})
-    public parentEmit: boolean;
-
-    @Prop({default: true})
-    public useBubble: boolean;
-
-    @Prop({default: true})
-    public required: boolean;
-
-    @Prop({default: null})
-    public values: ISelect[] | null;
-
-    @Prop({default: true})
-    public emptyIsNull: boolean;
-
     public isBubble: boolean = false;
 
     //
@@ -93,7 +60,7 @@ export default class FgInput extends AInputComponent {
 
     // Getter ///////////////////////////////
     public get eid(): string {
-        return this.id || `ipt-${this.name}`;
+        return `ipt_${this.name}`;
     }
 
     public get extEdit(): ExtEdit {
@@ -108,6 +75,14 @@ export default class FgInput extends AInputComponent {
         return this.extEdit.input;
     }
 
+    public get schema(): IEditSchema | null {
+        return (this.edit.schemas || []).findByKey('name', this.name);
+    }
+
+    public get type(): string {
+        return $v.p(this.schema, 'type', 'text');
+    }
+
     public get error(): IErrorBag | null {
         return !!this.edit ? this.edit.errors.findByKey('name', this.name) : null;
     }
@@ -117,7 +92,7 @@ export default class FgInput extends AInputComponent {
     }
 
     public get ec(): any {
-        return this.hasError ? this.eclass : {};
+        return this.hasError ? 'error' : {};
     }
 
     public get eMessages(): any {
@@ -128,12 +103,20 @@ export default class FgInput extends AInputComponent {
         return $v.p(this.input, this.name);
     }
 
+    public get required(): boolean {
+        return !!$v.p(this.schema, 'required', false);
+    }
+
     public get remainingLength(): number {
+        return 0;
+        // if (!this.useBubble || !this.value) {
+        //     return 0;
+        // }
+        //
+        // return this.maxlength - this.value.length;
+    }
 
-        if (!this.useBubble || !this.value) {
-            return 0;
-        }
-
-        return this.maxlength - this.value.length;
+    public get useBubble(): boolean {
+        return false;
     }
 }

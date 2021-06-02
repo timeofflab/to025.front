@@ -1,5 +1,5 @@
 import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
-import {editModule, IEdit, IErrorBag} from "~/store/edit";
+import {editModule, IEdit, IEditSchema, IErrorBag} from "~/store/edit";
 import {$v} from "~/classes/utils/var-util";
 import Bubble from "~/components/ui/Bubble";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
@@ -24,46 +24,10 @@ export default class FInput extends AInputComponent {
     @Prop()
     public name: string;
 
-    // Optional -----------------------------------
-    @Prop({default: ''})
-    public id: string;
-
-    @Prop({default: 'text'})
-    public type: string;
-
-    @Prop({default: ''})
-    public en: string;
-
-    @Prop({default: ''})
-    public placeholder: string;
-
-    @Prop({default: 'error'})
-    public eclass: any;
-
-    @Prop({default: 100})
-    public maxlength: number;
-
-    @Prop({default: true})
-    public parentEmit: boolean;
-
-    @Prop({default: true})
-    public useBubble: boolean;
-
-    public isBubble: boolean = false;
-
     //
     public bubbleTimer: number;
 
     public async showBubble() {
-
-        this.isBubble = true;
-        if (this.bubbleTimer > 0) {
-            window.clearTimeout(this.bubbleTimer);
-        }
-
-        this.bubbleTimer = window.setTimeout(() => {
-            this.isBubble = false;
-        }, 800);
     }
 
     // Events ---------------------------------------
@@ -97,6 +61,27 @@ export default class FInput extends AInputComponent {
         return this.extEdit.input;
     }
 
+    public get schema(): IEditSchema | null {
+        return (this.edit.schemas || []).findByKey('name', this.name);
+    }
+
+    public get id(): string {
+        return 'ipt_' + $v.p(this.schema, 'name');
+    }
+
+    public get type(): string {
+        return $v.p(this.schema, 'type', 'text');
+    }
+
+    public get placeholder(): string {
+        return $v.p(this.schema, 'placeholder',
+            $v.p(this.schema, 'name'));
+    }
+
+    public get maxlength(): number {
+        return $v.p(this.schema, 'maxlength', 1000);
+    }
+
     public get error(): IErrorBag | null {
         return !!this.edit ? this.edit.errors.findByKey('name', this.name) : null;
     }
@@ -106,7 +91,7 @@ export default class FInput extends AInputComponent {
     }
 
     public get ec(): any {
-        return this.hasError ? this.eclass : {};
+        return this.hasError ? 'error' : {};
     }
 
     public get eMessages(): any {
@@ -119,7 +104,7 @@ export default class FInput extends AInputComponent {
 
     public get classBase(): any {
         return {
-            ['en']: (['1', 'true', 'on'].indexOf(String(this.en)) >= 0)
+            ['en']: (['1', 'true', 'on'].indexOf(String($v.p(this.schema, 'en'))) >= 0)
         };
     }
 

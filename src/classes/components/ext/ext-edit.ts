@@ -1,11 +1,13 @@
+/* eslint-disable */
+
 import {AExt} from "@/classes/components/ext/a-ext";
 import {$v} from "@/classes/utils/var-util";
 import {editModule, IEdit, IEditRequest, IErrorBag} from "@/store/edit";
 import {Validator} from "@/classes/validate/validator";
 import {MasterConst} from "~/configs/master-const";
-import {LangLabelUtil} from "~/classes/domain/lang/lang-label-util";
 import Throttle from "~/classes/core/throttle";
 import {ErrorUtil} from "~/classes/app/error-util";
+import {LangLabelUtil} from "@/classes/domain/lang/lang-label-util";
 
 const TAG = 'ExtEdit';
 
@@ -37,7 +39,9 @@ export class ExtEdit extends AExt {
     }
 
     // Methods /////////////////////////////////////////
-
+    public isChecked(path: string, value: any): boolean {
+        return $v.p(this.input, path) === value;
+    }
 
     public hasError(col: string | string[]): boolean {
         if ($v.isArray(col)) {
@@ -84,9 +88,7 @@ export class ExtEdit extends AExt {
         const input = pinput || $v.p(this.vue, 'input');
         const target: string[] = ($v.isString(name) ? [name] : name) as string[];
 
-        console.log('[%s] valid() > ',
-            TAG,
-            this.vue.constructor.name,
+        console.log('[ExtEdit] valid() > ',
             input,
             target,
             valid,
@@ -170,14 +172,16 @@ export class ExtEdit extends AExt {
         });
     }
 
-    public async updateEditInfo(edit: IEditRequest) {
+    public async updateEdit(edit: IEditRequest) {
         await editModule.updateEdit({
             ...this.edit,
             ...edit,
         });
     }
 
+
     public async updateInput(input: any) {
+        console.log('%s.input | cid= ', TAG, this.cid, input);
         await editModule.input({
             id: this.cid,
             input,
@@ -252,6 +256,23 @@ export class ExtEdit extends AExt {
             || '@';
     }
 
+    public get cidPosition(): string {
+
+        if (!$v.isEmpty($v.p(this.vue, 'state.config.editId'))) {
+            return 'state.config.editId';
+        }
+
+        if (!$v.isEmpty($v.p(this.vue, 'state.config.cid'))) {
+            return 'state.config.cid';
+        }
+
+        if (!$v.isEmpty($v.p(this.vue, 'cid'))) {
+            return 'cid';
+        }
+
+        return '-';
+    }
+
     public get edit(): IEdit {
         return editModule.edits.findByKey('id', this.cid) || editModule.template;
     }
@@ -268,3 +289,4 @@ export class ExtEdit extends AExt {
         return this.errors.length > 0;
     }
 }
+

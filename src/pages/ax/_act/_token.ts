@@ -24,18 +24,18 @@ export default class Token extends AToComponent {
             token,
         });
 
-        const res = await appAuthModule.showAuth({
+        const auth = await appAuthModule.showAuth({
             act,
             token,
         });
 
-        console.log('%s.asyncData|res > ', TAG, res);
+        console.log('%s.asyncData|res > ', TAG, auth);
 
         return {
             state: {
                 ...state,
                 ...{
-                    auth: $v.p(res, 'auth'),
+                    auth,
                 },
             },
         };

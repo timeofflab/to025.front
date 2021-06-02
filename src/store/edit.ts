@@ -16,8 +16,8 @@ export interface IBubble {
 
 export interface IEditSchema {
     name: string;
-    type: string;
     title: string;
+    type?: string;
     required?: boolean;
     maxlength?: number;
     placeholder?: string;

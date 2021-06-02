@@ -116,8 +116,8 @@ export const MasterConst = {
     To025: {
         App: {
             Auth: {
-                UserAuthToken: 'X-To025-User-Auth-Token',
-                AdminAuthToken: 'X-To025-Admin-Auth-Token',
+                UserAuthToken: 'X-To025-Auth-Token',
+                AdminAuthToken: 'X-To006-Auth-Token',
             },
         },
     },
