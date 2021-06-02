@@ -121,14 +121,14 @@ export class EnvUtil {
         return M.val('TO985_SITE_CD') as string;
     }
 
+    public static get TO025_API_BASE(): string {
+        return M.val('TO025_API_BASE') as string;
+    }
+
+
     public static get TO985_SECRET(): string {
         return $v.p(M.src, 'to985Secret') as string;
     }
-
-    public static get TO025_API_BASE(): string {
-        return $v.p(M.src, 'TO025_API_BASE') as string;
-    }
-
 
     public static get INSTAGRAM_API_BASE(): string {
         return M.val('INSTAGRAM_API_BASE') as string;

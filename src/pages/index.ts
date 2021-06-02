@@ -10,11 +10,18 @@ import {debugModule} from "~/store/debug";
 import {previewModule} from "~/store/preview";
 import {$v} from "~/classes/utils/var-util";
 import {Project} from '@/configs/project';
+import {ExtEdit} from "~/classes/components/ext/ext-edit";
+import {appAuthModule} from "~/store/app/auth";
 
 const TAG = '/';
 const state = {
     config: {
         lang: 'pages.index',
+        editId: 'index',
+    },
+    view: {
+        ready: false,
+        submit: false,
     },
 };
 
@@ -23,12 +30,10 @@ const state = {
 })
 export default class index extends AOfficialComponent {
 
-
     public project_data: any = Project;
     public global: any = Project.global;
     public fullscreen_txt: string = 'fullscreen';
 
-    public state: boolean = true;
     public isFirst: boolean = true;
     public isLast: boolean = false;
     public info_hover: boolean = false;
@@ -40,14 +45,60 @@ export default class index extends AOfficialComponent {
     public isUi: boolean = true;
     public isScroll: boolean = false;
 
+    public state = {} as any;
+
     // Computed /////////////////////////////////////////////////////////
     // Event /////////////////////////////////////////////////////////
 
     // Methods /////////////////////////////////////////////////////////
-    // Methods ////////////////////////////////////////////////
+    public async submit() {
 
+        console.log('%s.submit｜input', TAG, this.input);
+
+        const email = $v.p(this.input, 'email');
+
+        if ($v.isEmpty(email)) {
+            console.log('%s｜mail is empty', TAG, email);
+            return;
+        }
+
+        const success = await appAuthModule.postAuth({
+            email,
+        });
+
+        if (success) {
+            this.state.view.submit = true;
+        } else {
+            await this.extEdit.updateErrors([
+                {name: 'email', messages: ['Invalid email']},
+            ]);
+            console.log('%s.submit｜submit - error', TAG, this.extEdit.errors);
+        }
+    }
+
+    public async onInput(e: any) {
+        await this.extEdit.clearErrors();
+        await this.extEdit.onInput(e);
+    }
+
+    // Events ////////////////////////////////////////////////
+    public async onClickSubmit() {
+        await this.submit();
+    }
+
+    public async onSubmit(): Promise<boolean> {
+        await this.submit();
+        return false;
+    }
 
     // Computed ////////////////////////////////////////////////
+    public get extEdit(): ExtEdit {
+        return new ExtEdit(this);
+    }
+
+    public get input(): any {
+        return this.extEdit.input;
+    }
 
     public get deviceSize(): any {
         return appModule.deviceSize;
@@ -71,11 +122,18 @@ export default class index extends AOfficialComponent {
 
     public async mounted() {
         await this.initParam();
+        await this.initInput();
         officialModule.updateIsNavScrollSwitch(true);
         officialModule.updateUseNavScrollSwitch(true);
     }
 
     public async initParam() {
         debugModule.updateCode($v.p(this.$route, 'query.debug'));
+    }
+
+    public async initInput() {
+        await this.extEdit.updateInput({
+            email: '',
+        });
     }
 }

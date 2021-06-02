@@ -113,6 +113,14 @@ export const MasterConst = {
             ],
         },
     },
+    To025: {
+        App: {
+            Auth: {
+                UserAuthToken: 'X-To025-User-Auth-Token',
+                AdminAuthToken: 'X-To025-Admin-Auth-Token',
+            },
+        },
+    },
     Connection: {
         Error: 900,
     },
