@@ -39,8 +39,6 @@ export default class P extends AOfficialComponent {
     public global: any = Project.global;
     public fullscreen_txt: string = 'fullscreen';
 
-    public isFirst: boolean = true;
-    public isLast: boolean = false;
     public info_hover: boolean = false;
 
     public cvTxt: any = {};
@@ -52,20 +50,6 @@ export default class P extends AOfficialComponent {
 
     @Watch('active')
     public watchActive(value: any) {
-
-        if (value + 1 >= this.project_data.items.length) {
-            this.isLast = true;
-
-        } else {
-            this.isLast = false;
-        }
-
-        if (value <= 0) {
-            this.isFirst = true;
-
-        } else {
-            this.isFirst = false;
-        }
 
         // fade out ///////////////////////
         this.state.view.ready = false;
@@ -199,7 +183,7 @@ export default class P extends AOfficialComponent {
             previewModule.updateActive(value);
         }
 //         console.log(`Active: ${previewModule.active} isFirst: ${this.isFirst} isLast: ${this.isLast}`);
-
+        this.$router.push('./' + previewModule.active);
     }
 
     public onFullscreen() {
@@ -234,6 +218,23 @@ export default class P extends AOfficialComponent {
         return appModule.window.size.height;
     }
 
+    public get items(): any[] {
+        return $v.p(this.project_data, 'items', []);
+    }
+
+    public get index(): number {
+        return previewModule.active;
+    }
+
+    public get isFirst(): boolean {
+        return this.index === 0;
+    }
+
+    public get isLast(): boolean {
+        return this.index >= (this.items.length - 1);
+    }
+
+
     // Base //////////////////////////////////////////////////
     public async asyncData(ctx: any) {
 
@@ -263,8 +264,8 @@ export default class P extends AOfficialComponent {
         });
     }
 
-    public created() {
-        this.initPj();
+    public async created() {
+        await this.initPj();
         this.updateItem();
     }
 
@@ -280,6 +281,10 @@ export default class P extends AOfficialComponent {
     }
 
     public head() {
+        console.log('head > ', this.state.ssr, $v.p(this.state.ssr, 'project.global.title'));
+        return {
+            title: $v.p(this.state.ssr, 'project.global.title'),
+        };
     }
 
     public async mounted() {
@@ -290,6 +295,6 @@ export default class P extends AOfficialComponent {
 
     public async initParam() {
         debugModule.updateCode($v.p(this.$route, 'query.debug'));
+        previewModule.updateActive(this.state.param.page);
     }
-
 }

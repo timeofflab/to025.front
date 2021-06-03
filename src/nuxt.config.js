@@ -5,7 +5,7 @@ const httpPort = 3000;
 
 const websiteInfo = {
     url: 'https://test.com/',
-    name: 'Parade Artist Visual Identity Plan by Timeoff',
+    name: '',
     description: '',
     ogImgPath: 'https://test.com/common/img/sns/og.jpg',
     fbAppId: '',
@@ -58,7 +58,7 @@ export default {
     */
     head: {
         title: '',
-        titleTemplate: websiteInfo.name + ' | %s',
+        titleTemplate: '%s',
         meta: [
             {charset: 'utf-8'},
             {httpEquiv: 'content-language', content: 'ja'},

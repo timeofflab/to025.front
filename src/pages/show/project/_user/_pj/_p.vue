@@ -51,10 +51,10 @@ fff<template lang="pug">
                         .s.s5
                             s-img(src="/safari-bar-05.png")
                 .body
-                    img(:src="img_path")
+                    s-img(:src="img_path")
 
     .img-loader-frame
-        img(v-for="(item,index) in project_data.items" :key="`img${index}`" :src="`/${item.img}`")
+        s-img(v-for="(item,index) in project_data.items" :key="`img${index}`" :src="`/${item.img}`")
 
 </template>
 <script lang="ts" src="./_p.ts"></script>
