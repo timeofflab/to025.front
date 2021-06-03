@@ -1,4 +1,4 @@
-<template lang="pug">
+fff<template lang="pug">
 .container(:class="[{'-web': isWeb}, {'-ui': isUi}]" :style="[cvTxt, cvBg]")
     .ui-frame
         .info(:class="{'-hover': info_hover}")
@@ -37,7 +37,7 @@
                             polygon(points="40.073,1.192 37.457,3.809 51.798,18.148 3.119,18.148 3.119,21.849 51.798,21.849 37.457,36.191 40.073,38.808 58.881,19.999 ")
     .img-frame(:class="{'-scroll': isScroll}")
         transition(name="item" mode="out-in")
-            .img-container(v-if="state" :class="{'-shadow': isShadow}")
+            .img-container(v-if="isReady" :class="{'-shadow': isShadow}")
                 .head(:class="{'-web': isWeb}")
                     .safari
                         .s.s1

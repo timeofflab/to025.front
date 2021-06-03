@@ -6,66 +6,48 @@ import {ApiMessageUtil} from "~/classes/app/api/api-message-util";
 import {$v} from "~/classes/utils/var-util";
 import {errorModule} from "~/store/error";
 
-const TAG = 'pageContact';
-
-export interface IBodyClickEvent {
-}
+const TAG = 'pageShowProject';
 
 // state's interface
 export interface IBodyModule {
     project: string;
-    record: any;
-    page: string;
-    pageItem: any;
 }
 
-@Module({dynamic: true, store, name: 'pageMyPresentationProject', namespaced: true})
+@Module({dynamic: true, store, name: 'pageShowProject', namespaced: true})
 class Store extends VuexModule implements IBodyModule {
 
     private _project: string = '';
-    private _record: any = null;
-    private _page: string = '';
-    private _pageItem: any = null;
 
     // Computed ////////////////////////////////////////
     public get project(): string {
         return this._project;
     }
 
-    public get record(): string {
-        return this._record;
-    }
-
-    public get page(): string {
-        return this._page;
-    }
-
-    public get pageItem(): any {
-        return this._pageItem;
-    }
-
-// Mutations ///////////////////////////////////////
+    // Mutations ///////////////////////////////////////
     @Mutation
     public updateProject(value: string) {
         this._project = value;
     }
 
-    @Mutation
-    public updateRecord(value: any) {
-        this._record = value;
+    // Action //////////////////////////////////////////
+    @Action
+    public async $get(param: any = {}): Promise<IApiMessage> {
+        try {
+            const res = Api.To025c2.show.prje
+        } catch (e) {
+
+        }
     }
 
-    @Mutation
-    public updatePage(value: string) {
-        this._page = value;
+    @Action
+    public async $show(param: any = {}): Promise<IApiMessage> {
+        try {
+
+        } catch (e) {
+
+        }
     }
 
-    @Mutation
-    public updatePageItem(value: any) {
-        this._pageItem = value;
-    }
-
-// Action //////////////////////////////////////////
     @Action
     public async $post(param: any = {}): Promise<IApiMessage> {
         try {
@@ -86,37 +68,7 @@ class Store extends VuexModule implements IBodyModule {
             console.log('%s.$post', TAG, e.response.data);
 
             errorModule.addError({
-                code: 'pageMyPresentationProject.$post',
-                message: '',
-                ext: {
-                    e,
-                },
-            });
-
-            return e;
-        }
-    }
-
-    @Action
-    public async $delete(id: string): Promise<IApiMessage> {
-        try {
-            const res = await Api.To025c2
-                .presentation
-                .project
-                ._id(id)
-                .$delete({
-                    body: {},
-                });
-
-            console.log('%s.$delete', TAG, res);
-
-            return ApiMessageUtil.success();
-
-        } catch (e) {
-            console.log('%s.$delete', TAG, e.response.data);
-
-            errorModule.addError({
-                code: 'pageMyPresentationProject.$post',
+                code: 'pageShowProject.$post',
                 message: '',
                 ext: {
                     e,
@@ -128,6 +80,6 @@ class Store extends VuexModule implements IBodyModule {
     }
 }
 
-export const pageMyPresentationProjectModule = getModule(Store);
+export const pageShowProjectModule = getModule(Store);
 
-const M = pageMyPresentationProjectModule;
+const M = pageShowProjectModule;
