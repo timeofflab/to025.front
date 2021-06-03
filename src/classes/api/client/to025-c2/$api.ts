@@ -17,6 +17,10 @@ import { Methods as Methods5 } from './to025/c2/service/auth'
 import { Methods as Methods6 } from './to025/c2/service/auth/_token@string'
 // prettier-ignore
 import { Methods as Methods7 } from './to025/c2/service/hello'
+// prettier-ignore
+import { Methods as Methods8 } from './to025/c2/view/project/_user@string/_project@string'
+// prettier-ignore
+import { Methods as Methods9 } from './to025/c2/view/project/_user@string/_project@string/_token@string'
 
 // prettier-ignore
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
@@ -26,6 +30,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH2 = '/to025/c2/presentation/project'
   const PATH3 = '/to025/c2/service/auth'
   const PATH4 = '/to025/c2/service/hello'
+  const PATH5 = '/to025/c2/view/project'
   const GET = 'GET'
   const POST = 'POST'
   const PUT = 'PUT'
@@ -232,6 +237,60 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             $get: (option?: { headers?: Methods7['get']['reqHeaders'], config?: T }) =>
               fetch<Methods7['get']['resBody'], BasicHeaders, Methods7['get']['status']>(prefix, PATH4, GET, option).json().then(r => r.body),
             $path: () => `${prefix}${PATH4}`
+          }
+        },
+        view: {
+          project: {
+            _user: (val4: string) => {
+              const prefix4 = `${PATH5}/${val4}`
+
+              return {
+                _project: (val5: string) => {
+                  const prefix5 = `${prefix4}/${val5}`
+
+                  return {
+                    _token: (val6: string) => {
+                      const prefix6 = `${prefix5}/${val6}`
+
+                      return {
+                        /**
+                         * @returns A array of auth
+                         */
+                        get: (option?: { config?: T }) =>
+                          fetch<Methods9['get']['resBody'], BasicHeaders, Methods9['get']['status']>(prefix, prefix6, GET, option).json(),
+                        /**
+                         * @returns A array of auth
+                         */
+                        $get: (option?: { config?: T }) =>
+                          fetch<Methods9['get']['resBody'], BasicHeaders, Methods9['get']['status']>(prefix, prefix6, GET, option).json().then(r => r.body),
+                        $path: () => `${prefix}${prefix6}`
+                      }
+                    },
+                    /**
+                     * @returns A array of auth
+                     */
+                    get: (option?: { config?: T }) =>
+                      fetch<Methods8['get']['resBody'], BasicHeaders, Methods8['get']['status']>(prefix, prefix5, GET, option).json(),
+                    /**
+                     * @returns A array of auth
+                     */
+                    $get: (option?: { config?: T }) =>
+                      fetch<Methods8['get']['resBody'], BasicHeaders, Methods8['get']['status']>(prefix, prefix5, GET, option).json().then(r => r.body),
+                    /**
+                     * @returns A array of auth
+                     */
+                    post: (option: { body: Methods8['post']['reqBody'], config?: T }) =>
+                      fetch<Methods8['post']['resBody'], BasicHeaders, Methods8['post']['status']>(prefix, prefix5, POST, option).json(),
+                    /**
+                     * @returns A array of auth
+                     */
+                    $post: (option: { body: Methods8['post']['reqBody'], config?: T }) =>
+                      fetch<Methods8['post']['resBody'], BasicHeaders, Methods8['post']['status']>(prefix, prefix5, POST, option).json().then(r => r.body),
+                    $path: () => `${prefix}${prefix5}`
+                  }
+                }
+              }
+            }
           }
         }
       }

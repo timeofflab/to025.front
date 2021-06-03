@@ -5,6 +5,7 @@ import {OfficialAsyncAdataUtil} from "~/classes/utils/official-async-adata-util"
 import {$v} from "~/classes/utils/var-util";
 import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-project";
 
+const TAG = '/my';
 const state = {
     conifg: {},
     view: {
@@ -24,11 +25,17 @@ export default class Index extends AToComponent {
     }
 
     public async post() {
-        await pageMyPresentationProjectModule.$post();
+        const res = await pageMyPresentationProjectModule.$post();
+        const nid = $v.p(res, 'ex.record.id');
+        console.log('%s.post｜nid', TAG, res, nid);
+        if (!!nid) {
+            await this.$router.push(`/my/presentation/${nid}/0`);
+        }
     }
 
-    public async remove() {
-
+    public async delete(id: string) {
+        await pageMyPresentationProjectModule.$delete(id);
+        appProjectModule.removeRecord(id);
     }
 
     public getRecordLink(item: any): string {
@@ -41,7 +48,7 @@ export default class Index extends AToComponent {
             return false;
         }
 
-        return false;
+        await this.delete(id);
     }
 
     public async onClickAdd() {

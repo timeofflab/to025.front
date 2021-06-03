@@ -76,7 +76,7 @@ class Store extends VuexModule implements IBodyModule {
                     body: {},
                 });
 
-            console.log('%s.$store', TAG, res);
+            console.log('%s.$post', TAG, res);
 
             return ApiMessageUtil.success({
                 record: res,
@@ -84,6 +84,36 @@ class Store extends VuexModule implements IBodyModule {
 
         } catch (e) {
             console.log('%s.$post', TAG, e.response.data);
+
+            errorModule.addError({
+                code: 'pageMyPresentationProject.$post',
+                message: '',
+                ext: {
+                    e,
+                },
+            });
+
+            return e;
+        }
+    }
+
+    @Action
+    public async $delete(id: string): Promise<IApiMessage> {
+        try {
+            const res = await Api.To025c2
+                .presentation
+                .project
+                ._id(id)
+                .$delete({
+                    body: {},
+                });
+
+            console.log('%s.$delete', TAG, res);
+
+            return ApiMessageUtil.success();
+
+        } catch (e) {
+            console.log('%s.$delete', TAG, e.response.data);
 
             errorModule.addError({
                 code: 'pageMyPresentationProject.$post',

@@ -39,6 +39,16 @@ class Store extends VuexModule implements IAppProjectModule {
         this._records = value;
     }
 
+    @Mutation
+    public updateRecord(value: IAppProject) {
+        this._records = this._records.replaceByKey('id', value).array;
+    }
+
+    @Mutation
+    public removeRecord(id: string) {
+        this._records = this._records.rejectByKey('id', id);
+    }
+
     // Actions /////////////////////
     @Action
     public async $get(param: {
