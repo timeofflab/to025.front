@@ -26,7 +26,7 @@ div
                 li(v-for="(r, idx) in pjItems"
                     :class="classPageItem(idx)")
                     span.-active-mark ＞
-                    router-link(:to="linkPage(idx)")  {{ p(r, 'label', '---') }}
+                    router-link(:to="linkPage(idx)")  [{{idx}}] {{ p(r, 'label', '---') }}
                     a(href="#" @click.stop="onClickRemoveItem(idx)") X
                 li
                     a(href="#" @click.stop="onClickAddItem") +

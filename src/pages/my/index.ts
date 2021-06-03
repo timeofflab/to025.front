@@ -3,6 +3,7 @@ import {AToComponent} from "~/classes/components/a-to-component";
 import {appProjectModule, IAppProject} from "~/store/app/project";
 import {OfficialAsyncAdataUtil} from "~/classes/utils/official-async-adata-util";
 import {$v} from "~/classes/utils/var-util";
+import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-project";
 
 const state = {
     conifg: {},
@@ -22,11 +23,30 @@ export default class Index extends AToComponent {
         this.state.view.ready = true;
     }
 
+    public async post() {
+        await pageMyPresentationProjectModule.$post();
+    }
+
+    public async remove() {
+
+    }
+
     public getRecordLink(item: any): string {
         return '/my/presentation/' + $v.p(item, 'id') + '/0';
     }
 
     // Evnets /////////////////////////////////
+    public async onClickRemove(id: string) {
+        if (!confirm('Delete?')) {
+            return false;
+        }
+
+        return false;
+    }
+
+    public async onClickAdd() {
+        await this.post();
+    }
 
     // Computeds ///////////////////////////////
     public get isReady(): boolean {

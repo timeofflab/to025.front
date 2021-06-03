@@ -67,18 +67,20 @@ class Store extends VuexModule implements IBodyModule {
 
 // Action //////////////////////////////////////////
     @Action
-    public async $post(param: any): Promise<IApiMessage> {
+    public async $post(param: any = {}): Promise<IApiMessage> {
         try {
-            const res = await Api.To985
-                ._siteCd($v.p(param, 'siteCd'))
-                .contact
+            const res = await Api.To025c2
+                .presentation
+                .project
                 .$post({
-                    body: param.body,
+                    body: {},
                 });
 
-            console.log('%s.$post', TAG, res);
+            console.log('%s.$store', TAG, res);
 
-            return ApiMessageUtil.success();
+            return ApiMessageUtil.success({
+                record: res,
+            });
 
         } catch (e) {
             console.log('%s.$post', TAG, e.response.data);

@@ -156,6 +156,16 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
              */
             $get: (option?: { headers?: Methods3['get']['reqHeaders'], config?: T }) =>
               fetch<Methods3['get']['resBody'], BasicHeaders, Methods3['get']['status']>(prefix, PATH2, GET, option).json().then(r => r.body),
+            /**
+             * @returns A array of auth
+             */
+            post: (option: { body: Methods3['post']['reqBody'], headers?: Methods3['post']['reqHeaders'], config?: T }) =>
+              fetch<Methods3['post']['resBody'], BasicHeaders, Methods3['post']['status']>(prefix, PATH2, POST, option).json(),
+            /**
+             * @returns A array of auth
+             */
+            $post: (option: { body: Methods3['post']['reqBody'], headers?: Methods3['post']['reqHeaders'], config?: T }) =>
+              fetch<Methods3['post']['resBody'], BasicHeaders, Methods3['post']['status']>(prefix, PATH2, POST, option).json().then(r => r.body),
             $path: () => `${prefix}${PATH2}`
           }
         },

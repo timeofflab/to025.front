@@ -107,7 +107,7 @@ export default class Page extends AToComponent {
             await this.saveFile();
         }
 
-        // await this.load(true);
+        await this.load(true);
     }
 
     public async selectRecord() {
@@ -131,24 +131,33 @@ export default class Page extends AToComponent {
     }
 
     public async addItem() {
+
+        const pjItems = this.pjItems || [];
+
+        console.log('pjItems', pjItems);
         pageMyPresentationProjectModule.updateRecord(
-            $v.put(this.record, 'ex.item.items', (this.pjItems || []).from([{
+            $v.put(this.record, 'ex.item.items', (this.pjItems || []).from({
                 img: '',
                 bg: '#f4f4f4',
                 shadow: false,
                 web: false,
                 scroll: false,
                 label: 'New Page',
-            }])));
+            })));
         await this.save();
         await this.$router.push(this.linkPage(this.pjItems.length - 1));
     }
 
     public async removeItem(idx: number) {
-        pageMyPresentationProjectModule.updateRecord(
-            $v.put(this.record, 'ex.item.items', this.pjItems.filter((_: any, _i: number) => {
-                return (idx !== _i);
-            })));
+        try {
+            pageMyPresentationProjectModule.updateRecord(
+                $v.put(this.record, 'ex.item.items', this.pjItems.filter((_: any, _i: number) => {
+                    return (idx !== _i);
+                })));
+        } catch (e) {
+            pageMyPresentationProjectModule.updateRecord(
+                $v.put(this.record, 'ex.item.items', []));
+        }
         await this.save();
     }
 
