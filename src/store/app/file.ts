@@ -1,12 +1,16 @@
 import {Mutation, MutationAction, Action, VuexModule, getModule, Module} from 'vuex-module-decorators';
 import store from '@/store';
+import {$v} from "~/classes/utils/var-util";
+import {ErrorUtil} from "~/classes/app/error-util";
+import {errorModule} from "~/store/error";
+import {Api} from "~/classes/api";
 
 const TAG = 'fileModule';
 
 export interface IFile {
     id: string;
     purpose: string;
-    file: File;
+    file: Blob;
 }
 
 // state's interface
@@ -35,29 +39,78 @@ class Store extends VuexModule implements IAppFileModule {
     }
 
     // Actions //////////////////////////////////////////////
-    // Shop S3 put URL
+    // Shop S3 put URLwww
     @Action
     public async $get(param: {
-        id?: string
         purpose?: string
-    }): Promise<string> {
-        return '';
+    }): Promise<boolean> {
+        try {
+            const res = await Api.To025c2
+                .file
+                .$get();
+
+            console.log('%s.$get｜posted', TAG, res);
+
+            return true;
+        } catch (e) {
+            // errorModule.addError();
+            return false;
+        }
     }
 
     @Action
-    public async $post(param: {
-        id?: string
-        purpose?: string
-    }): Promise<string> {
-        return '';
+    public async $store(param: {
+        targetId: string,
+        purpose: any,
+    }): Promise<any> {
+        try {
+            const res = await Api.To025c2
+                .file
+                .$post({
+                    body: {
+                        targetId: $v.p(param, 'targetId', {}),
+                        purpose: $v.p(param, 'purpose', {})
+                    },
+                });
+
+            console.log('%s.$store｜posted', TAG, res);
+
+            return res;
+        } catch (e) {
+            // errorModule.addError();
+            return null;
+        }
     }
 
     @Action
     public async $attach(param: {
+        fileId: string,
         token: string,
-        file: IFile
-    }): Promise<string> {
-        return '';
+        file: Blob
+    }): Promise<any> {
+        try {
+            // const body = new FormData();
+            // body.append('token', $v.p(param, 'token'));
+            // body.append('file', $v.p(param, 'file'));
+
+            const res = await Api.To025c2
+                .file
+                ._id($v.p(param, 'fileId'))
+                .attach
+                .$post({
+                    body: {
+                        token: $v.p(param, 'token'),
+                        file: $v.p(param, 'file'),
+                    },
+                });
+
+            console.log('%s.$attach｜posted', TAG, res);
+
+            return '';
+        } catch (e) {
+            // errorModule.addError();
+            return null;
+        }
     }
 }
 

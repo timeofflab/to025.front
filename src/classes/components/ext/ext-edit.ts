@@ -8,6 +8,8 @@ import {MasterConst} from "~/configs/master-const";
 import Throttle from "~/classes/core/throttle";
 import {ErrorUtil} from "~/classes/app/error-util";
 import {LangLabelUtil} from "@/classes/domain/lang/lang-label-util";
+import {cmdModule} from "~/store/cmd";
+import {AppCmd} from "~/configs/app-cmd";
 
 const TAG = 'ExtEdit';
 
@@ -245,6 +247,21 @@ export class ExtEdit extends AExt {
         const v = $v.adaptInput(evt);
         await this.updateInput({
             [v.name]: v.value,
+        });
+        await cmdModule.registCmd({
+            cmd: AppCmd.Input,
+            request: {
+                cid: this.cid,
+                id: $v.p(evt.target, 'id'),
+                name: $v.p(evt.target, 'name'),
+                type: $v.p(evt.target, 'type'),
+                value: $v.p(evt.target, 'value'),
+                ext: {
+                    selected: $v.p(evt.target, 'selected'),
+                    checked: $v.p(evt.target, 'checked'),
+                    files: $v.p(evt.target, 'files', []),
+                },
+            }
         });
     }
 

@@ -83,12 +83,6 @@ export default class EditGlobal extends AOfficialComponent {
         await this.extEdit.onInput(e);
     }
 
-    public async onClickSave() {
-        await cmdModule.registCmd({
-            cmd: AppCmd.PresentationProjectSave,
-        });
-    }
-
     // Computed /////////////////////////////////////
     public get extEdit(): ExtEdit {
         return new ExtEdit(this);

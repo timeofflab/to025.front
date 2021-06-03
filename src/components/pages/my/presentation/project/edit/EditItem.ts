@@ -6,6 +6,8 @@ import {appProjectModule} from "~/store/app/project";
 import {IEditSchema} from "~/store/edit";
 import {cmdModule} from "~/store/cmd";
 import {AppCmd} from "~/configs/app-cmd";
+import {uploadModule} from "~/store/upload";
+import {$v} from "~/classes/utils/var-util";
 
 const TAG = 'EditItem';
 
@@ -14,6 +16,9 @@ export default class EditItem extends AOfficialComponent {
     public state = {
         config: {
             editId: 'presentationProjectEditItem',
+            upload: {
+                img: 'presentationEditItemImg',
+            },
             form: {
                 schemas: [
                     {
@@ -62,28 +67,7 @@ export default class EditItem extends AOfficialComponent {
     }
 
     // Methods /////////////////////////////////////
-    public async addItem() {
-
-    }
-
     // Events //////////////////////////////////////
-    public async onInput(e: any) {
-        await this.extEdit.onInput(e);
-
-        switch (e.target.name) {
-            case 'file':
-                console.log('onInput.File');
-                break;
-            default:
-                break;
-        }
-    }
-
-    public async onClickSave() {
-        await cmdModule.registCmd({
-            cmd: AppCmd.PresentationProjectSave,
-        });
-    }
 
     // Computed /////////////////////////////////////
     public get extEdit(): ExtEdit {
@@ -114,6 +98,10 @@ export default class EditItem extends AOfficialComponent {
         return this.page + 1;
     }
 
+    public get uploads(): any[] {
+        return uploadModule.uploads;
+    }
+
     // Init /////////////////////////////////////////////
     public async mounted() {
         await this.initEdit();
@@ -138,6 +126,11 @@ export default class EditItem extends AOfficialComponent {
                 scroll: '',
             },
             ...this.pageItem || {},
+        });
+
+        // Clear uploads
+        Object.keys(this.state.config.upload).map((_: string) => {
+            uploadModule.removeUpload($v.p(this.state.config.upload, _));
         });
     }
 }

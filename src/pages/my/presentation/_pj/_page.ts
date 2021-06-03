@@ -9,6 +9,9 @@ import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-proj
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
 import {cmdModule, ICmd} from "~/store/cmd";
 import {AppCmd} from "~/configs/app-cmd";
+import {uploadModule} from "~/store/upload";
+import {editModule, IEdit} from "~/store/edit";
+import {To025} from "~/classes/domain/to025";
 
 const TAG = '/my/presentations/project/_pj/_id';
 const state = {
@@ -36,9 +39,18 @@ export default class Page extends AToComponent {
      */
     public state: any = state;
 
-    @Watch('cmds')
-    public watchCmds() {
+    @Watch('fileCmd')
+    public watchFileCmd(now: any) {
+        console.log('%s.watchFileCmd', TAG, now);
+        if (!now) {
+            return;
+        }
 
+        // $v.p(now, 'request.cid')
+        uploadModule.updateUpload({
+            id: 'presentationEditItemImg',
+            files: $v.p(now, 'request.ext.files'),
+        });
     }
 
     // Method ///////////////////////////////////////
@@ -51,11 +63,51 @@ export default class Page extends AToComponent {
         this.state.view.ready = true;
     }
 
+    public async storeRecord() {
+        pageMyPresentationProjectModule.updateRecord($v.puts(this.record, [
+            ['ex.item.global', $v.tap(editModule.edits.findByKey('id', 'presentationProjectEditGlobal'), (edit: IEdit) => {
+                return $v.p(edit, 'input');
+            })],
+            ['ex.item.items', (this.pjItems || []).map((_: any, idx: number) => {
+                return (idx === Number(this.state.param.page)) ? (() => {
+                    return $v.p(editModule.edits.findByKey('id', 'presentationProjectEditItem'), 'input')
+                })() : _;
+            })],
+        ]));
+        console.log('%s.storeRecord｜stored', TAG, $v.p(this.record, 'ex.item'));
+    }
+
+    public hasUpload(): boolean {
+        return !!uploadModule.uploads.findByKey('id', 'presentationEditItemImg');
+    }
+
+    public async saveFile() {
+        await To025.File.FileUploadUtil.upload(
+            'presentationEditItemImg',
+            this.state.param.pj,
+            ['presentation',
+                'project',
+                'page',
+                this.state.param.page,
+                'img'].join('/'));
+    }
+
     public async save() {
+        await this.storeRecord();
         await appProjectModule.$put({
             record: this.record,
         });
-        await this.load(true);
+
+        console.log('%s｜saveFile - 1', TAG, {
+            id: this.record.id,
+            uploads: uploadModule.uploads,
+        });
+        if (this.record.id && this.hasUpload()) {
+            console.log('%s｜saveFile - 2');
+            await this.saveFile();
+        }
+
+        // await this.load(true);
     }
 
     public async selectRecord() {
@@ -80,7 +132,7 @@ export default class Page extends AToComponent {
 
     public async addItem() {
         pageMyPresentationProjectModule.updateRecord(
-            $v.put(this.record, 'ex.item.items', this.pjItems.from([{
+            $v.put(this.record, 'ex.item.items', (this.pjItems || []).from([{
                 img: '',
                 bg: '#f4f4f4',
                 shadow: false,
@@ -111,6 +163,15 @@ export default class Page extends AToComponent {
     }
 
     // Events ///////////////////////////////////////
+    public async onClickSave() {
+
+        if (!confirm('Save')) {
+            return;
+        }
+
+        await this.save();
+    }
+
     public get extEdit(): ExtEdit {
         return new ExtEdit(this);
     }
@@ -141,7 +202,7 @@ export default class Page extends AToComponent {
     }
 
     public get pjItems(): any {
-        return $v.p(this.record, 'ex.item.items');
+        return $v.p(this.record, 'ex.item.items', []);
     }
 
     public get record(): any {
@@ -158,6 +219,18 @@ export default class Page extends AToComponent {
                 AppCmd.PresentationProjectSave.toString(),
             ].indexOf(_.cmd) >= 0;
         });
+    }
+
+    public get fileCmd(): ICmd | null {
+        return cmdModule.queues
+            .slice()
+            .reverse()
+            .find((_: ICmd) => {
+                const cid = $v.p(_, 'request.cid');
+                const name = $v.p(_, 'request.name');
+                return (cid === 'presentationProjectEditItem'
+                    && name === 'img');
+            });
     }
 
     // Init //////////////////////////////////////////////////

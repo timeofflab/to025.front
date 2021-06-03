@@ -4,6 +4,6 @@ div
     h2 Projects
     ul(v-if="isReady")
         li(v-for="r in records")
-            router-link(:to="getRecordLink(r)") {{ p(r, 'ex.item.global.title') }}
+            router-link(:to="getRecordLink(r)") {{ p(r, 'id') }} - {{ p(r, 'ex.item.global.title') }}
 </template>
 <script lang="ts" src="./index.ts"/>

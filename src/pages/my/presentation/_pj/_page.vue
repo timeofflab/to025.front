@@ -15,6 +15,9 @@ div
 
             EditGlobal
 
+            .form-group
+                a.btn.btn-primary(href="#" @click.stop="onClickSave") save
+
             hr
             h2 Pages
             h3 List
@@ -23,13 +26,19 @@ div
                 li(v-for="(r, idx) in pjItems"
                     :class="classPageItem(idx)")
                     span.-active-mark ＞
-                    router-link(:to="linkPage(idx)")  {{ p(r, 'label') }}
+                    router-link(:to="linkPage(idx)")  {{ p(r, 'label', '---') }}
                     a(href="#" @click.stop="onClickRemoveItem(idx)") X
                 li
                     a(href="#" @click.stop="onClickAddItem") +
 
+
+            div(v-if="!!p(pageItem, 'img')")
+                img(:src="`http://localhost:19860/${p(pageItem, 'img')}`" width="100")
+
             EditItem
 
+            .form-group
+                a.btn.btn-primary(href="#" @click.stop="onClickSave") save
 </template>
 <script lang="ts" src="./_page.ts"/>
 <style lang="sass">

@@ -5,7 +5,7 @@ const TAG = 'uploadModule';
 
 export interface IUpload {
     id: string;
-    files: File[];
+    files: Blob[];
 }
 
 // state's interface
@@ -31,6 +31,11 @@ class Store extends VuexModule implements IUploadModule {
     @Mutation
     public updateUpload(value: IUpload) {
         this._uploads = this._uploads.replaceByKey('id', value).array;
+    }
+
+    @Mutation
+    public removeUpload(value: string) {
+        this._uploads = this._uploads.rejectByKey('id', value);
     }
 
     // Actions //////////////////////////////////////////////
