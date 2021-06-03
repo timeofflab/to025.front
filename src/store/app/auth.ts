@@ -90,7 +90,12 @@ class Store extends VuexModule implements IAppAuthModule {
 
             const session = $v.p(res, 'session');
             if ($v.p(session, 'user')) {
-                // M.updateAuth(session);
+                M.updateAuth({
+                    ...M.auth,
+                    ...{
+                        user: $v.p(session, 'user'),
+                    }
+                } as any);
             } else {
                 console.log('[%s] hello() failed auth clean', TAG, session);
                 M.updateAuth(null);

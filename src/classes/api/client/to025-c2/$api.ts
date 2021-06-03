@@ -18,9 +18,9 @@ import { Methods as Methods6 } from './to025/c2/service/auth/_token@string'
 // prettier-ignore
 import { Methods as Methods7 } from './to025/c2/service/hello'
 // prettier-ignore
-import { Methods as Methods8 } from './to025/c2/view/project/_user@string/_project@string'
+import { Methods as Methods8 } from './to025/c2/show/project/_user@string/_project@string'
 // prettier-ignore
-import { Methods as Methods9 } from './to025/c2/view/project/_user@string/_project@string/_token@string'
+import { Methods as Methods9 } from './to025/c2/show/project/_user@string/_project@string/_token@string'
 
 // prettier-ignore
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
@@ -30,7 +30,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH2 = '/to025/c2/presentation/project'
   const PATH3 = '/to025/c2/service/auth'
   const PATH4 = '/to025/c2/service/hello'
-  const PATH5 = '/to025/c2/view/project'
+  const PATH5 = '/to025/c2/show/project'
   const GET = 'GET'
   const POST = 'POST'
   const PUT = 'PUT'
@@ -239,7 +239,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             $path: () => `${prefix}${PATH4}`
           }
         },
-        view: {
+        show: {
           project: {
             _user: (val4: string) => {
               const prefix4 = `${PATH5}/${val4}`

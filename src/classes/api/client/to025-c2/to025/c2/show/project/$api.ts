@@ -9,7 +9,7 @@ import { Methods as Methods1 } from './_user@string/_project@string/_token@strin
 // prettier-ignore
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'https://api.plain.timeoff.today/api/v1' : baseURL).replace(/\/$/, '')
-  const PATH0 = '/to025/c2/view/project'
+  const PATH0 = '/to025/c2/show/project'
   const GET = 'GET'
   const POST = 'POST'
 

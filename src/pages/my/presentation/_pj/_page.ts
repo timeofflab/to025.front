@@ -12,6 +12,7 @@ import {AppCmd} from "~/configs/app-cmd";
 import {uploadModule} from "~/store/upload";
 import {editModule, IEdit} from "~/store/edit";
 import {To025} from "~/classes/domain/to025";
+import {appAuthModule} from "~/store/app/auth";
 
 const TAG = '/my/presentations/project/_pj/_id';
 const state = {
@@ -240,6 +241,16 @@ export default class Page extends AToComponent {
                 return (cid === 'presentationProjectEditItem'
                     && name === 'img');
             });
+    }
+
+    public get auth(): any {
+        return appAuthModule.auth;
+    }
+
+    public get previewUrl(): string {
+        const accKey = $v.p(appAuthModule.auth, 'user.accKey');
+        const pj = this.record.id;
+        return `/show/project/${accKey}/${pj}/0`;
     }
 
     // Init //////////////////////////////////////////////////

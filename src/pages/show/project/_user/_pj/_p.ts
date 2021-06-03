@@ -3,11 +3,12 @@ import {AOfficialComponent} from "~/classes/components/a-official-component";
 import {OfficialAsyncAdataUtil} from "~/classes/utils/official-async-adata-util";
 import {officialModule} from "~/store/official";
 import {appModule} from "~/store/app";
-import {bodyModule} from '@/store/body';
+import {bodyModule} from '~/store/body';
 import {debugModule} from "~/store/debug";
 import {previewModule} from "~/store/preview";
 import {$v} from "~/classes/utils/var-util";
-import {Project} from '@/configs/project';
+import {Project} from '~/configs/project';
+import {pageShowProjectModule} from "~/store/page/show-project";
 
 const TAG = '/';
 const state = {
@@ -98,11 +99,6 @@ export default class P extends AOfficialComponent {
     }
 
 
-    public created() {
-        this.updateItem();
-    }
-
-
     // Computed /////////////////////////////////////////////////////////
     public get isReady(): boolean {
         return this.state.view.ready;
@@ -113,7 +109,7 @@ export default class P extends AOfficialComponent {
     }
 
     public get img_path(): any {
-        return this.project_data.items[previewModule.active].img;
+        return 'http://localhost:19860/' + this.project_data.items[previewModule.active].img;
     }
 
     public get isFullscreen(): any {
@@ -245,7 +241,12 @@ export default class P extends AOfficialComponent {
         const pj = $v.p(ctx, 'route.params.pj');
         const page = Number($v.p(ctx, 'route.params.p', 0));
 
-        const project = pageShowProjectModule.$get();
+        const res = await pageShowProjectModule.$get({
+            user,
+            pj,
+        });
+
+        console.log('project >', {user, pj, res});
 
         return OfficialAsyncAdataUtil.load(ctx, {
             ...state,
@@ -256,10 +257,26 @@ export default class P extends AOfficialComponent {
                     page,
                 },
                 ssr: {
-                    project: {},
+                    project: $v.p(res, 'ex.project'),
                 },
             },
         });
+    }
+
+    public created() {
+        this.initPj();
+        this.updateItem();
+    }
+
+    public async initPj() {
+        console.log('%s.initPj', TAG, this.state.ssr.project);
+
+        if (!this.state.ssr.project) {
+            return;
+        }
+
+        this.project_data = $v.p(this.state, 'ssr.project');
+        this.global = $v.p(this.state, 'ssr.project.global');
     }
 
     public head() {
@@ -274,4 +291,5 @@ export default class P extends AOfficialComponent {
     public async initParam() {
         debugModule.updateCode($v.p(this.$route, 'query.debug'));
     }
+
 }

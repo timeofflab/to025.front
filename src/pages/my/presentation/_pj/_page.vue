@@ -10,8 +10,7 @@ div
             h1 Presentation
             h2 {{ pjGlobal.title }}
             h3
-                a(href="#") preview
-                a(href="#") publish
+                a(:href="previewUrl" target="_blank") preview
 
             EditGlobal
 
