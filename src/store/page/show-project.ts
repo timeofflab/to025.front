@@ -33,7 +33,8 @@ class Store extends VuexModule implements IBodyModule {
     @Action
     public async $get(param: any = {}): Promise<IApiMessage> {
         try {
-            const res = Api.To025c2.show.prje
+            const res = Api.To025c2.show.
+                project
         } catch (e) {
 
         }
