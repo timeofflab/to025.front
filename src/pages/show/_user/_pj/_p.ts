@@ -14,6 +14,17 @@ const state = {
     config: {
         lang: 'pages.index',
     },
+    param: {
+        user: '',
+        pj: '',
+        page: 0,
+    },
+    ssr: {
+        project: {} as any,
+    },
+    view: {
+        ready: false,
+    },
 };
 
 @Component({
@@ -21,12 +32,12 @@ const state = {
 })
 export default class P extends AOfficialComponent {
 
+    public state = state;
 
     public project_data: any = Project;
     public global: any = Project.global;
     public fullscreen_txt: string = 'fullscreen';
 
-    public state: boolean = true;
     public isFirst: boolean = true;
     public isLast: boolean = false;
     public info_hover: boolean = false;
@@ -56,7 +67,7 @@ export default class P extends AOfficialComponent {
         }
 
         // fade out ///////////////////////
-        this.state = false;
+        this.state.view.ready = false;
 
         // action ///////////////////////
 
@@ -65,7 +76,7 @@ export default class P extends AOfficialComponent {
             this.updateItem();
 
             setTimeout(() => {
-                this.state = true;
+                this.state.view.ready = true;
 
             }, 700);
 
@@ -93,6 +104,9 @@ export default class P extends AOfficialComponent {
 
 
     // Computed /////////////////////////////////////////////////////////
+    public get isReady(): boolean {
+        return this.state.view.ready;
+    }
 
     public get active(): any {
         return previewModule.active;
@@ -226,7 +240,26 @@ export default class P extends AOfficialComponent {
 
     // Base //////////////////////////////////////////////////
     public async asyncData(ctx: any) {
-        return OfficialAsyncAdataUtil.load(ctx, state);
+
+        const user = $v.p(ctx, 'route.params.user');
+        const pj = $v.p(ctx, 'route.params.pj');
+        const page = Number($v.p(ctx, 'route.params.p', 0));
+
+        const project = pageShowProjectModule.$get();
+
+        return OfficialAsyncAdataUtil.load(ctx, {
+            ...state,
+            ...{
+                param: {
+                    user,
+                    pj,
+                    page,
+                },
+                ssr: {
+                    project: {},
+                },
+            },
+        });
     }
 
     public head() {
