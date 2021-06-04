@@ -1,5 +1,0 @@
-#!/bin/bash
-
-D_SCRIPT=$(cd $(dirname $0); pwd)
-
-./delete_gae_old.sh to000-200909 default 1
