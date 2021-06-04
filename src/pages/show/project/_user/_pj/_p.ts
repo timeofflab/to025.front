@@ -9,6 +9,7 @@ import {previewModule} from "~/store/preview";
 import {$v} from "~/classes/utils/var-util";
 import {Project} from '~/configs/project';
 import {pageShowProjectModule} from "~/store/page/show-project";
+import {To025} from "~/classes/domain/to025";
 
 const TAG = '/';
 const state = {
@@ -75,7 +76,7 @@ export default class P extends AOfficialComponent {
     }
 
     public get img_path(): any {
-        return 'http://localhost:19860/' + this.project_data.items[previewModule.active].img;
+        return this.img(this.project_data.items[previewModule.active].img);
     }
 
     public get isFullscreen(): any {
@@ -203,7 +204,9 @@ export default class P extends AOfficialComponent {
 
 
     // Methods ////////////////////////////////////////////////
-
+    public img(path: string): string {
+        return 'http://localhost:19860' + To025.File.AccessUtil.path(path);
+    }
 
     // Computed ////////////////////////////////////////////////
 

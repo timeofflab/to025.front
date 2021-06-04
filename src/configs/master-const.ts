@@ -119,6 +119,9 @@ export const MasterConst = {
                 UserAuthToken: 'X-To025-Auth-Token',
                 AdminAuthToken: 'X-To006-Auth-Token',
             },
+            File: {
+                Base: '/f',
+            },
             FilePurpose: {
                 PresentationProjectPageImg: '100',
             },

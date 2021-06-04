@@ -171,6 +171,10 @@ export default class Page extends AToComponent {
         };
     }
 
+    public img(path: string): string {
+        return 'http://localhost:19860' + To025.File.AccessUtil.path(path);
+    }
+
     // Events ///////////////////////////////////////
     public async onClickSave() {
 

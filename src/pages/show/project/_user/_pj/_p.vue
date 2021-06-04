@@ -54,7 +54,7 @@
                     s-img(:src="img_path")
 
     .img-loader-frame
-        s-img(v-for="(item,index) in project_data.items" :key="`img${index}`" :src="`/${item.img}`")
+        s-img(v-for="(item,index) in project_data.items" :key="`img${index}`" :src="img(item.img)")
 
 </template>
 <script lang="ts" src="./_p.ts"></script>

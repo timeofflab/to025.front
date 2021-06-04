@@ -32,7 +32,7 @@ div
 
 
             div(v-if="!!p(pageItem, 'img')")
-                img(:src="`http://localhost:19860/${p(pageItem, 'img')}`" width="100")
+                s-img(:src="img(p(pageItem, 'img'))" width="100")
 
             EditItem
 
