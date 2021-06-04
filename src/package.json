@@ -17,7 +17,7 @@
         "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
         "lint": "yarn lint:js",
         "test": "jest",
-        "deploy": "/bin/bash ./deploy.sh",
+        "deploy": "node ../bin/deploy.version.js",
         "generate": "NODE_ENV=production nuxt generate -c nuxt.config.js",
         "-- MAIL ---------------------------------------------------------": "",
         "start:m": "nuxt-ts serve -c nuxt.mail.config.js",
