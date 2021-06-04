@@ -1,4 +1,4 @@
-fff<template lang="pug">
+<template lang="pug">
 .container(:class="[{'-web': isWeb}, {'-ui': isUi}]" :style="[cvTxt, cvBg]")
     .ui-frame
         .info(:class="{'-hover': info_hover}")

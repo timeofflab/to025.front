@@ -6,13 +6,11 @@ const TAG = 'FileUploadUtil';
 
 export class FileUploadUtil {
 
-    public static purpose: string = 'presentation/page';
-
     public static isUpload(page: string): boolean {
-        return !!appFileModule.files.findByKey('purpose', self.purpose + page);
+        return !!appFileModule.files.findByKey('purpose', page);
     }
 
-    public static async upload(uploadId: string, targetId: string, purpose: string) {
+    public static async upload(uploadId: string, targetId: string, purpose: string, option: any = {}) {
 
         const upload = uploadModule.uploads.findByKey('id', uploadId);
         console.log('%s.upload｜', TAG, {
@@ -28,16 +26,29 @@ export class FileUploadUtil {
             upfile: upload.files[0],
         });
 
+
+        const ext = (upload.files[0] as File).name.split('.').reverse()[0].toLocaleLowerCase();
+
         // ファイル登録を予約｜トークン発行
         const file = await appFileModule.$store({
             targetId,
             purpose,
-
+            option: {
+                ...option,
+                ...{
+                    ext,
+                },
+            }
         });
 
         console.log('%s.upload｜r3/file', TAG, {
             file,
         });
+
+        if (!file) {
+            console.error('file attach request error');
+            return;
+        }
 
         // トークンを用いてファイルを登録
         await appFileModule.$attach({

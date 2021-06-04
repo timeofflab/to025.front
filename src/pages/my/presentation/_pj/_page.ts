@@ -13,6 +13,7 @@ import {uploadModule} from "~/store/upload";
 import {editModule, IEdit} from "~/store/edit";
 import {To025} from "~/classes/domain/to025";
 import {appAuthModule} from "~/store/app/auth";
+import {MasterConst} from "~/configs/master-const";
 
 const TAG = '/my/presentations/project/_pj/_id';
 const state = {
@@ -86,11 +87,9 @@ export default class Page extends AToComponent {
         await To025.File.FileUploadUtil.upload(
             'presentationEditItemImg',
             this.state.param.pj,
-            ['presentation',
-                'project',
-                'page',
-                this.state.param.page,
-                'img'].join('/'));
+            MasterConst.To025.App.FilePurpose.PresentationProjectPageImg, {
+                page: this.state.param.page,
+            });
     }
 
     public async save() {

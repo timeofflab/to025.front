@@ -50,25 +50,7 @@ export default class P extends AOfficialComponent {
 
     @Watch('active')
     public watchActive(value: any) {
-
-        // fade out ///////////////////////
-        this.state.view.ready = false;
-
-        // action ///////////////////////
-
-        setTimeout(() => {
-
-            this.updateItem();
-
-            setTimeout(() => {
-                this.state.view.ready = true;
-
-            }, 700);
-
-        }, 640);
-
-        //fade in ///////////////////////
-
+        this.moveActive();
     }
 
     @Watch('isFullscreen')
@@ -113,6 +95,25 @@ export default class P extends AOfficialComponent {
 
 
     // Methods /////////////////////////////////////////////////////////
+    public moveActive() {
+        // fade out ///////////////////////
+        this.state.view.ready = false;
+
+        // action ///////////////////////
+
+        setTimeout(() => {
+
+            this.updateItem();
+
+            setTimeout(() => {
+                this.state.view.ready = true;
+
+            }, 700);
+
+        }, 640);
+
+        //fade in ///////////////////////
+    }
 
     public updateItem() {
 
@@ -183,7 +184,7 @@ export default class P extends AOfficialComponent {
             previewModule.updateActive(value);
         }
 //         console.log(`Active: ${previewModule.active} isFirst: ${this.isFirst} isLast: ${this.isLast}`);
-        this.$router.push('./' + previewModule.active);
+        // this.$router.push('./' + previewModule.active);
     }
 
     public onFullscreen() {
@@ -234,7 +235,6 @@ export default class P extends AOfficialComponent {
         return this.index >= (this.items.length - 1);
     }
 
-
     // Base //////////////////////////////////////////////////
     public async asyncData(ctx: any) {
 
@@ -281,7 +281,7 @@ export default class P extends AOfficialComponent {
     }
 
     public head() {
-        console.log('head > ', this.state.ssr, $v.p(this.state.ssr, 'project.global.title'));
+        // console.log('head > ', this.state.ssr, $v.p(this.state.ssr, 'project.global.title'));
         return {
             title: $v.p(this.state.ssr, 'project.global.title'),
         };
@@ -291,6 +291,8 @@ export default class P extends AOfficialComponent {
         await this.initParam();
         officialModule.updateIsNavScrollSwitch(true);
         officialModule.updateUseNavScrollSwitch(true);
+        this.moveActive();
+
     }
 
     public async initParam() {

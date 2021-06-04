@@ -62,6 +62,7 @@ class Store extends VuexModule implements IAppFileModule {
     public async $store(param: {
         targetId: string,
         purpose: any,
+        option: any,
     }): Promise<any> {
         try {
             const res = await Api.To025c2
@@ -69,7 +70,8 @@ class Store extends VuexModule implements IAppFileModule {
                 .$post({
                     body: {
                         targetId: $v.p(param, 'targetId', {}),
-                        purpose: $v.p(param, 'purpose', {})
+                        purpose: $v.p(param, 'purpose', {}),
+                        option: $v.p(param, 'option', {})
                     },
                 });
 
