@@ -6,7 +6,6 @@ ARRAY=("main" "stage")
 echo "VERCEL_GIT_COMMIT_REF = ${VERCEL_GIT_COMMIT_REF}"
 for IS in ${ARRAY[@]}; do
     if [ "${VERCEL_GIT_COMMIT_REF}" = "${IS}" ]; then
-        rm -rf ./static/common/img
         exit 1
     fi
 done
