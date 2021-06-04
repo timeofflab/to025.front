@@ -31,7 +31,7 @@ div
                     a(href="#" @click.stop="onClickAddItem") +
 
 
-            div(v-if="!!p(pageItem, 'img')")
+            div.img-preview(v-if="!!p(pageItem, 'img')")
                 s-img(:src="img(p(pageItem, 'img'))" width="100")
 
             EditItem
@@ -42,6 +42,9 @@ div
 <script lang="ts" src="./_page.ts"/>
 <style lang="sass">
 
+.img-preview
+    img
+        width: 80px
 .items
     .-active-mark
         display: none

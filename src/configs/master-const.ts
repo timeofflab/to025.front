@@ -1,5 +1,4 @@
-import {To000Version} from "~/configs/version";
-import {EnvUtil} from "~/classes/utils/env-util";
+import To000Version from "~/configs/version.json";
 
 export enum OfficialBlogArticleType {
     Article = 'article',

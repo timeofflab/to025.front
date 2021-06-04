@@ -1,3 +1,3 @@
-import {To000Version as V} from '@/configs/version.ts';
+import V from '@/configs/version.json';
 
 console.log('version %s / %s', V.Version, V.Build);
