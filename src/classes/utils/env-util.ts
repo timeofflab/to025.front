@@ -127,7 +127,7 @@ export class EnvUtil {
     }
 
     public static get TO025_UP_FILE_BASE(): string {
-        return M.val('TO025_API_UP_FILE_BASE') as string;
+        return M.val('TO025_UP_FILE_BASE') as string;
     }
 
 

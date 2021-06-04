@@ -205,7 +205,7 @@ export default class P extends AOfficialComponent {
 
     // Methods ////////////////////////////////////////////////
     public img(path: string): string {
-        return 'http://localhost:19860' + To025.File.AccessUtil.path(path);
+        return To025.File.AccessUtil.path(path);
     }
 
     // Computed ////////////////////////////////////////////////
