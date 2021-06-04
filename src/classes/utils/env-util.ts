@@ -34,6 +34,7 @@ export class EnvUtil {
             INSTAGRAM_API_BASE: process.env.INSTAGRAM_API_BASE || '',
 
             TO025_API_BASE: process.env.TO025_API_BASE || '',
+            TO025_UP_FILE_BASE: process.env.TO025_UP_FILE_BASE || '',
         };
 
         M._inited = true;
@@ -123,6 +124,10 @@ export class EnvUtil {
 
     public static get TO025_API_BASE(): string {
         return M.val('TO025_API_BASE') as string;
+    }
+
+    public static get TO025_UP_FILE_BASE(): string {
+        return M.val('TO025_API_UP_FILE_BASE') as string;
     }
 
 

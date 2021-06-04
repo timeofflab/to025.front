@@ -58,7 +58,7 @@ export default {
     */
     head: {
         title: '',
-        titleTemplate: '%s',
+        titleTemplate: '%s｜Show Plain',
         meta: [
             {charset: 'utf-8'},
             {httpEquiv: 'content-language', content: 'ja'},
@@ -249,6 +249,7 @@ export default {
         INSTAGRAM_API_BASE: $.INSTAGRAM_API_BASE || '',
 
         TO025_API_BASE: $.TO025_API_BASE || '',
+        TO025_UP_FILE_BASE: $.TO025_UP_FILE_BASE || '',
     },
     basic: {
         name: $.AUTH_ID,
