@@ -14,6 +14,7 @@ import {editModule, IEdit} from "~/store/edit";
 import {To025} from "~/classes/domain/to025";
 import {appAuthModule} from "~/store/app/auth";
 import {MasterConst} from "~/configs/master-const";
+import Draggable from 'vuedraggable';
 
 const TAG = '/my/presentations/project/_pj/_id';
 const state = {
@@ -26,11 +27,14 @@ const state = {
     },
     view: {
         ready: false,
+        sort: false,
+        migrated: false,
     },
 }
 
 @Component({
     components: {
+        Draggable,
         EditGlobal,
         EditItem,
     }
@@ -40,6 +44,13 @@ export default class Page extends AToComponent {
      *
      */
     public state: any = state;
+    public records: any = [];
+
+
+    @Watch('view.state.sort')
+    public watchViewStateSort(now: boolean) {
+        this.records = this.pjItems.from();
+    }
 
     @Watch('fileCmd')
     public watchFileCmd(now: any) {
@@ -58,10 +69,23 @@ export default class Page extends AToComponent {
     // Method ///////////////////////////////////////
     public async load(force: boolean = false) {
         if (force || this.records.length === 0) {
-            await appProjectModule.$get()
+            await appProjectModule.$get();
         }
+
         await this.selectRecord();
         await this.selectItem();
+
+        this.records = this.pjItems.from();
+
+        console.log('%s.load｜', TAG, {
+            pjItems: this.pjItems,
+            records: this.records
+        });
+
+        if (!this.state.view.migrated) {
+            await this.migrateItem();
+        }
+
         this.state.view.ready = true;
     }
 
@@ -70,13 +94,44 @@ export default class Page extends AToComponent {
             ['ex.item.global', $v.tap(editModule.edits.findByKey('id', 'presentationProjectEditGlobal'), (edit: IEdit) => {
                 return $v.p(edit, 'input');
             })],
-            ['ex.item.items', (this.pjItems || []).map((_: any, idx: number) => {
+            ['ex.item.items', this.records.map((_: any, idx: number) => {
                 return (idx === Number(this.state.param.page)) ? (() => {
-                    return $v.p(editModule.edits.findByKey('id', 'presentationProjectEditItem'), 'input')
+                    const ipt = $v.p(editModule.edits.findByKey('id', 'presentationProjectEditItem'), 'input');
+                    return {
+                        ..._,
+                        ...ipt,
+                        ...{
+                            id: $v.p(_, 'id', $v.rndchars(5)),
+                        },
+                    };
                 })() : _;
             })],
         ]));
         console.log('%s.storeRecord｜stored', TAG, $v.p(this.record, 'ex.item'));
+    }
+
+    public async migrateItem() {
+
+        let changed = 0;
+        this.state.view.migrated = true;
+        this.records = this.records.map((_: any) => {
+            const id = $v.p(_, 'id');
+
+            console.log('item > ', _);
+            if (!id) {
+                changed++;
+                return {
+                    ..._,
+                    ...{id: $v.rndchars(5)},
+                };
+            } else {
+                return _;
+            }
+        });
+        if (changed > 0) {
+            console.log('%s｜detect migration > ', TAG, this.records);
+            await this.save();
+        }
     }
 
     public hasUpload(): boolean {
@@ -88,13 +143,14 @@ export default class Page extends AToComponent {
             'presentationEditItemImg',
             this.state.param.pj,
             MasterConst.To025.App.FilePurpose.PresentationProjectPageImg, {
+                id: $v.p(this.record, 'id'),
                 page: this.state.param.page,
             });
     }
 
     public async save() {
         await this.storeRecord();
-        await appProjectModule.$put({
+        await pageMyPresentationProjectModule.$put({
             record: this.record,
         });
 
@@ -137,6 +193,7 @@ export default class Page extends AToComponent {
         console.log('pjItems', pjItems);
         pageMyPresentationProjectModule.updateRecord(
             $v.put(this.record, 'ex.item.items', (this.pjItems || []).from({
+                id: $v.rndchars(5),
                 img: '',
                 bg: '#f4f4f4',
                 shadow: false,
@@ -201,12 +258,23 @@ export default class Page extends AToComponent {
         await this.removeItem(idx);
     }
 
+    public async onClickSort() {
+        this.state.view.sort = !this.state.view.sort;
+    }
+
+    public async onClickCommitSort(e: any) {
+        pageMyPresentationProjectModule.updateRecord(
+            $v.put(this.record, 'ex.item.items', this.records.from()));
+        await this.save();
+        this.state.view.sort = false;
+    }
+
     // Computed /////////////////////////////////////
     public get isReady(): boolean {
         return this.state.view.ready;
     }
 
-    public get records(): IAppProject[] {
+    public get projects(): IAppProject[] {
         return appProjectModule.records;
     }
 
@@ -271,6 +339,7 @@ export default class Page extends AToComponent {
     public async mounted() {
         await this.initParam();
         await this.load();
+
     }
 
     public async initParam() {

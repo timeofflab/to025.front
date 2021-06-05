@@ -98,6 +98,46 @@ class Store extends VuexModule implements IBodyModule {
     }
 
     @Action
+    public async $put(param: any = {
+        record: null as any,
+    }) {
+        try {
+
+            const id = $v.p(param, 'record.id');
+            if (!id) {
+                console.log('%s.$put｜id blank', TAG, id);
+                return;
+            }
+
+            console.log('%s｜put project', TAG, param);
+
+            const res = await Api.To025c2
+                .presentation
+                .project
+                ._id(id)
+                .$put({
+                    body: {
+                        item: $v.p(param, 'record.ex.item'),
+                    },
+                });
+
+            console.log('[%s] response is ', URL, res);
+
+            return true;
+
+        } catch (e) {
+
+            const err = $v.p(e, 'response.data.errors');
+            errorModule.updateError(err || [{
+                name: 'loginId',
+                messages: ['invalid Project'],
+            }]);
+
+            return e;
+        }
+    }
+
+    @Action
     public async $delete(id: string): Promise<IApiMessage> {
         try {
             const res = await Api.To025c2

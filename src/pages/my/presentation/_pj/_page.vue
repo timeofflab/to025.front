@@ -20,24 +20,40 @@ div
             hr
             h2 Pages
             h3 List
-                a(href="#") sort
-            ul.items
-                li(v-for="(r, idx) in pjItems"
-                    :class="classPageItem(idx)")
-                    span.-active-mark ＞
-                    router-link(:to="linkPage(idx)")  [{{idx}}] {{ p(r, 'label', '---') }}
-                    a(href="#" @click.stop="onClickRemoveItem(idx)") X
-                li
-                    a(href="#" @click.stop="onClickAddItem") +
 
+            div(v-if="records.length === 0")
+                h4 no items
+            div(v-else)
+                a.switch(href="#"
+                    :class="{off: !state.view.sort}"
+                    @click.stop="onClickSort")
+                    span.-on cancel
+                    span.-off sort
 
-            div.img-preview(v-if="!!p(pageItem, 'img')")
-                s-img(:src="img(p(pageItem, 'img'))" width="100")
+                ul.items(:class="{['-sorting']: state.view.sort}")
+                    Draggable(v-model="records"
+                        handle=".-sort-handle"
+                        draggable=".-item"
+                        :disabled="!state.view.sort")
+                        li.-item(v-for="(r, idx) in records"
+                            :class="classPageItem(idx)")
+                            span.-active-mark ＞
+                            span.-sort-handle ○
 
-            EditItem
+                            router-link(:to="linkPage(idx)")  [{{idx}}] [{{r.id}}] {{ p(r, 'label', '---') }}
+                            a(href="#" @click.stop="onClickRemoveItem(idx)") X
+                    li.-commit-sort
+                        a(href="#" @click.stop="onClickCommitSort") Sort OK
+                    li.-add-item
+                        a(href="#" @click.stop="onClickAddItem") +
 
-            .form-group
-                a.btn.btn-primary(href="#" @click.stop="onClickSave") save
+                div.img-preview(v-if="!!p(pageItem, 'img')")
+                    s-img(:src="img(p(pageItem, 'img'))" width="100")
+
+                EditItem
+
+                .form-group
+                    a.btn.btn-primary(href="#" @click.stop="onClickSave") save
 </template>
 <script lang="ts" src="./_page.ts"/>
 <style lang="sass">
@@ -45,6 +61,7 @@ div
 .img-preview
     img
         width: 80px
+
 .items
     .-active-mark
         display: none
@@ -53,5 +70,33 @@ div
         .-active-mark
             display: inline-block
 
+    .-commit-sort
+        display: none
+
+    &.-sorting
+        .-add-item
+            display: none
+
+        .-active-mark
+            display: none
+
+        .-sort-handle,
+        .-commit-sort
+            display: inline-block
+
+
+.-sort-handle
+    display: none
+
+
+.-off
+    display: none
+
+.off
+    .-on
+        display: none
+
+    .-off
+        display: inline-block
 
 </style>
