@@ -4,10 +4,10 @@ const prod = (process.env.NODE_ENV === 'production');
 const httpPort = 3000;
 
 const websiteInfo = {
-    url: 'https://test.com/',
+    url: 'https://show.plain.timeoff.today/',
     name: '',
     description: '',
-    ogImgPath: 'https://test.com/common/img/sns/og.jpg',
+    ogImgPath: 'https://media.show.plain.timeoff.today/common/img/sns/og.jpg',
     fbAppId: '',
     twitterUserId: '@test',
 }

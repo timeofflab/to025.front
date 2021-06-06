@@ -8,7 +8,7 @@ div
             h1 Record Error
         div(v-else)
             h1 Presentation
-            h2 {{ pjGlobal.title }}
+            h2 {{ p(pjGlobal, 'title', '???') }}
             h3
                 a(:href="previewUrl" target="_blank") preview
 
