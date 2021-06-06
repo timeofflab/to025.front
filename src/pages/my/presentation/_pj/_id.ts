@@ -5,7 +5,7 @@ import {$v} from "~/classes/utils/var-util";
 import {appProjectModule, IAppProject} from "~/store/app/project";
 import EditGlobal from "~/components/pages/my/presentation/project/edit/EditGlobal";
 import EditItem from "~/components/pages/my/presentation/project/edit/EditItem";
-import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-project";
+import {pageMyPresentationProjectModule as PMPPM} from "~/store/page/my-presentation-project";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
 import {cmdModule, ICmd} from "~/store/cmd";
 import {AppCmd} from "~/configs/app-cmd";
@@ -90,7 +90,7 @@ export default class Page extends AToComponent {
     }
 
     public async storeRecord() {
-        pageMyPresentationProjectModule.updateRecord($v.puts(this.record, [
+        PMPPM.updateRecord($v.puts(this.record, [
             ['ex.item.global', $v.tap(editModule.edits.findByKey('id', 'presentationProjectEditGlobal'), (edit: IEdit) => {
                 return $v.p(edit, 'input');
             })],
@@ -150,7 +150,7 @@ export default class Page extends AToComponent {
 
     public async save() {
         await this.storeRecord();
-        await pageMyPresentationProjectModule.$put({
+        await PMPPM.$put({
             record: this.record,
         });
 
@@ -167,14 +167,14 @@ export default class Page extends AToComponent {
     }
 
     public async selectRecord() {
-        pageMyPresentationProjectModule.updateProject(this.state.param.pj);
-        pageMyPresentationProjectModule.updateRecord(
+        PMPPM.updateProject(this.state.param.pj);
+        PMPPM.updateRecord(
             appProjectModule.records.findByKey('id', $v.p(this.state, 'param.pj', '@')));
     }
 
     public async selectItem() {
-        pageMyPresentationProjectModule.updatePage(this.state.param.page);
-        pageMyPresentationProjectModule.updatePageItem(
+        PMPPM.updatePage(this.state.param.page);
+        PMPPM.updatePageItem(
             $v.p(this.pjItems || [], this.state.param.page));
     }
 
@@ -191,7 +191,7 @@ export default class Page extends AToComponent {
         const pjItems = this.pjItems || [];
 
         console.log('pjItems', pjItems);
-        pageMyPresentationProjectModule.updateRecord(
+        PMPPM.updateRecord(
             $v.put(this.record, 'ex.item.items', (this.pjItems || []).from({
                 id: $v.rndchars(5),
                 img: '',
@@ -207,12 +207,12 @@ export default class Page extends AToComponent {
 
     public async removeItem(idx: number) {
         try {
-            pageMyPresentationProjectModule.updateRecord(
+            PMPPM.updateRecord(
                 $v.put(this.record, 'ex.item.items', this.pjItems.filter((_: any, _i: number) => {
                     return (idx !== _i);
                 })));
         } catch (e) {
-            pageMyPresentationProjectModule.updateRecord(
+            PMPPM.updateRecord(
                 $v.put(this.record, 'ex.item.items', []));
         }
         await this.save();
@@ -234,11 +234,6 @@ export default class Page extends AToComponent {
 
     // Events ///////////////////////////////////////
     public async onClickSave() {
-
-        if (!confirm('Save')) {
-            return;
-        }
-
         await this.save();
     }
 
@@ -263,8 +258,10 @@ export default class Page extends AToComponent {
     }
 
     public async onClickCommitSort(e: any) {
-        pageMyPresentationProjectModule.updateRecord(
+        PMPPM.updateRecord(
             $v.put(this.record, 'ex.item.items', this.records.from()));
+
+        console.log('%s｜onClickCommitSort', TAG, this.records);
         await this.save();
         this.state.view.sort = false;
     }
@@ -287,11 +284,11 @@ export default class Page extends AToComponent {
     }
 
     public get record(): any {
-        return pageMyPresentationProjectModule.record;
+        return PMPPM.record;
     }
 
     public get pageItem(): any {
-        return pageMyPresentationProjectModule.pageItem;
+        return PMPPM.pageItem;
     }
 
     public get cmds(): ICmd[] | null {
