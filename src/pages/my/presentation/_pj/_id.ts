@@ -49,7 +49,7 @@ export default class Id extends AToComponent {
 
     @Watch('view.state.sort')
     public watchViewStateSort(now: boolean) {
-        this.records = this.pjItems.from();
+        this.state.records = this.pjItems.from();
     }
 
     @Watch('fileCmd')
