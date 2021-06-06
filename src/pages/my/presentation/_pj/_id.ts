@@ -23,7 +23,7 @@ const state = {
     },
     param: {
         pj: '',
-        page: '0',
+        id: '0',
     },
     view: {
         ready: false,
@@ -39,7 +39,7 @@ const state = {
         EditItem,
     }
 })
-export default class Page extends AToComponent {
+export default class Id extends AToComponent {
     /**
      *
      */
@@ -71,7 +71,7 @@ export default class Page extends AToComponent {
         if (force || this.records.length === 0) {
             await appProjectModule.$get();
         }
-
+        await this.initParamId();
         await this.selectRecord();
         await this.selectItem();
 
@@ -95,7 +95,7 @@ export default class Page extends AToComponent {
                 return $v.p(edit, 'input');
             })],
             ['ex.item.items', this.records.map((_: any, idx: number) => {
-                return (idx === Number(this.state.param.page)) ? (() => {
+                return ($v.p(_, 'id') === this.param.id) ? (() => {
                     const ipt = $v.p(editModule.edits.findByKey('id', 'presentationProjectEditItem'), 'input');
                     return {
                         ..._,
@@ -141,10 +141,10 @@ export default class Page extends AToComponent {
     public async saveFile() {
         await To025.File.FileUploadUtil.upload(
             'presentationEditItemImg',
-            this.state.param.pj,
+            this.param.pj,
             MasterConst.To025.App.FilePurpose.PresentationProjectPageImg, {
                 id: $v.p(this.record, 'id'),
-                page: this.state.param.page,
+                page: this.param.id,
             });
     }
 
@@ -167,23 +167,23 @@ export default class Page extends AToComponent {
     }
 
     public async selectRecord() {
-        PMPPM.updateProject(this.state.param.pj);
+        PMPPM.updateProject(this.param.pj);
         PMPPM.updateRecord(
             appProjectModule.records.findByKey('id', $v.p(this.state, 'param.pj', '@')));
     }
 
     public async selectItem() {
-        PMPPM.updatePage(this.state.param.page);
+        PMPPM.updatePage(this.pjItems.findIndexByKey('id', this.param.id));
         PMPPM.updatePageItem(
-            $v.p(this.pjItems || [], this.state.param.page));
+            {...this.selectedItem});
     }
 
     public getRecordLink(item: any): string {
         return '/my/presentation/project/' + $v.p(item, 'id');
     }
 
-    public isCurrentPageItem(idx: number) {
-        return Number(this.state.param.page) === idx;
+    public isCurrentPageItem(idx: string) {
+        return this.param.id === idx;
     }
 
     public async addItem() {
@@ -218,13 +218,13 @@ export default class Page extends AToComponent {
         await this.save();
     }
 
-    public linkPage(idx: number) {
-        return ['', 'my', 'presentation', this.state.param.pj, idx].join('/');
+    public linkPage(r: any) {
+        return ['', 'my', 'presentation', this.param.pj, $v.p(r, 'id')].join('/');
     }
 
-    public classPageItem(idx: number): any {
+    public classPageItem(record: any): any {
         return {
-            ['-active']: this.isCurrentPageItem(idx),
+            ['-active']: this.isCurrentPageItem($v.p(record, 'id')),
         };
     }
 
@@ -267,12 +267,20 @@ export default class Page extends AToComponent {
     }
 
     // Computed /////////////////////////////////////
+    public get param(): any {
+        return this.state.param;
+    }
+
     public get isReady(): boolean {
         return this.state.view.ready;
     }
 
     public get projects(): IAppProject[] {
         return appProjectModule.records;
+    }
+
+    public get selectedItem(): IAppProject | null {
+        return this.pjItems.findByKey('id', this.param.id);
     }
 
     public get pjGlobal(): any {
@@ -327,6 +335,7 @@ export default class Page extends AToComponent {
      * @param ctx
      */
     public async asyncData(ctx: any) {
+        console.log('%s.asyncData', TAG);
         return OfficialAsyncAdataUtil.load(ctx, state);
     }
 
@@ -342,7 +351,22 @@ export default class Page extends AToComponent {
     public async initParam() {
         this.state.param = {
             pj: $v.p(this.$route, 'params.pj'),
-            page: $v.p(this.$route, 'params.page', '0'),
+            id: $v.p(this.$route, 'params.id', ''),
         };
+    }
+
+    public async initParamId() {
+
+        if (this.param.id == $v.p(this.selectedItem, 'id')) {
+            return;
+        }
+
+        this.state.param.id = $v.p(this.pjItems[0], 'id');
+
+        console.log('%s.initParamId｜id=', TAG, this.param.id, this.selectedItem);
+
+        // if (!!this.param.id) {
+        //     await this.$router.push(`/my/resentatiosn/${this.record.id}/${this.param.id}`);
+        // }
     }
 }

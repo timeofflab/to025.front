@@ -15,7 +15,7 @@ export interface IBodyClickEvent {
 export interface IBodyModule {
     project: string;
     record: any;
-    page: string;
+    page: number;
     pageItem: any;
 }
 
@@ -24,7 +24,7 @@ class Store extends VuexModule implements IBodyModule {
 
     private _project: string = '';
     private _record: any = null;
-    private _page: string = '';
+    private _page: number = 0;
     private _pageItem: any = null;
 
     // Computed ////////////////////////////////////////
@@ -36,7 +36,7 @@ class Store extends VuexModule implements IBodyModule {
         return this._record;
     }
 
-    public get page(): string {
+    public get page(): number {
         return this._page;
     }
 
@@ -56,7 +56,7 @@ class Store extends VuexModule implements IBodyModule {
     }
 
     @Mutation
-    public updatePage(value: string) {
+    public updatePage(value: number) {
         this._page = value;
     }
 

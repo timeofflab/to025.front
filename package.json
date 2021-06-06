@@ -1,6 +1,7 @@
 {
     "name": "g25",
     "scripts": {
-        "f": "cd src && yarn dev"
+        "f": "cd src && yarn dev",
+        "cf": "cd src && yarn clean && yarn dev"
     }
 }

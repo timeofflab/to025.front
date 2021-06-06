@@ -1,11 +1,11 @@
 import {Vue, Component, Prop, Watch} from 'nuxt-property-decorator';
 import {AOfficialComponent} from "~/classes/components/a-official-component";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
-import {pageMyPresentationProjectModule} from "~/store/page/my-presentation-project";
+import {
+    pageMyPresentationProjectModule as PMPPM,
+} from "~/store/page/my-presentation-project";
 import {appProjectModule} from "~/store/app/project";
 import {IEditSchema} from "~/store/edit";
-import {cmdModule} from "~/store/cmd";
-import {AppCmd} from "~/configs/app-cmd";
 import {uploadModule} from "~/store/upload";
 import {$v} from "~/classes/utils/var-util";
 
@@ -79,7 +79,7 @@ export default class EditItem extends AOfficialComponent {
     }
 
     public get currentProject(): string {
-        return pageMyPresentationProjectModule.project;
+        return PMPPM.project;
     }
 
     public get currentRecord(): any {
@@ -87,15 +87,19 @@ export default class EditItem extends AOfficialComponent {
     }
 
     public get pageItem(): any {
-        return pageMyPresentationProjectModule.pageItem;
-    }
-
-    public get page(): number {
-        return Number(pageMyPresentationProjectModule.page);
+        return PMPPM.pageItem;
     }
 
     public get pageL(): number {
-        return this.page + 1;
+        return PMPPM.page;
+    }
+
+    public get record(): any {
+        return PMPPM.record;
+    }
+
+    public get pjItems(): any {
+        return $v.p(this.record, 'ex.item.items', []);
     }
 
     public get uploads(): any[] {

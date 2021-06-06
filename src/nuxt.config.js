@@ -159,7 +159,7 @@ export default {
         '~plugins/vue-awesome-swiper',
         '~plugins/official/prism',
         {src: '~plugins/client', ssr: false},
-        {src: '~plugins/client/route', ssr: false},
+        {src: '~plugins/clients/route', ssr: false},
         {src: '~plugins/resize-directive', ssr: false},
         {src: '~plugins/vue2-touch-events', ssr: false},
 

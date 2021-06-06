@@ -36,11 +36,11 @@ div
                         draggable=".-item"
                         :disabled="!state.view.sort")
                         li.-item(v-for="(r, idx) in records"
-                            :class="classPageItem(idx)")
+                            :class="classPageItem(r)")
                             span.-active-mark ＞
                             span.-sort-handle ○
 
-                            router-link(:to="linkPage(idx)")  [{{idx}}] [{{r.id}}] {{ p(r, 'label', '---') }}
+                            router-link(:to="linkPage(r)")  [{{idx}}] [{{r.id}}] {{ p(r, 'label', '---') }}
                             a(href="#" @click.stop="onClickRemoveItem(idx)") X
                     li.-commit-sort
                         a(href="#" @click.stop="onClickCommitSort") Sort OK
@@ -49,13 +49,14 @@ div
 
                 div.img-preview(v-if="!!p(pageItem, 'img')")
                     s-img(:src="img(p(pageItem, 'img'))" width="100")
+                    div IMG: {{img(p(pageItem, 'img'))}}
 
                 EditItem
 
                 .form-group
                     a.btn.btn-primary(href="#" @click.stop="onClickSave") save
 </template>
-<script lang="ts" src="./_page.ts"/>
+<script lang="ts" src="./_id.ts"/>
 <style lang="sass">
 
 .img-preview
