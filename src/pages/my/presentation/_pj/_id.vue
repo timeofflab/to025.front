@@ -31,7 +31,7 @@ div
                     span.-off sort
 
                 ul.items(:class="{['-sorting']: state.view.sort}")
-                    Draggable(v-model="records"
+                    Draggable(v-model="state.records"
                         handle=".-sort-handle"
                         draggable=".-item"
                         :disabled="!state.view.sort")
