@@ -30,6 +30,7 @@ const state = {
         sort: false,
         migrated: false,
     },
+    records: [] as any[],
 }
 
 @Component({
@@ -44,7 +45,6 @@ export default class Id extends AToComponent {
      *
      */
     public state: any = state;
-    public records: any = [];
 
 
     @Watch('view.state.sort')
@@ -75,7 +75,7 @@ export default class Id extends AToComponent {
         await this.selectRecord();
         await this.selectItem();
 
-        this.records = this.pjItems.from();
+        this.state.records = this.pjItems.from();
 
         console.log('%s.load｜', TAG, {
             pjItems: this.pjItems,
@@ -114,7 +114,7 @@ export default class Id extends AToComponent {
 
         let changed = 0;
         this.state.view.migrated = true;
-        this.records = this.records.map((_: any) => {
+        this.state.records = this.records.map((_: any) => {
             const id = $v.p(_, 'id');
 
             console.log('item > ', _);
@@ -150,6 +150,7 @@ export default class Id extends AToComponent {
 
     public async save() {
         await this.storeRecord();
+
         await PMPPM.$put({
             record: this.record,
         });
@@ -189,20 +190,21 @@ export default class Id extends AToComponent {
     public async addItem() {
 
         const pjItems = this.pjItems || [];
+        const newItem = {
+            id: $v.rndchars(5),
+            img: '',
+            bg: '#f4f4f4',
+            shadow: false,
+            web: false,
+            scroll: false,
+            label: 'New Page',
+        };
 
-        console.log('pjItems', pjItems);
-        PMPPM.updateRecord(
-            $v.put(this.record, 'ex.item.items', (this.pjItems || []).from({
-                id: $v.rndchars(5),
-                img: '',
-                bg: '#f4f4f4',
-                shadow: false,
-                web: false,
-                scroll: false,
-                label: 'New Page',
-            })));
+        console.log('%s.addItem｜base items', TAG, pjItems);
+
+        this.state.records = this.records.from(newItem);
         await this.save();
-        await this.$router.push(this.linkPage(this.pjItems.length - 1));
+        await this.$router.push(this.linkPage(newItem));
     }
 
     public async removeItem(idx: number) {
@@ -293,6 +295,10 @@ export default class Id extends AToComponent {
 
     public get record(): any {
         return PMPPM.record;
+    }
+
+    public get records(): any[] {
+        return this.state.records;
     }
 
     public get pageItem(): any {

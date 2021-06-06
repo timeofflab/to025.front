@@ -9,7 +9,7 @@ export class AccessUtil {
         const rpath = ((MasterConst.To025.App.File.Base + '/' + path)
             .replace(/\/\/+/, '/'));
 
-        console.log('%s.path｜', TAG, {base, rpath});
+        // console.log('%s.path｜', TAG, {base, rpath});
         return (base + rpath).replace(/([^:])\/\/+/, '$1/');
     }
 }

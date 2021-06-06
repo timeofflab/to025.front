@@ -56,6 +56,9 @@ export class FileUploadUtil {
             token: $v.p(file, 'ex.upload.token'),
             file: upload.files[0],
         });
+
+        // アップロードをRemove
+        await uploadModule.removeUpload(uploadId);
     }
 }
 
