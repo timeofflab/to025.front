@@ -102,6 +102,7 @@ export default class Id extends AToComponent {
                         ...ipt,
                         ...{
                             id: $v.p(_, 'id', $v.rndchars(5)),
+                            img: $v.p(_, 'img', ''),
                         },
                     };
                 })() : _;

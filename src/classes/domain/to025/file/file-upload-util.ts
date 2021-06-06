@@ -22,12 +22,19 @@ export class FileUploadUtil {
             return;
         }
 
+        const upfile = upload.files[0] as File | null;
         console.log('%s.upload｜r2/upload', TAG, {
-            upfile: upload.files[0],
+            upfile,
         });
 
+        if (!upfile) {
+            console.log('%s.upload｜upfile is null');
+            return;
+        }
 
-        const ext = (upload.files[0] as File).name.split('.').reverse()[0].toLocaleLowerCase();
+        const ext = (upload.files[0] as File).name
+            .split('.')
+            .reverse()[0].toLocaleLowerCase();
 
         // ファイル登録を予約｜トークン発行
         const file = await appFileModule.$store({
