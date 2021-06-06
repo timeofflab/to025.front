@@ -10,6 +10,7 @@ import {$v} from "~/classes/utils/var-util";
 import {Project} from '~/configs/project';
 import {pageShowProjectModule} from "~/store/page/show-project";
 import {To025} from "~/classes/domain/to025";
+import {appProjectModule} from "~/store/app/project";
 
 const TAG = '/';
 const state = {
@@ -269,6 +270,8 @@ export default class P extends AOfficialComponent {
 
     public async created() {
         await this.initPj();
+        appProjectModule.updateMode('show');
+
         this.updateItem();
     }
 

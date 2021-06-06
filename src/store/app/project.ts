@@ -6,6 +6,8 @@ import {errorModule} from "~/store/error";
 
 const TAG = 'appProjectModule';
 
+type ProjectModeType = 'my' | 'show';
+
 export interface IAppProject {
     project: string;
     user: {
@@ -18,6 +20,7 @@ export interface IAppProject {
 }
 
 export interface IAppProjectModule {
+    mode: ProjectModeType;
     records: IAppProject[]
 }
 
@@ -26,14 +29,24 @@ const LS_NAME = 'appProjectModule';
 @Module({dynamic: true, store, name: 'appProject', namespaced: true})
 class Store extends VuexModule implements IAppProjectModule {
 
+    private _mode: ProjectModeType = 'my';
     private _records: IAppProject[] = [];
 
     // Getters //////////////////////////////
+    public get mode(): ProjectModeType {
+        return this._mode;
+    }
+
     public get records(): IAppProject[] {
         return this._records;
     }
 
     // Mutations ////////////////////////////////
+    @Mutation
+    public updateMode(value: ProjectModeType) {
+        this._mode = value;
+    }
+
     @Mutation
     public updateRecords(value: IAppProject[]) {
         this._records = value;

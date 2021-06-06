@@ -15,7 +15,7 @@
             .popup-frame(style="z-index: 10")
                 PopupLayer
 
-        transition(name="t-loader" mode="out-in")
+        transition(name="t-loader" mode="out-in" v-if="isModeShow")
             .m-popup-frame(v-if="popup_fullscreen")
                 .m-popup-layer.m-pop--s.m-pop-bg--bk
                     .m-popup-wrapper.g5w

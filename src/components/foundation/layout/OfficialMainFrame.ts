@@ -13,6 +13,7 @@ import {OfficialConst} from "~/configs/official-const";
 import Throttle from "~/classes/core/throttle";
 import {MasterConst} from "~/configs/master-const";
 import {previewModule} from '@/store/preview';
+import {appProjectModule} from "~/store/app/project";
 // import NavScrollSwitch from '@/components/module/NavScrollSwitch.vue';
 
 const TAG = 'OfficialMainFrame';
@@ -24,7 +25,7 @@ const TAG = 'OfficialMainFrame';
     }
 })
 export default class OfficialMainFrame extends AOfficialLayout {
-    
+
     @Prop({default: true})
     public useNav: boolean;
 
@@ -48,12 +49,12 @@ export default class OfficialMainFrame extends AOfficialLayout {
     };
 
     public isMounted: boolean = false;
-	public gnav: boolean = false;
-	public display: boolean = false;
+    public gnav: boolean = false;
+    public display: boolean = false;
     public popup_fullscreen: boolean = false;
     public fullscreen_txt: string = 'maximize';
-    
-    
+
+
     @Watch('routeStep')
     public watchRouteStep() {
 
@@ -65,7 +66,7 @@ export default class OfficialMainFrame extends AOfficialLayout {
 
         this.execPageLoading();
     }
-    
+
     @Watch('isLoaded')
     public watchLoaded(value: boolean) {
 
@@ -84,10 +85,10 @@ export default class OfficialMainFrame extends AOfficialLayout {
         if (now < -10000) {
             return;
         }
-        
+
         console.log(now);
-        
-        this.refOs.osInstance().scroll({ y : now }, 1000);
+
+        this.refOs.osInstance().scroll({y: now}, 1000);
         scrollModule.clear(this.scrollCid);
     }
 
@@ -111,8 +112,8 @@ export default class OfficialMainFrame extends AOfficialLayout {
         });
     }
 
-    // Methods ////////////////////////////////////////////////////    
-    
+    // Methods ////////////////////////////////////////////////////
+
     public onFullscreen() {
 
         this.onClose();
@@ -135,7 +136,7 @@ export default class OfficialMainFrame extends AOfficialLayout {
 
     }
 
-    public checkFullscreen(){
+    public checkFullscreen() {
 
         if (!document.fullscreenElement) {
             previewModule.updateFullscreen(true);
@@ -144,7 +145,7 @@ export default class OfficialMainFrame extends AOfficialLayout {
             previewModule.updateFullscreen(false);
         }
     }
-    
+
     public async created() {
         this.scrollThrottle = new Throttle(100);
         this.execPageLoading();
@@ -164,28 +165,27 @@ export default class OfficialMainFrame extends AOfficialLayout {
 
         this.timer = null;
         scrollModule.clear(this.scrollCid);
-    	this.checkFullscreen();
+        this.checkFullscreen();
     }
 
     public async openTicketPopup() {
     }
-    
-    
-    
+
 
     // Events ///////////////////////////////////////////////////////
-    
+
     public onToggle() {
         let value: boolean = appModule.navOpen;
         value = !value;
         appModule.updateNavOpen(value);
     }
-    
-    
 
 
     // Computed /////////////////////////////////////////////////////////////////
-    
+    public get isModeShow(): boolean {
+        return appProjectModule.mode === 'show';
+    }
+
     public get refOs(): any {
         return $v.p(this.$refs, 'os');
     }

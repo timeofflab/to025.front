@@ -27,7 +27,13 @@ export default class EditItem extends AOfficialComponent {
                         maxlength: 20,
                     },
                     {
-                        name: 'img',
+                        name: 'img.x2',
+                        type: 'file',
+                        title: 'Img(x2)',
+                        maxlength: 1000,
+                    },
+                    {
+                        name: 'img.x1',
                         type: 'file',
                         title: 'Img',
                         maxlength: 1000,
@@ -123,7 +129,10 @@ export default class EditItem extends AOfficialComponent {
         await this.extEdit.updateInput({
             ...{
                 label: '',
-                img: '',
+                img: {
+                    x2: '',
+                    x1: '',
+                },
                 bg: '',
                 shadow: '',
                 web: '',
