@@ -122,7 +122,8 @@ export const MasterConst = {
                 Base: '/f',
             },
             FilePurpose: {
-                PresentationProjectPageImg: '100',
+                PresentationProjectPageImgX1: '100',
+                PresentationProjectPageImgX2: '101',
             },
         },
     },

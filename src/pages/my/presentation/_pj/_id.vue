@@ -4,8 +4,9 @@ div
         div
             router-link(to="/my") Home
 
-        div(v-if="!record")
-            h1 Record Error
+        div(v-if="!record || !param.id")
+            h1 Record Error - ID: {{ param.id || '---' }}
+            pre {{ JSON.stringify($route.params, null, 2) }}
         div(v-else)
             h1 Presentation
             h2 {{ p(pjGlobal, 'title', '???') }}
@@ -47,14 +48,23 @@ div
                     li.-add-item
                         a(href="#" @click.stop="onClickAddItem") +
 
-                div.img-preview(v-if="!!p(pageItem, 'img')")
-                    s-img(:src="img(p(pageItem, 'img'))" width="100")
-                    div IMG: {{img(p(pageItem, 'img'))}}
 
                 EditItem
 
                 .form-group
                     a.btn.btn-primary(href="#" @click.stop="onClickSave") save
+
+                hr
+
+                div.img-preview(v-if="!!p(pageItem, 'img')")
+                    h2 Images
+                    h3 X1
+                    s-img(:src="img(p(pageItem, 'img.x1'))" width="100")
+                    div IMG: {{img(p(pageItem, 'img.x1'))}}
+                    h3 X2
+                    s-img(:src="img(p(pageItem, 'img.x2'))" width="100")
+                    div IMG: {{img(p(pageItem, 'img.x2'))}}
+
 </template>
 <script lang="ts" src="./_id.ts"/>
 <style lang="sass">

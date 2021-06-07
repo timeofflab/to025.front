@@ -9,7 +9,7 @@ import {pageMyPresentationProjectModule as PMPPM} from "~/store/page/my-presenta
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
 import {cmdModule, ICmd} from "~/store/cmd";
 import {AppCmd} from "~/configs/app-cmd";
-import {uploadModule} from "~/store/upload";
+import {IUpload, uploadModule} from "~/store/upload";
 import {editModule, IEdit} from "~/store/edit";
 import {To025} from "~/classes/domain/to025";
 import {appAuthModule} from "~/store/app/auth";
@@ -17,9 +17,16 @@ import {MasterConst} from "~/configs/master-const";
 import Draggable from 'vuedraggable';
 
 const TAG = '/my/presentations/project/_pj/_id';
-const state = {
+let state = {
     config: {
         editId: 'myPresentationsProject',
+        upload: {
+            group: 'my/presentation/project',
+            img: {
+                x1: MasterConst.To025.App.FilePurpose.PresentationProjectPageImgX1,
+                x2: MasterConst.To025.App.FilePurpose.PresentationProjectPageImgX2,
+            },
+        },
     },
     param: {
         pj: '',
@@ -54,15 +61,35 @@ export default class Id extends AToComponent {
 
     @Watch('fileCmd')
     public watchFileCmd(now: any) {
-        console.log('%s.watchFileCmd', TAG, now);
+        console.log('%s.watchFileCmd', TAG, now || '@removed');
         if (!now) {
             return;
         }
 
+        const purpose = $v.p(this.state.config.upload, $v.p(now, 'request.name', ''));
+        if (!purpose) {
+            console.error('%s.watchFileCmd｜Unknown or empty purpose > ', TAG, {
+                config: this.state.config.upload,
+                purpose
+            });
+        }
+
         // $v.p(now, 'request.cid')
-        uploadModule.updateUpload({
-            id: 'presentationEditItemImg',
+        const upload = {
+            id: purpose,
+            group: this.state.config.upload.group,
             files: $v.p(now, 'request.ext.files'),
+            targetId: this.param.pj,
+            purpose,
+            option: {
+                pj: this.param.pj,
+                page: this.param.id,
+            },
+        };
+        uploadModule.updateUpload(upload);
+        console.log('%s.TAG｜upload set', TAG, {
+            upload,
+            queues: uploadModule.uploads,
         });
     }
 
@@ -71,9 +98,9 @@ export default class Id extends AToComponent {
         if (force || this.records.length === 0) {
             await appProjectModule.$get();
         }
-        await this.initParamId();
         await this.selectRecord();
         await this.selectItem();
+        await this.initParamId();
 
         this.state.records = this.pjItems.from();
 
@@ -86,6 +113,7 @@ export default class Id extends AToComponent {
             await this.migrateItem();
         }
 
+        uploadModule.clear();
         this.state.view.ready = true;
     }
 
@@ -102,7 +130,7 @@ export default class Id extends AToComponent {
                         ...ipt,
                         ...{
                             id: $v.p(_, 'id', $v.rndchars(5)),
-                            img: $v.p(_, 'img', ''),
+                            img: $v.p(_, 'img', {x1: '', x2: ''}),
                         },
                     };
                 })() : _;
@@ -116,18 +144,31 @@ export default class Id extends AToComponent {
         let changed = 0;
         this.state.view.migrated = true;
         this.state.records = this.records.map((_: any) => {
+            let r = {..._};
             const id = $v.p(_, 'id');
-
             console.log('item > ', _);
             if (!id) {
                 changed++;
-                return {
+                r = {
                     ..._,
                     ...{id: $v.rndchars(5)},
                 };
-            } else {
-                return _;
             }
+
+            if ($v.isString($v.p(r, 'img'))) {
+                changed++;
+                r = {
+                    ...r,
+                    ...{
+                        img: {
+                            x1: $v.p(r, 'img'),
+                            x2: '',
+                        },
+                    },
+                };
+            }
+
+            return r;
         });
         if (changed > 0) {
             console.log('%s｜detect migration > ', TAG, this.records);
@@ -135,18 +176,12 @@ export default class Id extends AToComponent {
         }
     }
 
-    public hasUpload(): boolean {
-        return !!uploadModule.uploads.findByKey('id', 'presentationEditItemImg');
-    }
-
     public async saveFile() {
-        await To025.File.FileUploadUtil.upload(
-            'presentationEditItemImg',
-            this.param.pj,
-            MasterConst.To025.App.FilePurpose.PresentationProjectPageImg, {
-                id: $v.p(this.record, 'id'),
-                page: this.param.id,
-            });
+        console.log('%s.saveFile', TAG, {uploads: this.uploads});
+        for (const u of this.uploads) {
+            console.log(' - ', {u});
+            await To025.File.FileUploadUtil.upload(u);
+        }
     }
 
     public async save() {
@@ -160,7 +195,7 @@ export default class Id extends AToComponent {
             id: this.record.id,
             uploads: uploadModule.uploads,
         });
-        if (this.record.id && this.hasUpload()) {
+        if (this.hasUploads) {
             console.log('%s｜saveFile - 2');
             await this.saveFile();
         }
@@ -178,6 +213,10 @@ export default class Id extends AToComponent {
         PMPPM.updatePage(this.pjItems.findIndexByKey('id', this.param.id));
         PMPPM.updatePageItem(
             {...this.selectedItem});
+
+        console.log('%s｜selectedItem', TAG, {
+            record: this.record,
+        });
     }
 
     public getRecordLink(item: any): string {
@@ -320,9 +359,7 @@ export default class Id extends AToComponent {
             .reverse()
             .find((_: ICmd) => {
                 const cid = $v.p(_, 'request.cid');
-                const name = $v.p(_, 'request.name');
-                return (cid === 'presentationProjectEditItem'
-                    && name === 'img');
+                return (cid === 'presentationProjectEditItem');
             });
     }
 
@@ -334,6 +371,16 @@ export default class Id extends AToComponent {
         const accKey = $v.p(appAuthModule.auth, 'user.accKey');
         const pj = this.record.id;
         return `/show/project/${accKey}/${pj}/0`;
+    }
+
+    public get hasUploads(): boolean {
+        return !!this.record.id && this.uploads.length > 0;
+    }
+
+    public get uploads(): IUpload[] {
+        return uploadModule.uploads.filter((_: IUpload) => {
+            return $v.p(_, 'group') === this.state.config.upload.group;
+        });
     }
 
     // Init //////////////////////////////////////////////////
@@ -350,6 +397,7 @@ export default class Id extends AToComponent {
      *
      */
     public async mounted() {
+
         await this.initParam();
         await this.load();
 
@@ -369,11 +417,12 @@ export default class Id extends AToComponent {
         }
 
         this.state.param.id = $v.p(this.pjItems[0], 'id');
-
-        console.log('%s.initParamId｜id=', TAG, this.param.id, this.selectedItem);
-
-        // if (!!this.param.id) {
-        //     await this.$router.push(`/my/resentatiosn/${this.record.id}/${this.param.id}`);
-        // }
+        console.log('%s.initParamId｜id=', TAG, {
+            record: this.record,
+            firstPjItem: this.pjItems[0],
+            stateParamId: this.state.param.id,
+            param: this.param,
+            selectedItem: this.selectedItem
+        });
     }
 }

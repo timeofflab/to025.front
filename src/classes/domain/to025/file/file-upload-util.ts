@@ -1,6 +1,6 @@
 import {appFileModule} from "~/store/app/file";
 import {$v} from "~/classes/utils/var-util";
-import {uploadModule} from "~/store/upload";
+import {IUpload, uploadModule} from "~/store/upload";
 
 const TAG = 'FileUploadUtil';
 
@@ -10,11 +10,10 @@ export class FileUploadUtil {
         return !!appFileModule.files.findByKey('purpose', page);
     }
 
-    public static async upload(uploadId: string, targetId: string, purpose: string, option: any = {}) {
+    public static async upload(upload: IUpload) {
 
-        const upload = uploadModule.uploads.findByKey('id', uploadId);
         console.log('%s.upload｜', TAG, {
-            upload, uploadId
+            upload
         });
 
         if (!upload) {
@@ -38,10 +37,10 @@ export class FileUploadUtil {
 
         // ファイル登録を予約｜トークン発行
         const file = await appFileModule.$store({
-            targetId,
-            purpose,
+            targetId: $v.p(upload, 'targetId'),
+            purpose: $v.p(upload, 'purpose'),
             option: {
-                ...option,
+                ...$v.p(upload, 'option', {}) || {},
                 ...{
                     ext,
                 },
@@ -65,7 +64,7 @@ export class FileUploadUtil {
         });
 
         // アップロードをRemove
-        await uploadModule.removeUpload(uploadId);
+        await uploadModule.removeUpload(upload.id);
     }
 }
 

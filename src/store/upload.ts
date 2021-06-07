@@ -1,11 +1,15 @@
-import {Mutation, MutationAction, Action, VuexModule, getModule, Module} from 'vuex-module-decorators';
+import {Mutation, Action, VuexModule, getModule, Module} from 'vuex-module-decorators';
 import store from '@/store';
 
 const TAG = 'uploadModule';
 
 export interface IUpload {
     id: string;
+    group: string; // 任意
+    purpose: number | string;
+    targetId: string;
     files: Blob[];
+    option?: any;
 }
 
 // state's interface
@@ -24,6 +28,11 @@ class Store extends VuexModule implements IUploadModule {
 
     // Mutations ////////////////////////////////////////////
     @Mutation
+    public clear() {
+        this._uploads = [];
+    }
+
+    @Mutation
     public updateUploads(value: IUpload[]) {
         this._uploads = value;
     }
@@ -31,6 +40,11 @@ class Store extends VuexModule implements IUploadModule {
     @Mutation
     public updateUpload(value: IUpload) {
         this._uploads = this._uploads.replaceByKey('id', value).array;
+    }
+
+    @Mutation
+    public updateUploadByPurpose(value: IUpload) {
+        this._uploads = this._uploads.replaceByKey('purpose', value).array;
     }
 
     @Mutation
