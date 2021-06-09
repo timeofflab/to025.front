@@ -5,12 +5,12 @@
             .head(@mouseenter="onInfoMouseEnter" @mouseleave="onInfoMouseLeave")
                 .left
                     .title
-                        en(:s="global.title")
+                        en(:s="p(global, 'title')")
                 .right
                     //.date
                         //en(:s="global.date")
                     .page-nav(:class="'-active' + (active + 1)")
-                        button.page-nav-btn(v-for="(item,index) in project_data.items" :key="`pagenav${index}`" @click="onPager(index)")
+                        button.page-nav-btn(v-for="(item,index) in items" :key="`pagenav${index}`" @click="onPager(index)")
                             span.en {{ index + 1 }}
                             p.page-nav-memo {{ item.label }}
 
@@ -25,7 +25,7 @@
                             span.en {{ fullscreen_txt }}
             .foot
                 .right
-                    span.en {{ active + 1 }}&#047;{{ project_data.items.length }}
+                    span.en {{ active + 1 }}&#047;{{ items.length }}
             .body
                 .prev-area(@click="onPager('prev')" :class="{'-disabled': isFirst}")
                     button.arrow
@@ -54,7 +54,7 @@
                     s-img(:src="img_path")
 
     .img-loader-frame
-        s-img(v-for="(item,index) in project_data.items" :key="`img${index}`" :src="img(item.img)")
+        s-img(v-for="(item,index) in items" :key="`img${index}`" :src="img(item.img)")
 
 </template>
 <script lang="ts" src="./_p.ts"></script>

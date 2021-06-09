@@ -1,6 +1,11 @@
 import CryptoJS from "crypto-js";
 
 export class CryptUtil {
+
+    public static sha384(txt: string): string {
+        return CryptoJS.SHA384(txt).toString();
+    }
+
     /**
      * @param keyLength
      */

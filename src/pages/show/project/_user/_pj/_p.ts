@@ -7,7 +7,8 @@ import {bodyModule} from '~/store/body';
 import {debugModule} from "~/store/debug";
 import {previewModule} from "~/store/preview";
 import {$v} from "~/classes/utils/var-util";
-import {Project} from '~/configs/project';
+// import {Project} from '~/configs/project';
+import {Project} from '~/configs/to025/container/project';
 import {pageShowProjectModule} from "~/store/page/show-project";
 import {To025} from "~/classes/domain/to025";
 import {appProjectModule} from "~/store/app/project";
@@ -77,7 +78,7 @@ export default class P extends AOfficialComponent {
     }
 
     public get img_path(): any {
-        return this.img(this.project_data.items[previewModule.active].img);
+        return this.img($v.p(this.items, `${previewModule.active}.img`));
     }
 
     public get isFullscreen(): any {
@@ -119,9 +120,13 @@ export default class P extends AOfficialComponent {
 
     public updateItem() {
 
-        if (this.project_data.items[previewModule.active].txt) {
+        if (this.items.length === 0) {
+            return;
+        }
+
+        if (this.items[previewModule.active].txt) {
             this.cvTxt = {
-                '--txt': this.project_data.items[previewModule.active].txt,
+                '--txt': this.items[previewModule.active].txt,
             }
 
         } else {
@@ -130,9 +135,9 @@ export default class P extends AOfficialComponent {
             }
         }
 
-        if (this.project_data.items[previewModule.active].bg) {
+        if (this.items[previewModule.active].bg) {
             this.cvBg = {
-                '--bg': this.project_data.items[previewModule.active].bg,
+                '--bg': this.items[previewModule.active].bg,
             }
 
         } else {
@@ -141,7 +146,7 @@ export default class P extends AOfficialComponent {
             }
         }
 
-        if (this.project_data.items[previewModule.active].shadow) {
+        if (this.items[previewModule.active].shadow) {
             this.isShadow = true;
 
         } else {
@@ -149,7 +154,7 @@ export default class P extends AOfficialComponent {
         }
 
 
-        if (this.project_data.items[previewModule.active].web) {
+        if (this.items[previewModule.active].web) {
             this.isWeb = true;
             this.isUi = false;
             this.isShadow = true;
@@ -160,7 +165,7 @@ export default class P extends AOfficialComponent {
         }
 
 
-        if (this.project_data.items[previewModule.active].scroll) {
+        if (this.items[previewModule.active].scroll) {
             this.isScroll = true;
 
         } else {
@@ -224,7 +229,7 @@ export default class P extends AOfficialComponent {
     }
 
     public get items(): any[] {
-        return $v.p(this.project_data, 'items', []);
+        return []; // $v.p(this.project_data, 'items', []) || [];
     }
 
     public get index(): number {
@@ -238,6 +243,7 @@ export default class P extends AOfficialComponent {
     public get isLast(): boolean {
         return this.index >= (this.items.length - 1);
     }
+
 
     // Base //////////////////////////////////////////////////
     public async asyncData(ctx: any) {

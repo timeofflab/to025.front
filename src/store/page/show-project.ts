@@ -37,7 +37,11 @@ class Store extends VuexModule implements IBodyModule {
                 .project
                 ._user($v.p(param, 'user'))
                 ._project($v.p(param, 'pj'))
-                .$get();
+                .$get({
+                    query: {
+                        password: $v.p(param, 'password'),
+                    },
+                });
 
             console.log('%s.$get｜res', TAG, res);
 
@@ -61,7 +65,27 @@ class Store extends VuexModule implements IBodyModule {
     @Action
     public async $show(param: any = {}): Promise<IApiMessage> {
         try {
-            return ApiMessageUtil.success({});
+            const res = await Api.To025c2.show
+                .project
+                ._user($v.p(param, 'user'))
+                ._project($v.p(param, 'pj'))
+                ._token($v.p(param, 'password'))
+                .$get();
+
+            console.log('%s.$get｜res', TAG, res);
+
+            if (!!$v.p(res, 'item')) {
+                return ApiMessageUtil.success({
+                    project: res.item,
+                });
+            } else if ($v.p(res, 'authorization')) {
+                return ApiMessageUtil.success({
+                    authorization: 1,
+                });
+            } else {
+                return ApiMessageUtil.error('notFound');
+            }
+
         } catch (e) {
             return ApiMessageUtil.error('exception', ['E'], {e});
         }

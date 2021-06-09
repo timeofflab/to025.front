@@ -7,13 +7,13 @@ import {AOfficialLayout} from "~/classes/components/a-official-layout";
 import Console from "~/components/pages/share/Console";
 import {scrollModule} from "~/store/scroll";
 import {bodyModule} from "~/store/body";
-import {PopupModule, popupModule} from "~/store/popup";
 import {loadingModule} from "~/store/loading";
-import {OfficialConst} from "~/configs/official-const";
 import Throttle from "~/classes/core/throttle";
 import {MasterConst} from "~/configs/master-const";
 import {previewModule} from '@/store/preview';
 import {appProjectModule} from "~/store/app/project";
+import Auth from "~/components/popups/Auth";
+import FullScreen from "~/components/popups/FullScreen";
 // import NavScrollSwitch from '@/components/module/NavScrollSwitch.vue';
 
 const TAG = 'OfficialMainFrame';
@@ -22,6 +22,8 @@ const TAG = 'OfficialMainFrame';
     components: {
         Console,
 //         NavScrollSwitch,
+        Auth,
+        FullScreen,
     }
 })
 export default class OfficialMainFrame extends AOfficialLayout {
