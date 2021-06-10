@@ -51,10 +51,14 @@
                         .s.s5
                             s-img(src="/safari-bar-05.png")
                 .body
-                    s-img(:src="img_path")
+                    n-img(:src="imgPath"
+                        :x2="imgPathX2")
 
     .img-loader-frame
-        s-img(v-for="(item,index) in items" :key="`img${index}`" :src="img(item.img)")
+        n-img(v-for="(item,index) in items"
+            :key="`img${index}`"
+            :src="img(item.img.x1)"
+            :x2="img(item.img.x2)")
 
 </template>
 <script lang="ts" src="./_p.ts"></script>

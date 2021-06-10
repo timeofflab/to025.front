@@ -31,6 +31,8 @@ import BtnArrow from '@/components/svg/BtnArrow.vue';
 import {EnvUtil} from "~/classes/utils/env-util";
 import {Api} from "~/classes/api";
 import WUtil from "~/classes/view/w-util";
+import NMImg from "~/components/foundation/NMImg";
+import NImg from "~/components/foundation/NImg";
 
 // console.log('plugins/boot - start');
 
@@ -44,6 +46,8 @@ Vue.component('loadingFrame', LoadingFrame);
 Vue.component('cmd', Cmd);
 Vue.component('en', En);
 Vue.component('sImg', SImg);
+Vue.component('nImg', NImg);
+Vue.component('nMImg', NMImg);
 Vue.component('sLoader', SLoader);
 Vue.component('noImg', NoImg);
 Vue.component('qr', Qr);

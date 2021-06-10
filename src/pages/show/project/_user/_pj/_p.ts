@@ -12,6 +12,7 @@ import {Project} from '~/configs/to025/container/project';
 import {pageShowProjectModule} from "~/store/page/show-project";
 import {To025} from "~/classes/domain/to025";
 import {appProjectModule} from "~/store/app/project";
+import {appProjectShowModule} from "~/store/app/project-show";
 
 const TAG = '/';
 const state = {
@@ -24,7 +25,8 @@ const state = {
         page: 0,
     },
     ssr: {
-        project: {} as any,
+        authorization: 0,
+        project: null as any,
     },
     view: {
         ready: false,
@@ -50,6 +52,16 @@ export default class P extends AOfficialComponent {
     public isShadow: boolean = true;
     public isUi: boolean = true;
     public isScroll: boolean = false;
+
+    @Watch('project')
+    public async watchProject() {
+        if (!this.project) {
+            return;
+        }
+
+        await this.initPj();
+        await this.initShow();
+    }
 
     @Watch('active')
     public watchActive(value: any) {
@@ -77,8 +89,12 @@ export default class P extends AOfficialComponent {
         return previewModule.active;
     }
 
-    public get img_path(): any {
-        return this.img($v.p(this.items, `${previewModule.active}.img`));
+    public get imgPath(): string {
+        return this.img($v.p(this.items, `${previewModule.active}.img.x1`));
+    }
+
+    public get imgPathX2(): string {
+        return this.img($v.p(this.items, `${previewModule.active}.img.x2`));
     }
 
     public get isFullscreen(): any {
@@ -108,10 +124,14 @@ export default class P extends AOfficialComponent {
 
             this.updateItem();
 
-            setTimeout(() => {
-                this.state.view.ready = true;
 
-            }, 700);
+            console.log('%s.moveActive', TAG);
+            if (!!this.project) {
+                setTimeout(() => {
+                    this.state.view.ready = true;
+
+                }, 700);
+            }
 
         }, 640);
 
@@ -215,6 +235,9 @@ export default class P extends AOfficialComponent {
     }
 
     // Computed ////////////////////////////////////////////////
+    public get project(): any {
+        return appProjectShowModule.record;
+    }
 
     public get deviceSize(): any {
         return appModule.deviceSize;
@@ -229,7 +252,7 @@ export default class P extends AOfficialComponent {
     }
 
     public get items(): any[] {
-        return []; // $v.p(this.project_data, 'items', []) || [];
+        return $v.p(this.project_data, 'items', []) || [];
     }
 
     public get index(): number {
@@ -268,6 +291,7 @@ export default class P extends AOfficialComponent {
                     page,
                 },
                 ssr: {
+                    authorization: $v.p(res, 'ex.authorization', 0),
                     project: $v.p(res, 'ex.project'),
                 },
             },
@@ -275,21 +299,26 @@ export default class P extends AOfficialComponent {
     }
 
     public async created() {
-        await this.initPj();
         appProjectModule.updateMode('show');
-
+        await this.initPj();
         this.updateItem();
     }
 
     public async initPj() {
         console.log('%s.initPj', TAG, this.state.ssr.project);
 
-        if (!this.state.ssr.project) {
-            return;
+        if (this.state.ssr.authorization) {
+            appProjectShowModule.updateAuthorization($v.nbool(this.state.ssr.authorization));
         }
 
-        this.project_data = $v.p(this.state, 'ssr.project');
-        this.global = $v.p(this.state, 'ssr.project.global');
+        if (!!this.state.ssr.project) {
+            appProjectShowModule.updateRecord($v.p(this.state, 'ssr.project'));
+        }
+
+        if (!!this.project) {
+            this.project_data = {...this.project};
+            this.global = $v.p(this.project, 'global', Project.global);
+        }
     }
 
     public head() {
@@ -301,14 +330,17 @@ export default class P extends AOfficialComponent {
 
     public async mounted() {
         await this.initParam();
-        officialModule.updateIsNavScrollSwitch(true);
-        officialModule.updateUseNavScrollSwitch(true);
-        this.moveActive();
-
+        await this.initShow();
     }
 
     public async initParam() {
         debugModule.updateCode($v.p(this.$route, 'query.debug'));
         previewModule.updateActive(this.state.param.page);
+    }
+
+    public async initShow() {
+        officialModule.updateIsNavScrollSwitch(true);
+        officialModule.updateUseNavScrollSwitch(true);
+        this.moveActive();
     }
 }

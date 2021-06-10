@@ -49,13 +49,13 @@ export default class SImgUtil {
         }
     }
 
-    public static makeSrcSet(src: string): string {
+    public static makeSrcSet(src: string, pX2: string = ''): string {
         const ext = VarUtil.tap(/(\.[a-z]+)$/.test(src), (_: boolean) => {
             return RegExp.$1;
         });
 
         const sets = [`${src} 1x`];
-        sets.push(src.replace(/(\.[a-z]+)$/, '_2x' + ext) + ' 2x');
+        sets.push((!!pX2 ? pX2 : src.replace(/(\.[a-z]+)$/, '_2x' + ext)) + ' 2x');
 
         // console.log('***', this.osrc, ext, sets, RegExp.$1);
 
