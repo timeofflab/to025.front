@@ -58,7 +58,7 @@ class Store extends VuexModule implements IBodyModule {
             }
 
         } catch (e) {
-            return ApiMessageUtil.error('exception', ['E'], {e});
+            return ApiMessageUtil.e(e);
         }
     }
 

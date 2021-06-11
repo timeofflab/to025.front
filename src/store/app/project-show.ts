@@ -1,15 +1,20 @@
 import {Action, getModule, Module, Mutation, VuexModule} from "@/node_modules/vuex-module-decorators";
 import store from '@/store';
-import VarUtil, {$v} from "@/classes/utils/var-util";
+import {$v} from "@/classes/utils/var-util";
 import {Api} from "~/classes/api";
 import {errorModule} from "~/store/error";
 
 const TAG = 'appProjectShowModule';
 
+export type ProjectShowErrorType =
+    null | 'notFound' | 'authorization' | 'expired' | 'unknown';
+
+
 export interface IAppProject {
 }
 
 export interface IAppProjectShowModule {
+    error: ProjectShowErrorType;
     authorization: boolean;
     record: IAppProject | null;
 }
@@ -19,10 +24,15 @@ const LS_NAME = 'appProjectShowModule';
 @Module({dynamic: true, store, name: 'appProjectShow', namespaced: true})
 class Store extends VuexModule implements IAppProjectShowModule {
 
+    private _error: ProjectShowErrorType = null;
     private _authorizeation: boolean = false;
     private _record: IAppProject | null = null;
 
     // Getters //////////////////////////////
+    public get error(): ProjectShowErrorType {
+        return this._error;
+    }
+
     public get authorization(): boolean {
         return this._authorizeation;
     }
@@ -32,6 +42,11 @@ class Store extends VuexModule implements IAppProjectShowModule {
     }
 
     // Mutations ////////////////////////////////
+    @Mutation
+    public updateError(value: ProjectShowErrorType) {
+        this._error = value;
+    }
+
     @Mutation
     public updateAuthorization(value: boolean) {
         this._authorizeation = value;

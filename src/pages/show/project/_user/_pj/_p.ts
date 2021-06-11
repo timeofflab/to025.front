@@ -12,7 +12,7 @@ import {Project} from '~/configs/to025/container/project';
 import {pageShowProjectModule} from "~/store/page/show-project";
 import {To025} from "~/classes/domain/to025";
 import {appProjectModule} from "~/store/app/project";
-import {appProjectShowModule} from "~/store/app/project-show";
+import {appProjectShowModule, ProjectShowErrorType} from "~/store/app/project-show";
 
 const TAG = '/';
 const state = {
@@ -25,6 +25,7 @@ const state = {
         page: 0,
     },
     ssr: {
+        error: null as ProjectShowErrorType,
         authorization: 0,
         project: null as any,
     },
@@ -123,7 +124,6 @@ export default class P extends AOfficialComponent {
         setTimeout(() => {
 
             this.updateItem();
-
 
             console.log('%s.moveActive', TAG);
             if (!!this.project) {
@@ -279,8 +279,14 @@ export default class P extends AOfficialComponent {
             user,
             pj,
         });
+        const error = !$v.p(res, 'result') ? $v.p(res, 'code') : null;
 
-        console.log('project >', {user, pj, res});
+        console.log('%s.project >', TAG, {
+            user,
+            pj,
+            res,
+            req: $v.p(res, 'ex.req'),
+        });
 
         return OfficialAsyncAdataUtil.load(ctx, {
             ...state,
@@ -291,6 +297,7 @@ export default class P extends AOfficialComponent {
                     page,
                 },
                 ssr: {
+                    error,
                     authorization: $v.p(res, 'ex.authorization', 0),
                     project: $v.p(res, 'ex.project'),
                 },
@@ -309,6 +316,10 @@ export default class P extends AOfficialComponent {
 
         if (this.state.ssr.authorization) {
             appProjectShowModule.updateAuthorization($v.nbool(this.state.ssr.authorization));
+        }
+
+        if (!!this.state.ssr.error) {
+            appProjectShowModule.updateError($v.p(this.state, 'ssr.error'));
         }
 
         if (!!this.state.ssr.project) {

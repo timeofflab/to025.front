@@ -17,6 +17,7 @@
 
         template(v-if="isModeShow")
             Auth
+            E400
             // FullScreen
             //
                 transition(name="t-loader" mode="out-in" v-if="isModeShow")
