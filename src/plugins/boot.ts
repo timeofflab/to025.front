@@ -30,10 +30,11 @@ import IconInstagram from '@/components/svg/IconInstagram.vue';
 import BtnArrow from '@/components/svg/BtnArrow.vue';
 import {EnvUtil} from "~/classes/utils/env-util";
 import {Api} from "~/classes/api";
-import WUtil from "~/classes/view/w-util";
 import NMImg from "~/components/foundation/NMImg";
 import NImg from "~/components/foundation/NImg";
 import E400 from "~/components/popups/E400";
+import FullScreen from "~/components/popups/FullScreen";
+import Auth from "~/components/popups/Auth";
 
 // console.log('plugins/boot - start');
 
@@ -69,6 +70,8 @@ Vue.component('oFooter', OFooter);
 Vue.component('iconFb', IconFb);
 Vue.component('iconInstagram', IconInstagram);
 Vue.component('btnArrow', BtnArrow);
+Vue.component('Auth', Auth);
+Vue.component('Fullscreen', FullScreen);
 Vue.component('E400', E400);
 
 $v.init();

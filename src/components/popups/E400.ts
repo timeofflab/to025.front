@@ -1,16 +1,15 @@
 import {Vue, Component, Prop, Watch} from 'nuxt-property-decorator';
-import {AToComponent} from "~/classes/components/a-to-component";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
-import {pageShowProjectModule} from "~/store/page/show-project";
-import {$v} from "~/classes/utils/var-util";
-import {CryptUtil} from "~/classes/utils/crypt-util";
-import {appProjectModule} from "~/store/app/project";
-import {appProjectShowModule} from "~/store/app/project-show";
+import {appProjectShowModule, ProjectShowErrorType} from "~/store/app/project-show";
+import {APopupComponent} from "~/classes/components/a-popup-component";
 
 const TAG = 'C/popups/Auth';
 
 @Component
-export default class E400 extends AToComponent {
+export default class E400 extends APopupComponent {
+
+    @Prop()
+    public cid: string;
 
     public state = {
         config: {
@@ -36,6 +35,10 @@ export default class E400 extends AToComponent {
         return this.extEdit.errors;
     }
 
+    public get error(): ProjectShowErrorType {
+        return appProjectShowModule.error;
+    }
+
     public get isShow(): boolean {
         return !!appProjectShowModule.error;
     }
@@ -47,7 +50,7 @@ export default class E400 extends AToComponent {
             case 'notFound':
                 return 'Presentation not found';
             default:
-                return '';
+                return 'Exception';
         }
     }
 

@@ -1,6 +1,8 @@
 import {IApiMessage, IApiMessageFail, IApiMessageSuccess} from "~/classes/core/i";
 import {$v} from "~/classes/utils/var-util";
 
+const TAG = 'ApiMessageUtil';
+
 export class ApiMessageUtil {
     /**
      * @param ex
@@ -37,25 +39,50 @@ export class ApiMessageUtil {
      */
     public static e(e: any, ex: any = {}): IApiMessageFail {
 
-        const err = $v.p(e, 'response.data.error');
-        return (!err)
+        const req = $v.p(e, 'request');
+        const errorCode = $v.p(req, 'res.data.error.code', '');
+        const statusCode = $v.p(req, 'res.statusCode');
+        const code = (() => {
+
+            if (!$v.isEmpty(errorCode)) {
+                return errorCode;
+            }
+
+            switch (statusCode) {
+                case 400:
+                    return 'badRequest';
+                case 401:
+                    return 'authorization';
+                case 403:
+                    return 'permission';
+                case 404:
+                    return 'notFound';
+                case 500:
+                    return 'serverError';
+                default:
+                    return '-';
+            }
+        })();
+
+
+        return (!req)
             ? self.error('-', [$v.p(e, 'message')], ex)
             : {
                 result: false,
-                code: $v.p(err, 'code'),
+                code,
                 ex: {
                     ...{
-                        statusCode: $v.p(e, 'response.status'),
+                        statusCode,
                         req: {
-                            host: $v.p(e, 'request.host'),
-                            protocol: $v.p(e, 'request.protocol'),
-                            method: $v.p(e, 'request.method'),
-                            path: $v.p(e, 'request.path'),
+                            host: $v.p(req, 'host'),
+                            protocol: $v.p(req, 'protocol'),
+                            method: $v.p(req, 'method'),
+                            path: $v.p(req, 'path'),
                         },
                     },
                     ...ex,
                     ...{
-                        messages: $v.p(err, 'messages', []),
+                        messages: $v.p(req, 'messages', []),
                     },
                 },
             };

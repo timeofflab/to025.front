@@ -1,22 +1,46 @@
 import {Vue, Component, Prop, Watch} from 'nuxt-property-decorator';
-import {AToComponent} from "~/classes/components/a-to-component";
 import {ExtEdit} from "~/classes/components/ext/ext-edit";
 import {pageShowProjectModule} from "~/store/page/show-project";
 import {$v} from "~/classes/utils/var-util";
 import {CryptUtil} from "~/classes/utils/crypt-util";
-import {appProjectModule} from "~/store/app/project";
+import {IPopup, popupModule, PopupState} from "~/store/popup";
+import {APopupComponent} from "~/classes/components/a-popup-component";
 import {appProjectShowModule} from "~/store/app/project-show";
 
 const TAG = 'C/popups/Auth';
 
 @Component
-export default class Auth extends AToComponent {
+export default class Auth extends APopupComponent {
+
+    @Prop()
+    public cid: string;
 
     public state = {
         config: {
             editId: 'popupAuth',
         },
+        view: {
+            ready: false,
+        },
     };
+
+    @Watch('_APopupComponent_popup')
+    public watchPopup(now: IPopup) {
+        const ready = $v.p(now, 'state') !== PopupState.Close.toString()
+        console.log('%s｜watchPopup', TAG, {now, ready});
+        this.state.view.ready = ready;
+    }
+
+    @Watch('isReady')
+    public watchIsReady(now: boolean) {
+        console.log('%s.watchIsReady', TAG, now ? 'T' : 'F');
+        if (!now) {
+            setTimeout(() => {
+                console.log('%s.watchIsReady｜remove', TAG);
+                popupModule.remove(this.cid);
+            }, 300);
+        }
+    }
 
     // Events //////////////////////////////////////
     public async onClickClose() {
@@ -40,7 +64,13 @@ export default class Auth extends AToComponent {
 
         const project = $v.p(res, 'ex.project');
         if (!!project) {
-            appProjectShowModule.updateRecord(project);
+            // appProjectShowModule.updateRecord(project);
+            appProjectShowModule.updatePrepare(project);
+            await popupModule.close();
+            await popupModule.open({
+                id: 'fs',
+                component: 'Fullscreen',
+            });
         } else {
             await this.extEdit.updateErrors([
                 {
@@ -72,25 +102,17 @@ export default class Auth extends AToComponent {
         return this.extEdit.errors;
     }
 
-    public get isShow(): boolean {
-
-
-        console.log('%s｜isShow: ', TAG, {
-            mode: appProjectModule.mode,
-            auth: appProjectShowModule.authorization,
-            record: appProjectShowModule.record
-        })
-
-        return (
-            appProjectModule.mode === 'show'
-            && appProjectShowModule.authorization
-            && !appProjectShowModule.record
-        );
+    public get isReady(): boolean {
+        return this.state.view.ready;
     }
 
     // Evetns //////////////////////////////////////
     public async mounted() {
         await this.initInput();
+
+        await this.$nextTick(() => {
+            this.state.view.ready = true;
+        });
     }
 
     public async initInput() {

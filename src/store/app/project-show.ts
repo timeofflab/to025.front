@@ -17,6 +17,7 @@ export interface IAppProjectShowModule {
     error: ProjectShowErrorType;
     authorization: boolean;
     record: IAppProject | null;
+    prepare: IAppProject | null;
 }
 
 const LS_NAME = 'appProjectShowModule';
@@ -27,6 +28,7 @@ class Store extends VuexModule implements IAppProjectShowModule {
     private _error: ProjectShowErrorType = null;
     private _authorizeation: boolean = false;
     private _record: IAppProject | null = null;
+    private _prepare: IAppProject | null = null;
 
     // Getters //////////////////////////////
     public get error(): ProjectShowErrorType {
@@ -41,7 +43,11 @@ class Store extends VuexModule implements IAppProjectShowModule {
         return this._record;
     }
 
-    // Mutations ////////////////////////////////
+    public get prepare(): IAppProject | null {
+        return this._prepare;
+    }
+
+// Mutations ////////////////////////////////
     @Mutation
     public updateError(value: ProjectShowErrorType) {
         this._error = value;
@@ -55,6 +61,11 @@ class Store extends VuexModule implements IAppProjectShowModule {
     @Mutation
     public updateRecord(value: IAppProject | null) {
         this._record = value;
+    }
+
+    @Mutation
+    public updatePrepare(value: IAppProject | null) {
+        this._prepare = value;
     }
 
     // Actions /////////////////////

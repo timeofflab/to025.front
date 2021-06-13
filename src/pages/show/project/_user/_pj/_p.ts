@@ -13,6 +13,9 @@ import {pageShowProjectModule} from "~/store/page/show-project";
 import {To025} from "~/classes/domain/to025";
 import {appProjectModule} from "~/store/app/project";
 import {appProjectShowModule, ProjectShowErrorType} from "~/store/app/project-show";
+import {popupModule} from "~/store/popup";
+import {cmdModule, ICmd} from "~/store/cmd";
+import {AppCmd} from "~/configs/app-cmd";
 
 const TAG = '/';
 const state = {
@@ -53,6 +56,23 @@ export default class P extends AOfficialComponent {
     public isShadow: boolean = true;
     public isUi: boolean = true;
     public isScroll: boolean = false;
+
+    @Watch('cmd')
+    public async watchCmd(now: ICmd | null) {
+
+        const pj = $v.p(this.state, 'ssr.project', appProjectShowModule.prepare);
+        console.log('%s.watchCmd', TAG,
+            {
+                now, pj
+            });
+        if (!now || !pj) {
+            return;
+        }
+
+        appProjectShowModule.updateRecord(pj);
+        this.project_data = {...pj};
+        this.global = $v.p(pj, 'global', Project.global);
+    }
 
     @Watch('project')
     public async watchProject() {
@@ -267,6 +287,17 @@ export default class P extends AOfficialComponent {
         return this.index >= (this.items.length - 1);
     }
 
+    public get targetCmds(): ICmd[] {
+        return cmdModule.queues.filter((_: ICmd) => {
+            return [
+                AppCmd.PresentationReady.toString(),
+            ].indexOf(_.cmd) >= 0
+        });
+    }
+
+    public get cmd(): ICmd | null {
+        return this.targetCmds.length > 0 ? this.targetCmds[0] : null;
+    }
 
     // Base //////////////////////////////////////////////////
     public async asyncData(ctx: any) {
@@ -274,14 +305,14 @@ export default class P extends AOfficialComponent {
         const user = $v.p(ctx, 'route.params.user');
         const pj = $v.p(ctx, 'route.params.pj');
         const page = Number($v.p(ctx, 'route.params.p', 0));
-
         const res = await pageShowProjectModule.$get({
             user,
             pj,
         });
-        const error = !$v.p(res, 'result') ? $v.p(res, 'code') : null;
+        const error = !$v.p(res, 'result') ? $v.p(res, 'code', 'notFound') : null;
 
         console.log('%s.project >', TAG, {
+            error,
             user,
             pj,
             res,
@@ -315,20 +346,31 @@ export default class P extends AOfficialComponent {
         console.log('%s.initPj', TAG, this.state.ssr.project);
 
         if (this.state.ssr.authorization) {
-            appProjectShowModule.updateAuthorization($v.nbool(this.state.ssr.authorization));
+            console.log('%s.initPj｜authorization', TAG),
+                appProjectShowModule.updateAuthorization($v.nbool(this.state.ssr.authorization));
+            await popupModule.open({
+                id: 'auth',
+                component: 'Auth',
+            });
         }
 
         if (!!this.state.ssr.error) {
             appProjectShowModule.updateError($v.p(this.state, 'ssr.error'));
+            await popupModule.open({
+                id: 'error',
+                component: 'E400',
+            });
         }
 
         if (!!this.state.ssr.project) {
-            appProjectShowModule.updateRecord($v.p(this.state, 'ssr.project'));
-        }
-
-        if (!!this.project) {
-            this.project_data = {...this.project};
-            this.global = $v.p(this.project, 'global', Project.global);
+            // appProjectShowModule.updateRecord($v.p(this.state, 'ssr.project'));
+            await popupModule.open({
+                id: 'fs',
+                component: 'Fullscreen',
+                option: {
+                    project: $v.p(this.state, 'ssr.project'),
+                },
+            });
         }
     }
 
