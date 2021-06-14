@@ -65,7 +65,7 @@ export default class FullScreen extends APopupComponent {
                 accept: true,
             },
         });
-        //await popupModule.close();
+        await popupModule.close(this.cid);
     }
 
     // Events //////////////////////////////////////
