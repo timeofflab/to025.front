@@ -40,8 +40,9 @@ export class ApiMessageUtil {
     public static e(e: any, ex: any = {}): IApiMessageFail {
 
         const req = $v.p(e, 'request');
-        const errorCode = $v.p(req, 'res.data.error.code', '');
-        const statusCode = $v.p(req, 'res.statusCode');
+        const res = $v.p(e, 'response');
+        const errorCode = $v.p(res, 'data.error.code', '');
+        const statusCode = $v.p(res, 'statusCode');
         const code = (() => {
 
             if (!$v.isEmpty(errorCode)) {
