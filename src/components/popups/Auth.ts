@@ -26,9 +26,32 @@ export default class Auth extends APopupComponent {
 
     @Watch('_APopupComponent_popup')
     public watchPopup(now: IPopup) {
-        const ready = $v.p(now, 'state') !== PopupState.Close.toString()
-        console.log('%s｜watchPopup', TAG, {now, ready});
-        this.state.view.ready = ready;
+
+        const state = $v.p(now, 'state');
+        console.log('%s｜watchPopup', TAG, {
+            cid: this.cid,
+            now,
+            state
+        });
+
+        switch (state) {
+            case PopupState.Close:
+                this.state.view.ready = false;
+                popupModule.patch({
+                    id: this.cid,
+                    state: PopupState.Closed,
+                });
+                break;
+            case PopupState.Closed:
+                setTimeout(() => {
+                    console.log('%s｜////////////////////////////////', TAG, this.cid);
+                    popupModule.remove(this.cid);
+                }, 1000);
+                break;
+            default:
+                this.state.view.ready = true;
+                break;
+        }
     }
 
     @Watch('isReady')
@@ -66,7 +89,7 @@ export default class Auth extends APopupComponent {
         if (!!project) {
             // appProjectShowModule.updateRecord(project);
             appProjectShowModule.updatePrepare(project);
-            await popupModule.close();
+            await popupModule.close(this.cid);
             await popupModule.open({
                 id: 'fs',
                 component: 'Fullscreen',

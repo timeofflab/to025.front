@@ -22,7 +22,6 @@ export default class FullScreen extends APopupComponent {
 
     @Watch('_APopupComponent_popup')
     public async watchPopup(now: IPopup) {
-        this.state.view.ready = ($v.p(now, 'state') !== PopupState.Close.toString());
 
         const accept = $v.p(now, 'result.accept');
         if (!!accept) {
@@ -30,6 +29,32 @@ export default class FullScreen extends APopupComponent {
             await cmdModule.registCmd({
                 cmd: AppCmd.PresentationReady,
             });
+        }
+
+        const state = $v.p(now, 'state');
+        console.log('%s｜watchPopup', TAG, {
+            cid: this.cid,
+            now,
+            state
+        });
+
+        switch (state) {
+            case PopupState.Close:
+                this.state.view.ready = false;
+                popupModule.patch({
+                    id: this.cid,
+                    state: PopupState.Closed,
+                });
+                break;
+            case PopupState.Closed:
+                setTimeout(() => {
+                    console.log('%s｜////////////////////////////////', TAG, this.cid);
+                    popupModule.remove(this.cid);
+                }, 1000);
+                break;
+            default:
+                this.state.view.ready = true;
+                break;
         }
     }
 
@@ -40,7 +65,7 @@ export default class FullScreen extends APopupComponent {
                 accept: true,
             },
         });
-        await popupModule.close();
+        //await popupModule.close();
     }
 
     // Events //////////////////////////////////////

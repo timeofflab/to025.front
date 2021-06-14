@@ -30,6 +30,7 @@ export interface IPopupRequest {
     id: string;
     component?: string;
     idx?: number;
+    state?: PopupState;
     option?: any;
     result?: any;
 }

@@ -80,7 +80,6 @@ export default class P extends AOfficialComponent {
             return;
         }
 
-        await this.initPj();
         await this.initShow();
     }
 
