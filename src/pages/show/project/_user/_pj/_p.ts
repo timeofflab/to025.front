@@ -91,12 +91,21 @@ export default class P extends AOfficialComponent {
     @Watch('isFullscreen')
     public watchIsFullscreen(value: any) {
 
-        if (value) {
-            this.fullscreen_txt = 'fullscreen'; //cancel
+        console.log('%s.watchIsFullscreeen', TAG, value ? 'T' : 'F');
 
+        if (value) {
+            if (!!document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+            this.fullscreen_txt = 'fullscreen'; //cancel
         } else {
+            if (!!document.exitFullscreen) {
+                document.exitFullscreen();
+            }
             this.fullscreen_txt = 'fullscreen';
         }
+
+        this.onFullscreen();
     }
 
 
@@ -117,10 +126,9 @@ export default class P extends AOfficialComponent {
         return this.img($v.p(this.items, `${previewModule.active}.img.x2`));
     }
 
-    public get isFullscreen(): any {
+    public get isFullscreen(): boolean {
         return previewModule.fullscreen;
     }
-
 
     // Event /////////////////////////////////////////////////////////
 
@@ -236,9 +244,7 @@ export default class P extends AOfficialComponent {
     public onFullscreen() {
 
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
             previewModule.updateFullscreen(true);
-
         } else {
             if (document.exitFullscreen) {
                 document.exitFullscreen();

@@ -115,37 +115,11 @@ export default class OfficialMainFrame extends AOfficialLayout {
     }
 
     // Methods ////////////////////////////////////////////////////
-
-    public onFullscreen() {
-
-        this.onClose();
-
-        setTimeout(() => {
-
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
-                previewModule.updateFullscreen(true);
-
-            } else {
-                document.exitFullscreen();
-                previewModule.updateFullscreen(false);
-            }
-        }, 800);
-    }
-
     public onClose() {
         this.popup_fullscreen = false;
-
     }
 
     public checkFullscreen() {
-
-        if (!document.fullscreenElement) {
-            previewModule.updateFullscreen(true);
-
-        } else {
-            previewModule.updateFullscreen(false);
-        }
     }
 
     public async created() {

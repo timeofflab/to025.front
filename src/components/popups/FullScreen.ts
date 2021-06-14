@@ -74,9 +74,12 @@ export default class FullScreen extends APopupComponent {
     }
 
     public async onClickFullscreen() {
+        console.log('%s.onClickFullscreen', TAG);
         if (!document.fullscreenElement) {
+            console.log(' - #');
             previewModule.updateFullscreen(true);
         } else {
+            console.log(' - ###');
             previewModule.updateFullscreen(false);
         }
         await this.commit();
