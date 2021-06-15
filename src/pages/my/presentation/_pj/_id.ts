@@ -98,9 +98,11 @@ export default class Id extends AToComponent {
         if (force || this.records.length === 0) {
             await appProjectModule.$get();
         }
+
         await this.selectRecord();
-        await this.selectItem();
         await this.initParamId();
+
+        await this.selectItem();
 
         this.state.records = this.pjItems.from();
 
@@ -216,6 +218,7 @@ export default class Id extends AToComponent {
 
         console.log('%s｜selectedItem', TAG, {
             record: this.record,
+            selectedItem: this.selectedItem,
         });
     }
 
@@ -397,10 +400,8 @@ export default class Id extends AToComponent {
      *
      */
     public async mounted() {
-
         await this.initParam();
         await this.load();
-
     }
 
     public async initParam() {

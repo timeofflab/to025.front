@@ -11,7 +11,7 @@
         f-check(:cid="cid"
             :name="name")
     template(v-else-if="['r', 'radio'].indexOf(type) >= 0")
-        f-radio(cid="cid"
+        f-radio(:cid="cid"
             :name="name")
     template(v-else)
         f-input(:cid="cid"

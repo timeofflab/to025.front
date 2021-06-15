@@ -46,17 +46,30 @@ export default class EditItem extends AOfficialComponent {
                     {
                         name: 'shadow',
                         title: 'Shadow',
+                        type: 'radio',
+                        values: [
+                            {value: 0, label: 'OFF'},
+                            {value: 1, label: 'ON'},
+                        ],
                         maxlength: 50,
                     },
                     {
                         name: 'web',
                         title: 'Web',
-                        maxlength: 100,
+                        type: 'radio',
+                        values: [
+                            {value: 0, label: 'OFF'},
+                            {value: 1, label: 'ON'},
+                        ],
                     },
                     {
-                        name: 'Scroll',
-                        title: 'scroll',
-                        maxlength: 20,
+                        name: 'scroll',
+                        title: 'Scroll',
+                        type: 'radio',
+                        values: [
+                            {value: 0, label: 'OFF'},
+                            {value: 1, label: 'ON'},
+                        ],
                     },
                 ],
             },
